@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Error parsing cart from localStorage:', error);
-        localStorage.removeItem('cart'); // Limpiar localStorage si hay error
+        localStorage.removeItem('cart');
       }
     };
   

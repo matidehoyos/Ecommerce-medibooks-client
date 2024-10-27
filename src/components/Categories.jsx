@@ -30,7 +30,7 @@ const Categories = () => {
         <div key={index} className="relative group">
           <button 
             onClick={() => handleCategoryChange(categoria.nombre)} 
-            className="text-[#1b7b7e] text-lg px-2 font-bold cursor-pointer hover:bg-white rounded-md transition-all duration-500 whitespace-nowrap"
+            className="text-[#1b7b7e] text-lg px-2 font-bold cursor-pointer hover:bg-[#1b7b7e] hover:text-white rounded-md transition-all duration-500 whitespace-nowrap"
           >
             {categoria.nombre}
           </button>

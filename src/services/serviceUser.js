@@ -1,8 +1,9 @@
-const API_URL = 'http://localhost:5000/api/user/';
+import BASE_URL from '../config';
+
 
 export const saveUserToDatabase = async (userData) => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -25,7 +26,7 @@ export const saveUserToDatabase = async (userData) => {
 
   export const getUsuarios = async () => {
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(BASE_URL);
       if (!res.ok) throw new Error('Error fetching usuarios');
       return await res.json();
     } catch (error) {

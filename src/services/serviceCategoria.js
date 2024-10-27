@@ -1,8 +1,9 @@
-const API_URL = 'http://localhost:5000/api/categories/'; 
+import BASE_URL from '../config';
+
 
 export const getCategorias = async () => {
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(BASE_URL);
     if (!res.ok) throw new Error('Error fetching categories');
     return await res.json();
   } catch (error) {
@@ -12,7 +13,7 @@ export const getCategorias = async () => {
 };
 
 export const crearCategoria = async (nombre) => {
-    const res = await fetch(API_URL, {
+    const res = await fetch(BASE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre }), 
@@ -23,7 +24,7 @@ export const crearCategoria = async (nombre) => {
   
 export const editarCategoria = async (id, nombre) => {
   try {
-    const res = await fetch(`${API_URL}/${id}`, {
+    const res = await fetch(`${BASE_URL}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre }),
@@ -38,7 +39,7 @@ export const editarCategoria = async (id, nombre) => {
 
 export const eliminarCategoria = async (id) => {
   try {
-    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Error deleting category');
   } catch (error) {
     console.error('Error in eliminarCategoria:', error);

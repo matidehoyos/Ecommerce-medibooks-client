@@ -1,7 +1,7 @@
-const API_URL = 'http://localhost:5000/api/cart';
+import BASE_URL from '../config';
 
 export const createCart = async (data) => {
-  const response = await fetch(`${API_URL}`, {
+  const response = await fetch(`${BASE_URL}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -17,19 +17,19 @@ export const createCart = async (data) => {
 
 export const obtenerCartItemsDesdeBackend = async (userId) => {
   try {
-    const response = await fetch(`${API_URL}/${userId}`, {
+    const response = await fetch(`${BASE_URL}/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
     if (!response.ok) {
       if (response.status === 404) {
-        return []; // Si no se encuentra el carrito, devolvemos un array vacío
+        return []; 
       }
       throw new Error('Error al obtener el carrito desde el backend');
     }
 
     const data = await response.json();
-    return data.CartItems || []; // Asegúrate de devolver siempre un array
+    return data.CartItems || [];
   } catch (error) {
     console.error('Error al obtener el carrito desde el backend:', error);
     throw error;
@@ -38,19 +38,19 @@ export const obtenerCartItemsDesdeBackend = async (userId) => {
 
 export const obtenerCarritoDesdeBackend = async (userId) => {
   try {
-    const response = await fetch(`${API_URL}/${userId}`, {
+    const response = await fetch(`${BASE_URL}/${userId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
     if (!response.ok) {
       if (response.status === 404) {
-        return null; // Cambiado a null para indicar que no hay carrito
+        return null; 
       }
       throw new Error('Error al obtener el carrito desde el backend');
     }
 
     const data = await response.json();
-    return data || null; // Asegúrate de devolver null si no hay datos
+    return data || null; 
   } catch (error) {
     console.error('Error al obtener el carrito desde el backend:', error.message);
     throw error;
@@ -59,7 +59,7 @@ export const obtenerCarritoDesdeBackend = async (userId) => {
 
 export const addToBackendCart = async (cartId, bookId, quantity, priceAtTime) => {
   try {
-    const response = await fetch(`${API_URL}/${cartId}/items`, {
+    const response = await fetch(`${BASE_URL}/${cartId}/items`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ export const addToBackendCart = async (cartId, bookId, quantity, priceAtTime) =>
 
 export const removeFromBackendCart = async (cartId, bookId) => {
   try {
-    const response = await fetch(`${API_URL}/${cartId}/items/${bookId}`, {
+    const response = await fetch(`${BASE_URL}/${cartId}/items/${bookId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export const removeFromBackendCart = async (cartId, bookId) => {
 
 export const clearBackendCart = async (cartId) => {
   try {
-    const response = await fetch(`${API_URL}/${cartId}/clear`, {
+    const response = await fetch(`${BASE_URL}/${cartId}/clear`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -1,0 +1,163 @@
+[
+    {
+      "id": 1,
+      "titulo": "Anatomía Humana Avanzada",
+      "precio": 29.99,
+      "categoria": "ANATOMÍA",
+      "imagen": "/libro.png",
+      "detalle": "Un estudio profundo sobre la anatomía del cuerpo humano."
+    },
+    {
+      "id": 2,
+      "titulo": "Atlas de Anatomía",
+      "precio": 35.50,
+      "categoria": "ANATOMÍA",
+      "imagen": "/libro.png",
+      "detalle": "Visualización completa de la anatomía humana."
+    },
+    {
+      "id": 3,
+      "titulo": "Fisiología Humana",
+      "precio": 24.99,
+      "categoria": "FISIOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Explora los mecanismos fisiológicos del cuerpo humano."
+    },
+    {
+      "id": 4,
+      "titulo": "Fisiología del Ejercicio",
+      "precio": 21.75,
+      "categoria": "FISIOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Cómo el ejercicio afecta la fisiología del cuerpo."
+    },
+    {
+      "id": 5,
+      "titulo": "Enfermería General",
+      "precio": 27.00,
+      "categoria": "ENFERMERÍA",
+      "imagen": "/libro.png",
+      "detalle": "Una guía para el cuidado y la práctica de la enfermería."
+    },
+    {
+      "id": 6,
+      "titulo": "Cuidados Críticos en Enfermería",
+      "precio": 32.50,
+      "categoria": "ENFERMERÍA",
+      "imagen": "/libro.png",
+      "detalle": "Fundamentos de la atención en unidades de cuidados críticos."
+    },
+    {
+      "id": 7,
+      "titulo": "Semiología Médica Práctica",
+      "precio": 19.99,
+      "categoria": "SEMIOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Guía práctica para el examen físico y diagnóstico."
+    },
+    {
+      "id": 8,
+      "titulo": "Semiología Avanzada",
+      "precio": 22.00,
+      "categoria": "SEMIOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Enfoques avanzados en el diagnóstico clínico."
+    },
+    {
+      "id": 9,
+      "titulo": "Histología para Estudiantes de Medicina",
+      "precio": 18.00,
+      "categoria": "HISTOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Introducción a la histología con ejemplos prácticos."
+    },
+    {
+      "id": 10,
+      "titulo": "Manual de Histología",
+      "precio": 20.50,
+      "categoria": "HISTOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Conceptos esenciales de histología para estudiantes."
+    },
+    {
+      "id": 11,
+      "titulo": "Química General para Médicos",
+      "precio": 26.75,
+      "categoria": "QUÍMICA",
+      "imagen": "/libro.png",
+      "detalle": "Fundamentos de química con aplicaciones en medicina."
+    },
+    {
+      "id": 12,
+      "titulo": "Bioquímica y Metabolismo",
+      "precio": 30.00,
+      "categoria": "QUÍMICA",
+      "imagen": "/libro.png",
+      "detalle": "Estudio del metabolismo y su relación con la salud."
+    },
+    {
+      "id": 13,
+      "titulo": "Odontología Básica",
+      "precio": 28.00,
+      "categoria": "ODONTOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Introducción a los principios de la odontología."
+    },
+    {
+      "id": 14,
+      "titulo": "Patología Dental",
+      "precio": 31.50,
+      "categoria": "ODONTOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Estudio de las enfermedades dentales y sus tratamientos."
+    },
+    {
+      "id": 15,
+      "titulo": "Bioquímica Clínica Básica",
+      "precio": 23.00,
+      "categoria": "BIOQUÍMICA",
+      "imagen": "/libro.png",
+      "detalle": "Fundamentos de bioquímica aplicada a la clínica."
+    },
+    {
+      "id": 16,
+      "titulo": "Bioquímica Avanzada",
+      "precio": 29.99,
+      "categoria": "BIOQUÍMICA",
+      "imagen": "/libro.png",
+      "detalle": "Enfoques avanzados en bioquímica clínica."
+    },
+    {
+      "id": 17,
+      "titulo": "Física Médica para Principiantes",
+      "precio": 21.00,
+      "categoria": "FÍSICA",
+      "imagen": "/libro.png",
+      "detalle": "Introducción a los principios de la física aplicados a la medicina."
+    },
+    {
+      "id": 18,
+      "titulo": "Radiación y Salud",
+      "precio": 25.50,
+      "categoria": "FÍSICA",
+      "imagen": "/libro.png",
+      "detalle": "Impacto de la radiación en la salud humana."
+    },
+    {
+      "id": 19,
+      "titulo": "Patología General Completa",
+      "precio": 34.99,
+      "categoria": "PATOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Guía exhaustiva sobre las enfermedades y su diagnóstico."
+    },
+    {
+      "id": 20,
+      "titulo": "Patología Específica",
+      "precio": 29.00,
+      "categoria": "PATOLOGÍA",
+      "imagen": "/libro.png",
+      "detalle": "Estudio detallado de patologías específicas en medicina."
+    }
+  ]
+  

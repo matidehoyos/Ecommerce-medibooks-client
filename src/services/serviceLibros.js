@@ -2,7 +2,7 @@ import BASE_URL from '../config';
 
 export const getLibros = async () => {
   try {
-    const res = await fetch(BASE_URL);
+    const res = await fetch(`${BASE_URL}/books`);
     if (!res.ok) throw new Error('Error fetching books');
     return await res.json();
   } catch (error) {
@@ -13,7 +13,7 @@ export const getLibros = async () => {
 
 export const getLibro = async (id) => {
   try {
-    const res = await fetch(`${BASE_URL}/${id}`);
+    const res = await fetch(`${BASE_URL}/books/${id}`);
     if (!res.ok) throw new Error('Error fetching book');
     return await res.json();
   } catch (error) {
@@ -24,7 +24,7 @@ export const getLibro = async (id) => {
 
 
 export const crearLibro = async (data) => {
-  const res = await fetch(BASE_URL, {
+  const res = await fetch(`${BASE_URL}/books`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -35,7 +35,7 @@ export const crearLibro = async (data) => {
 
 export const editarLibro = async (id, data) => {
   try {
-    const res = await fetch(`${BASE_URL}/${id}`, {
+    const res = await fetch(`${BASE_URL}/books/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -54,7 +54,7 @@ export const editarLibro = async (id, data) => {
 
 
 export const eliminarLibro = async (id) => {
-  const res = await fetch(`${BASE_URL}/${id}`, { method: 'DELETE' });
+  const res = await fetch(`${BASE_URL}/books/${id}`, { method: 'DELETE' });
   if (!res.ok) throw new Error('Error deleting book');
 };
 

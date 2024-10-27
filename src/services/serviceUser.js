@@ -3,7 +3,7 @@ import BASE_URL from '../config';
 
 export const saveUserToDatabase = async (userData) => {
     try {
-      const response = await fetch(BASE_URL, {
+      const response = await fetch(`${BASE_URL}/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const saveUserToDatabase = async (userData) => {
 
   export const getUsuarios = async () => {
     try {
-      const res = await fetch(BASE_URL);
+      const res = await fetch(`${BASE_URL}/user`);
       if (!res.ok) throw new Error('Error fetching usuarios');
       return await res.json();
     } catch (error) {

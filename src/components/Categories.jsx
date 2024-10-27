@@ -13,7 +13,7 @@ const Categories = () => {
         const data = await getCategorias();
         setCategorias(data);
       } catch (error) {
-        setError('Error loading categories: ' + error.message);
+        console.log('Error loading categories from categories: ' + error.message);
       }
     };
     loadCategorias();

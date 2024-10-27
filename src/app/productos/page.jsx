@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import ProductCard from '../../components/ProductCard';
 import { getLibros } from '@/services/serviceLibros';
@@ -46,44 +46,46 @@ const Productos = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-200">
-      {loading && <Loader />}
-      <div className="w-full pt-[120px] px-[2%] flex justify-between items-center">
-        <div className="mb-10">
-          <label htmlFor="category" className="mr-2 text-2xl font-light text-gray-700">
-            Categoria:
-          </label>
-          <select
-            id="category"
-            className="w-[200px] px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100"
-            onChange={handleCategoryChange}
-            value={queryCategory}
-          >
-            <option value="all">Todos los libros</option>
-            {categorias.map(category => (
-              <option key={category.id} value={category.nombre.trim()}>
-                {category.nombre.trim()}
-              </option>
-            ))}
-          </select>
+    <Suspense fallback={<Loader />}>
+      <div className="w-full min-h-screen bg-gray-200">
+        {loading && <Loader />}
+        <div className="w-full pt-[120px] px-[2%] flex justify-between items-center">
+          <div className="mb-10">
+            <label htmlFor="category" className="mr-2 text-2xl font-light text-gray-700">
+              Categoria:
+            </label>
+            <select
+              id="category"
+              className="w-[200px] px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100"
+              onChange={handleCategoryChange}
+              value={queryCategory}
+            >
+              <option value="all">Todos los libros</option>
+              {categorias.map(category => (
+                <option key={category.id} value={category.nombre.trim()}>
+                  {category.nombre.trim()}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
 
-      {filteredProducts.length > 0 ? (
-        <div className="w-[94%] md:grid  mt-0 px-[2%] pb-40 mx-auto grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-4">
-          {filteredProducts.map(libro => (
-            <ProductCard key={libro.id} libro={libro} />
-          ))}
-        </div>
-         ) : (
+        {filteredProducts.length > 0 ? (
+          <div className="w-[94%] md:grid mt-0 px-[2%] pb-40 mx-auto grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-4">
+            {filteredProducts.map(libro => (
+              <ProductCard key={libro.id} libro={libro} />
+            ))}
+          </div>
+        ) : (
           <div className='w-full py-[100px] px-[3%]'>
-              <p className='text-left text-3xl font-light text-gray-800'>En este momento no contamos con libros de esta categoría.</p>
-              <Link href='/productos' className='text-left text-xl font-semibold text-[#1b7b7e] underline'>Explore aqui libros disponibles en la tienda.</Link>
-              <Image src='/logoDark.png' width={2400} height={600} alt='Logo Medibooks.' className='w-[30%] mt-20' />
+            <p className='text-left text-3xl font-light text-gray-800'>En este momento no contamos con libros de esta categoría.</p>
+            <Link href='/productos' className='text-left text-xl font-semibold text-[#1b7b7e] underline'>Explore aquí libros disponibles en la tienda.</Link>
+            <Image src='/logoDark.png' width={2400} height={600} alt='Logo Medibooks.' className='w-[30%] mt-20' />
           </div>
         )}
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Suspense>
   );
 };
 

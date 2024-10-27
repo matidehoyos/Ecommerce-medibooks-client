@@ -34,6 +34,14 @@ const Productos = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    const filtered = queryCategory === 'all'
+      ? productos
+      : productos.filter(product => product.categoria?.trim() === queryCategory.trim());
+    setFilteredProducts(filtered);
+  }, [productos, queryCategory]);
+
+
   const handleCategoryChange = (e) => {
     router.push(`/productos?category=${e.target.value}`);
   };

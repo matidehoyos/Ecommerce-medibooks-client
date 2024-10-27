@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { Suspense, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import ProductCard from '../../components/ProductCard';
 import { getLibros } from '@/services/serviceLibros';
 import { getCategorias } from '@/services/serviceCategoria';
@@ -16,6 +16,8 @@ const Productos = () => {
   const [categorias, setCategorias] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const queryCategory = searchParams.get('category') || 'all';
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -58,6 +60,7 @@ const Productos = () => {
             id="category"
             className="w-[200px] px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100"
             onChange={handleCategoryChange}
+            value={queryCategory}
           >
             <option value="all">Todos los libros</option>
             {categorias.map(category => (

@@ -6,20 +6,20 @@ const ProductCard = ({ libro }) => {
 
 
   return (
-    <Link href={`/product/${libro.id}`} className="relative p-2 border border-gray-400 rounded-md shadow-lg overflow-hidden bg-gray-100 group hover:border-gray-500 hover:shadow-gray-600 transition-all duration-500">
+    <Link href={`/product/${libro.id}`} className="min-w-[180px] relative p-2 border border-gray-400 rounded-md shadow-lg overflow-hidden bg-gray-100 group md:hover:border-gray-500 md:hover:shadow-gray-600 transition-all duration-500">
       {
         libro.descuento > 0 ? (
           <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
         ) : null
       }
-      <div className="w-full h-[250px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md group-hover:bg-gray-400 transition-colors duration-500">
+      <div className="w-full h-[180px] md:h-[250px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md md:group-hover:bg-gray-400 transition-colors duration-500">
         {libro.imagen ? (
           <Image 
             src={libro.imagen} 
             alt={libro.titulo} 
             width={500}
             height={500}
-            className="w-[100%] h-[80%] object-contain" 
+            className="w-[100%] h-[90%] md:h-[80%] object-contain" 
           />
         ) : (
           <Image 

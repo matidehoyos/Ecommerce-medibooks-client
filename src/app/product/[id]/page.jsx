@@ -17,6 +17,9 @@ const ProductDetailPage = () => {
   const [terminacion, setTerminacion] = useState('Encuadernado');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+
 
   useEffect(() => {
     const getProducto = async () => {
@@ -52,6 +55,11 @@ const ProductDetailPage = () => {
     addToCart(productoConTerminacion, cantidad);
   };
 
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   const filtrados = similares.filter(libro => libro.categoria === producto?.categoria);
   const relacionados = filtrados.filter(libro => libro.id !== producto?.id);
 
@@ -61,35 +69,39 @@ const ProductDetailPage = () => {
   return (
     <div className='min-h-screen  bg-gray-200'>
       {loading && <Loader />}
-      <div className='w-full h-auto pt-[170px] flex flex-col items-center justify-center pb-20'>
-        <div className='w-full flex justify-center items-stretch gap-8 pb-20'>
-          <div className='w-[50%] flex justify-end overflow-hidden p-0'>
-            <div className='w-auto py-8 px-10 flex items-center bg-gray-300 overflow-hidden'>
+      <div className='w-full h-auto pt-[70px] md:pt-[170px] flex flex-col md:items-center md:justify-center md:pb-20 overflow-hidden'>
+        <div className='w-full flex flex-col md:flex-row md:justify-center md:items-stretch gap-0 md:gap-8 pb-12 md:pb-20'>
+          <div className='md:w-[50%] p-0 flex md:justify-end overflow-hidden'>
+            <div className='w-auto md:py-8 px-[2%] md:px-10 flex md:items-center md:bg-gray-300 '>
               <Image
                 src={producto.imagen || '/default.png'}
                 alt={producto.titulo}
                 width={500}
                 height={500}
-                className="w-[260px] h-auto object-contain hover:scale-[1.6] transition-all duration-500"
+                className="w-[180px] py-10 md:py-0 md:w-[260px] h-auto object-contain md:hover:scale-[1.6] transition-all duration-500"
+                style={{ filter: 'drop-shadow(10px 10px 10px #030712)' }}
               />
             </div>
           </div>
-          <div className='w-[50%] flex flex-col justify-around'>
-            <p className='text-xl font-bold text-[#1b7b7e]'>de {producto.autor}</p>
-            <h1 className='text-3xl font-bold text-gray-900'>{producto.titulo}</h1>
-            <p className='text-lg font-bold text-gray-600'>{producto.categoria}</p>
+          <div className='md:w-[50%] px-[2%] md:px-0 flex flex-col md:justify-around'>
+            <p className='text-lg md:text-xl font-bold text-gray-500 md:text-[#1b7b7e]'>de {producto.autor}</p>
+            <h1 className='text-2xl leading-[102%] md:leading-normal md:text-3xl font-bold text-gray-900'>{producto.titulo}</h1>
+            <p className='md:text-lg font-bold text-gray-500 mt-3 md:mt-0'>{producto.categoria}</p>
             <div className='w-auto mt-2 flex justify-start items-center gap-2'>
               {producto.precioAnterior !== producto.precio && (
-                <p className='text-xl text-gray-400 font-bold line-through'>${producto.precioAnterior}</p>
+                <p className='md:text-xl text-gray-400 font-bold line-through'>${producto.precioAnterior}</p>
               )}
               <p className='text-3xl font-bold text-[#1b7b7e]'>${producto.precio}</p>
               {producto.descuento > 0 && (
-                <p className='text-xl font-extrabold text-red-500'>{producto.descuento}% off!</p>
+                <p className='md:text-xl md:font-extrabold text-red-400 md:text-red-500'>{producto.descuento}% off!</p>
               )}
             </div>
-            <p className='mt-2 text-lg font-light text-gray-700'>Stock disponible {producto.stock} unidades.</p>
-            
-            <label className='mt-2 text-md font-normal text-gray-900'>
+            {
+              producto.stock > 0 ? (
+                <p className='mt-2 text-lg font-light text-gray-700'>Stock disponible.</p>
+              ) : null
+            }
+            <label className='mt-5 md:mt-2 text-md font-normal text-gray-900'>
               Terminación:
               <select
                 className='ml-2 p-1 border border-gray-700 rounded-md bg-transparent'
@@ -101,11 +113,11 @@ const ProductDetailPage = () => {
               </select>
             </label>
             
-            <div className='flex flex-col items-start mt-4 gap-4'>
+            <div className='flex md:flex-col items-start mt-8 md:mt-4 gap-2 md:gap-4'>
               <div className='flex items-center border border-gray-400 rounded-md'>
                 <button
                   onClick={decrementarCantidad}
-                  className='px-4 py-0 text-4xl bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-l'
+                  className='px-4 py-0 text-4xl bg-gray-300 md:hover:bg-gray-400 text-gray-800 rounded-l'
                 >
                   -
                 </button>
@@ -114,28 +126,39 @@ const ProductDetailPage = () => {
                 </span>
                 <button
                   onClick={incrementarCantidad}
-                  className='h-full px-4 text-2xl bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-r'
+                  className='py-1 md:py-0 h-full px-4 text-2xl bg-gray-300 md:hover:bg-gray-400 text-gray-800 font-bold rounded-r'
                 >
                   +
                 </button>
               </div>
               <button
                 onClick={agregarAlCarrito}
-                className='px-6 py-2 bg-red-600 text-white font-bold rounded hover:bg-red-700 transition-colors duration-300'
+                className='px-6 py-2 bg-red-600 text-white font-bold rounded-md md:rounded md:hover:bg-red-700 transition-colors duration-300'
               >
                 Agregar al Carrito
               </button>
             </div>
           </div>
         </div>
-        <p className='w-[90%] mt-2 text-[18px] tracking-[.6px] leading-[23px] font-medium text-gray-700 text-center'><span className='font-bold text-gray-900'>Descripción: </span>{producto.detalle}</p>
-      </div>
+      <div className='md:w-[90%] px-[3%] py-5 md:py-0 md:px-0 mt-2 md:text-[18px] md:tracking-[.6px] md:leading-[23px] font-medium text-gray-800 text-left bg-gray-300 md:bg-transparent'>
+        <p>
+           <span className='font-bold text-gray-700'>Descripción: </span>
+             {isExpanded ? producto.detalle : `${producto.detalle.slice(0, 160)}...`}
+        </p>
+        <button 
+        onClick={toggleExpand}
+        className="text-gray-500 mt-2 font-semibold underline"
+        >
+        {isExpanded ? 'Leer menos' : 'Leer más'}
+        </button>
+    </div>      
+    </div>
       { relacionados.length > 0 ? (
-      <div className='w-full flex flex-col items-center py-20 bg-gray-400 gap-10'>
-        <h3 className='text-2xl font-bold text-gray-800'>Productos similares</h3>
-        <div className='w-full flex flex-wrap justify-center gap-5'>
+      <div className='w-full flex flex-col md:items-center py-12 md:py-20 bg-[#1b7b7e] md:bg-gray-400  gap-6 md:gap-10'>
+        <h3 className='pl-[3%] md:pl-0 text-xl md:text-2xl font-bold text-gray-100 md:text-gray-800'>Productos similares</h3>
+        <div className='w-full px-[3%] flex md:flex-wrap justify-start md:justify-center gap-3 md:gap-5 overflow-scroll' style={{ scrollbarWidth: 'none'}}>
           {relacionados.map((libro) => (
-            <Link href={`/product/${libro.id}`} key={libro.id} className="w-[250px] relative p-2 border border-gray-400 rounded-md shadow-lg overflow-hidden bg-white group hover:border-gray-500 hover:shadow-gray-600 transition-all duration-500">
+            <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg  bg-white group md:hover:border-gray-500 md:hover:shadow-gray-600 transition-all duration-500">
               {libro.descuento > 0 && (
                 <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
               )}

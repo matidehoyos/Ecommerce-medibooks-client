@@ -7,6 +7,7 @@ import Oferts from "@/components/Oferts";
 import Ubicacion from "@/components/ubicacion";
 import { useEffect, useState } from "react";
 import Loader from "@/components/Loader";
+import CategoriesMovil from "@/components/CategoriesMov";
 
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
           {loading && <Loader />}
           <Header />
           <Categories />
+          <CategoriesMovil />
           <Destacados />
           <Oferts />
           <Ubicacion />

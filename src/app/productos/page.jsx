@@ -51,7 +51,7 @@ const Productos = () => {
   return (
     <div className="w-full min-h-screen bg-gray-200">
       {loading && <Loader />}
-      <div className="w-full pt-[120px] px-[2%] flex justify-between items-center">
+      <div className="w-full pt-[95px] md:pt-[120px] px-[2%] flex justify-start md:justify-between items-center">
         <div className="mb-10">
           <label htmlFor="category" className="mr-2 text-2xl font-light text-gray-700">
             Categoria:
@@ -73,7 +73,7 @@ const Productos = () => {
       </div>
 
       {filteredProducts.length > 0 ? (
-        <div className="w-[94%] md:grid mt-0 px-[2%] pb-40 mx-auto grid-cols-3 lg:grid-cols-5 gap-x-3 gap-y-4">
+        <div className="md:w-[94%] grid mt-0 px-[2%] pb-12 md:pb-40 mx-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-x-3 md:gap-y-4 ">
           {filteredProducts.map(libro => (
             <ProductCard key={libro.id} libro={libro} />
           ))}

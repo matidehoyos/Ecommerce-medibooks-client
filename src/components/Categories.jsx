@@ -25,7 +25,7 @@ const Categories = () => {
 
 
   return (
-    <div className="w-full h-auto py-6 px-4 flex items-start justify-center flex-wrap bg-gray-200 space-x-2">
+    <div className="hidden md:flex w-full h-auto py-6 px-4  items-start justify-center flex-wrap bg-gray-200 space-x-2">
       {categorias?.map((categoria, index) => (
         <div key={index} className="relative group">
           <button 

@@ -14,22 +14,25 @@ const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const [abierto, setAbierto] = useState(false);
 
+  const handleSearchCloseMenu = () => {
+    setAbierto(false); 
+  };
 
   return (
-    <nav className="w-full h-[45px] md:h-[75px] fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
+    <nav className="w-full h-[60px] md:h-[75px] fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
       <div className="w-full flex">
         <div className="w-full px-[2%] flex justify-between items-center">
-          <div className='md:h-[40px] flex items-center overflow-hidden'>
-            <Link href="/" aria-label="Go to homepage">
-              <Image 
-                src="/navLog.png" 
-                alt="Logo Medibooks" 
-                width={200} 
-                height={90} 
-                className="w-[180px] md:w-full h-auto object-contain object-center" 
-              />
-            </Link>
-          </div>
+            <div className="h-[40px] md:h-[60px] lg:h-[80px] flex items-center overflow-hidden">
+              <Link href="/" aria-label="Go to homepage">
+                <Image
+                  src="/navLog.png"
+                  alt="Logo Medibooks"
+                  width={200}
+                  height={90}
+                  className="w-[180px] md:w-[200px] lg:w-[200px] h-auto max-w-full object-contain object-center"
+                />
+              </Link>
+           </div>
           <div className='hidden md:block'>
             <SearchBar />
           </div>
@@ -42,7 +45,7 @@ const NavBar = () => {
                     alt="Carrito de compras." 
                     width={170} 
                     height={150} 
-                    className="w-[25px] md:w-[28px] h-auto object-contain md:hover:scale-125 transition-all duration-500 relative top-[3px]"
+                    className="w-[28px] h-auto object-contain md:hover:scale-125 transition-all duration-500 relative top-[3px]"
                   />
                 </button>
                 <span className="inline-flex items-center justify-center px-1 md:px-0 py-[1px] text-s lg:text-lg font-bold leading-none text-red-500">
@@ -57,38 +60,30 @@ const NavBar = () => {
             <Link href='/contacto' className='text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
           </div>
 
-          <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[45px] bg-gray-700 transition-all duration-700 ease-out`}>
-            <div className='w-[90%]'>
-              <SearchBar />
-            </div>
-            <div className='mt-6 flex flex-col gap-y-3'>
-              <Link href='/' className='text-2xl font-medium tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Inicio</Link>
-              <Link href='/productos' className='text-2xl font-medium tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Productos</Link>
-              <Link href='/contacto' className='text-2xl font-medium tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
-            </div>
-            <ul className={`mt-6 flex flex-col gap-y-3`}>
-            {!user ? (
-                <>
-                  <Link href="/api/auth/login" className="text-3xl font-bold text-[#26a5aa]">
-                    Iniciar sesion
-                  </Link>
-                  <Link href="/api/auth/login" className="text-3xl font-bold text-[#26a5aa]">
-                    Registrarte
-                  </Link>
-                </>
-              ) : ( 
-                <>
-                  <Link href="/api/auth/logout" className="text-xl font-medium text-gray-50 hover:scale-110">
-                    Cerrar sesion
-                  </Link>
-                </>
-              )}
-            </ul>
+          <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[60px] bg-gray-700 transition-all duration-700 ease-out`}>
+          <div className='w-[90%]'>
+            <SearchBar onSearch={handleSearchCloseMenu}/>
           </div>
+          <div className='mt-6 flex flex-col gap-y-3'>
+            <Link href='/' className='text-2xl font-semibold tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300' onClick={() => setAbierto(false)}>Inicio</Link>
+            <Link href='/productos' className='text-2xl font-semibold tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300' onClick={() => setAbierto(false)}>Productos</Link>
+            <Link href='/contacto' className='text-2xl font-semibold tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300' onClick={() => setAbierto(false)}>Contacto</Link>
+          </div>
+          <ul className={`mt-6 flex flex-col gap-y-3`}>
+            {!user ? (
+              <>
+                <Link href="/api/auth/login" className="text-2xl font-semibold text-[#26a5aa]" onClick={() => setAbierto(false)}>Iniciar sesión</Link>
+                <Link href="/api/auth/login" className="text-2xl font-semibold text-[#26a5aa]" onClick={() => setAbierto(false)}>Registrarte</Link>
+              </>
+            ) : ( 
+              <Link href="/api/auth/logout" className="text-xl font-medium text-gray-50 hover:scale-110" onClick={() => setAbierto(false)}>Cerrar sesión</Link>
+            )}
+          </ul>
+        </div>
 
           <div className='flex md:hidden w-auto h-auto'>
             <button onClick={() => setAbierto(!abierto)}>
-               <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[26px] h-auto object-contain' />
+               <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[40px] h-auto object-contain' />
             </button>
           </div>
 

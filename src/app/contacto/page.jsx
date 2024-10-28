@@ -34,8 +34,8 @@ const Contacto = () => {
   return (
     <div className="w-full bg-gray-200">
       {loading && <Loader />}
-        <div className='w-[80%] pt-[170px] mx-auto pb-20 flex flex-col md:flex-row-reverse md:justify-center md:items-stretch gap-8'>
-            <div className="w-full h-full mt-8 md:mt-0 p-4 text-gray-700 space-y-3 border border-gray-800 rounded-lg bg-white bg-opacity-100">
+        <div className='md:w-[80%] px-[3%] pt-[80px] md:pt-[170px] mx-auto pb-20 flex flex-col md:flex-row-reverse md:justify-center md:items-stretch gap-8'>
+            <div className="w-full h-full mt-8 md:mt-0 p-4 text-gray-700 space-y-3 border md:border-gray-800 md:rounded-lg md:bg-white">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Información de Contacto</h2>
                 <p>Email: <a href="mailto:somosmedibooks@gmail.com" target="_blank"  className="text-gray-800 font-bold hover:underline">somosmedibooks@gmail.com</a></p>
                 <p>WhatsApp: <a href="https://wa.me/+54 9 223 341-4157" target="_blank" className="text-gray-800 font-bold hover:underline">+54 9 223 341-4157</a></p>
@@ -43,8 +43,8 @@ const Contacto = () => {
                 <p>Dirección:  <a href="" target="_blank" rel="noopener noreferrer" className="text-gray-800 font-bold hover:underline">Gaboto 5334</a></p>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3142.4541279362948!2d-57.55942868820136!3d-38.036503546684266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584de793ab6b611%3A0x9231325eddac25aa!2sMagallanes%204394%2C%20B7600%20Mar%20del%20Plata%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1710183187034!5m2!1ses!2sar" width="100%" height="207" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className='border-2 border-gray-400 rounded-lg rounded-t-none'></iframe>
             </div>
-            <div className="w-full h-full">
-                <form onSubmit={handleSubmit} className="w-full h-full p-4 space-y-2 bg-white border border-gray-800 rounded-lg">
+            <div className="w-full h-full px-[3%] md:px-0">
+                <form onSubmit={handleSubmit} className="w-full h-full p-4 space-y-2 bg-white md:border border-gray-800 md:rounded-lg">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Envianos un mensaje</h2>
                 <div>
                     <label htmlFor="nombre" className="block text-gray-700 font-semibold mb-1">
@@ -60,7 +60,7 @@ const Contacto = () => {
                     className="w-full p-2 border border-gray-400 rounded-md focus:outline-none focus:border-[#1b7b7e] bg-gray-50"
                     />
                 </div>
-                <div className='w-full flex gap-2'>
+                <div className='w-full flex flex-col md:flex-row gap-2'>
                     <div className='w-full'>
                         <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
                         Email
@@ -107,7 +107,7 @@ const Contacto = () => {
 
                 <button
                     type="submit"
-                    className="w-full bg-gray-800 text-white py-2 rounded-md hover:bg-gray-950 transition duration-300 font-semibold"
+                    className="w-full bg-[#1b7b7e] md:bg-gray-800 text-white py-2 rounded-md md:hover:bg-gray-950 transition duration-300 font-semibold"
                 >
                     Enviar mensaje
                 </button>

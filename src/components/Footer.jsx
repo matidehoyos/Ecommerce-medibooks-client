@@ -8,9 +8,9 @@ import { faAt, faEnvelope, faEnvelopeOpen, faEnvelopeOpenText, faMailBulk, faMai
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white flex flex-col">
-      <div className="pt-20 pb-12 w-full px-[10%] flex justify-around items-center">
+      <div className="pt-12 md:pt-20 pb-12 w-full px-[2%] md:px-[10%] flex flex-col md:flex-row md:justify-around md:items-center">
         
-        <Link href='/' className="flex flex-col items-center justify-center ">
+        <Link href='/' className="flex flex-col items-center justify-center">
           <Image 
             src="/logo3.png" 
             alt="Logo del Proyecto" 
@@ -20,17 +20,17 @@ const Footer = () => {
           />
         </Link>
         
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mt-6 md:mt-0">
           <p>Mar Del Plata, Bs As, Argentina</p>
           <p>Calle: Gaboto 5434</p>
         </div>
 
-        <div className="flex justify-center space-x-4">
+        <div className="mt-8 md:mt-0 flex justify-center space-x-6 md:space-x-4">
                 <a 
                 href="https://www.instagram.com/tuusuario" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#E1306C] transition-colors duration-300"
+                className="text-[#e1306c] md:text-gray-600 md:hover:text-[#E1306C] transition-colors duration-300"
                 >
                 <FontAwesomeIcon icon={faInstagram} size="2x" />
                 </a>
@@ -38,7 +38,7 @@ const Footer = () => {
                 href="https://wa.me/tu-numero" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#25D366] transition-colors duration-300"
+                className="text-[#25d366] md:text-gray-600 md:hover:text-[#25D366] transition-colors duration-300"
                 >
                 <FontAwesomeIcon icon={faWhatsapp} size="2x" />
                 </a>
@@ -46,13 +46,13 @@ const Footer = () => {
                 href="mailto:somosmedibooks@gmail.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-[#1b7b7e] transition-colors duration-300"
+                className="text-[#1b7b7e] md:text-gray-600 md:hover:text-[#1b7b7e] transition-colors duration-300"
                 >
                 <FontAwesomeIcon icon={faEnvelope} size="2x" />
                 </a>
             </div>
       </div>
-      <div className="md:py-8 text-center text-gray-300 font-semibold mt-8 md:mt-12 md:bg-gray-900">
+      <div className="py-3 md:py-8 md:mt-12 text-center text-gray-300 text-xs md:text-lg md:font-semibold bg-gray-900">
         <p>Copyright Medibooks - 2024. Todos los derechos reservados.</p>
       </div>
     </footer>

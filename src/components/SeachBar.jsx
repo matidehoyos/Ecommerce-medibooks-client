@@ -5,9 +5,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import { getLibros } from '@/services/serviceLibros';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const [products, setProducts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const router = useRouter();
 
@@ -39,14 +39,16 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    onSearch(); 
     setSearchQuery('');
     setSuggestedProducts([]);
   };
 
   const handleSuggestionClick = (productId) => {
+    onSearch();  
+    router.push(`/product/${productId}`);
     setSearchQuery('');
     setSuggestedProducts([]);
-    router.push(`/product/${productId}`); 
   };
 
   return (
@@ -57,8 +59,8 @@ const SearchBar = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Buscar libro..."
-          className="w-full py-1 md:py-0 px-2 text-lg md:text-base md:text-gray-200 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-50 placeholder:text-lg"
-          style={{ touchAction: 'manipulation', fontSize: '16px' }} 
+          className="w-full py-1 md:py-0 px-2 text-lg md:text-base text-gray-200 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-50 placeholder:text-xl placeholder:font-medium"
+          style={{ touchAction: 'manipulation', fontSize: '16px' }}
           autoComplete="off"
         />
         <button type="submit" className="text-gray-50 px-2">

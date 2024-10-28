@@ -10,6 +10,7 @@ import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 import Image from 'next/image';
 import Link from 'next/link';
+import SearchBar from '@/components/SeachBar';
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
@@ -54,7 +55,10 @@ const Productos = () => {
   return (
     <div className="w-full min-h-screen bg-gray-200">
       {loading && <Loader />}
-      <div className="w-full pt-[95px] md:pt-[120px] px-[2%] flex justify-start md:justify-between items-center">
+      <div className='w-full mb-4 px-[2%] pt-[95px] md:hidden'>
+        <SearchBar />
+      </div>
+      <div className="w-full  md:pt-[120px] px-[2%] flex justify-start md:justify-between items-center">
         <div className="mb-10">
           <label htmlFor="category" className="mr-2 text-2xl font-light text-gray-700">
             Categoria:

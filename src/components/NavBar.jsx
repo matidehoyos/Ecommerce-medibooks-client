@@ -6,6 +6,7 @@ import { useCart } from '@/contexts/CartContexts';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Profile from './Profile';
 import { useState } from 'react';
+import SearchBarMov from './SearchBarMov';
 
 const NavBar = () => {
   const { cart, toggleCart } = useCart();
@@ -62,7 +63,7 @@ const NavBar = () => {
 
           <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] bg-gray-700 transition-all duration-700 ease-out`}>
           <div className='w-[90%]'>
-            <SearchBar onSearch={handleSearchCloseMenu}/>
+            <SearchBarMov onSearch={handleSearchCloseMenu}/>
           </div>
           <div className='mt-6 flex flex-col gap-y-3'>
             <Link href='/' className='text-2xl font-semibold tracking-wider text-[#eee] hover:text-[#57c0c4] transition-all duration-300' onClick={() => setAbierto(false)}>Inicio</Link>

@@ -5,7 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import { getLibros } from '@/services/serviceLibros';
 
-const SearchBar = () => {
+const SearchBarMov = ({ onSearch }) => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
@@ -39,30 +39,32 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+    onSearch(); 
     setSearchQuery('');
     setSuggestedProducts([]);
   };
 
   const handleSuggestionClick = (productId) => {
+    onSearch();  
     router.push(`/product/${productId}`);
     setSearchQuery('');
     setSuggestedProducts([]);
   };
 
   return (
-    <div className="w-full md:w-[380px] relative">
-      <form onSubmit={handleSearchSubmit} className="flex border border-gray-400 md:border-gray-300 rounded-md overflow-hidden bg-white bg-opacity-40 md:bg-opacity-40 py-1">
+    <div className="w-auto md:w-[380px] relative">
+      <form onSubmit={handleSearchSubmit} className="flex border border-gray-400 md:border-gray-300 rounded-md overflow-hidden bg-white bg-opacity-10 md:bg-opacity-40 py-2 md:py-1">
         <input
           type="text"
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Buscar libro..."
-          className="w-full py-0 px-2 text-lg md:text-base text-gray-600 md:text-gray-200 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 md:placeholder:text-gray-50 md:placeholder:text-xl placeholder:font-bold md:placeholder:font-medium"
+          className="w-full py-1 md:py-0 px-2 text-lg md:text-base text-gray-200 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-50 placeholder:text-xl placeholder:font-medium"
           style={{ touchAction: 'manipulation', fontSize: '16px' }}
           autoComplete="off"
         />
         <button type="submit" className="text-gray-50 px-2">
-          <FontAwesomeIcon icon={faSearch} className='text-gray-700 md:text-gray-50 text-lg' />
+          <FontAwesomeIcon icon={faSearch} className='text-gray-50 text-lg' />
         </button>
       </form>
 
@@ -86,4 +88,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchBarMov;

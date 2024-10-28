@@ -28,16 +28,16 @@ const CategoriesMovil = () => {
 
 
   return (
-    <div className="w-full px-[2%] py-6 flex justify-start items-stretch lg:hidden bg-gray-800 overflow-hidden">
+    <div className="w-full px-[2%] py-3 flex justify-start items-stretch lg:hidden bg-gray-200 overflow-hidden">
       <Link
         href="/productos"
-        className="block text-white text-xl font-bold text-center bg-[#1b7b7e] py-2 px-4 rounded-md border border-gray-800"
+        className="block text-[#1b7b7e] text-xl font-bold text-center bg-gray-50 py-1 px-4 rounded-md border border-gray-400"
       >
         Todas
       </Link>
       <select
         onChange={handleCategoryChange}
-        className="w-[180px] px-1 ml-2 flex-1 text-gray-800 text-xl font-bold bg-gray-100 rounded-md border border-gray-800"
+        className="w-[180px] px-1 ml-2 flex-1 text-[#1b7b7e] text-xl font-bold bg-gray-50 rounded-md border border-gray-400"
       >
         <option value="">Seleccione categoria</option>
         {categorias.map((category) => (

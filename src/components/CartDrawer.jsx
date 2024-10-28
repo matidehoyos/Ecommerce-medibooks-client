@@ -30,7 +30,7 @@ const CartDrawer = () => {
   return (
     <>
     {isCartOpen && <div className="bg-black opacity-40 fixed inset-0 z-[2000]" onClick={toggleCart}></div>}
-    <div className={`fixed w-full md:w-[800px] h-[calc(100vh-60px)] md:h-[100vh] pb-20 md:pb-60 top-[60px] md:top-[0px] right-0 bg-gray-200 md:bg-gray-50 shadow-lg z-[2000] transition-transform duration-1000 ease-in-out ${isCartOpen ? 'translate-x-0' : 'translate-x-[200%]'} overflow-y-scroll`}>
+    <div className={`fixed w-full md:w-[800px] h-[100vh] md:h-[100vh] pb-20 md:pb-60 top-0 right-0 bg-gray-200 md:bg-gray-50 shadow-lg z-[2000] transition-transform duration-1000 ease-in-out ${isCartOpen ? 'translate-x-0' : 'translate-x-[200%]'} overflow-y-scroll`}>
       <div className='w-full p-4 mb-4 md:mb-0 flex justify-between items-center bg-gray-800'>
         <h2 className="text-[20px] font-medium text-gray-100">Tus productos seleccionados</h2>
         <button onClick={toggleCart} className="font-bold text-xl text-gray-50 hover:text-[#1b7b7e]"><BiSolidRightArrow /></button>

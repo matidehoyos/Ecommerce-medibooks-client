@@ -81,10 +81,17 @@ const NavBar = () => {
           </ul>
         </div>
 
-          <div className='flex md:hidden w-auto h-auto'>
-            <button onClick={() => setAbierto(!abierto)}>
-               <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[40px] h-auto object-contain' />
-            </button>
+          <div className='flex justify-end md:hidden w-[40px] h-auto'>
+            {
+              !abierto ? (
+                <button onClick={() => setAbierto(!abierto)}>
+                  <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[36px] h-auto object-contain' />
+                </button>
+              ) : (
+                <button onClick={() => setAbierto(!abierto)}>
+                  <p className='text-gray-100 text-2xl pr-3'>X</p>
+                </button>
+              )}
           </div>
 
           <div className='hidden md:flex'>

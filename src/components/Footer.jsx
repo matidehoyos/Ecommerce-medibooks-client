@@ -22,7 +22,7 @@ const Footer = () => {
         
         <div className="flex flex-col items-center mt-6 md:mt-0">
           <p>Mar Del Plata, Bs As, Argentina</p>
-          <p>Calle: Gaboto 5434</p>
+          <p>Gaboto 5434</p>
         </div>
 
         <div className="mt-8 md:mt-0 flex justify-center space-x-6 md:space-x-4">

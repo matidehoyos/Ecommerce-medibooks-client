@@ -19,7 +19,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full h-[60px] md:h-[75px] fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
+    <nav className="w-full h-[68px] md:h-[75px] pt-[8px] md:pt-0 fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
       <div className="w-full flex">
         <div className="w-full px-[2%] flex justify-between items-center">
             <div className="h-[40px] md:h-[60px] lg:h-[80px] flex items-center overflow-hidden">
@@ -60,7 +60,7 @@ const NavBar = () => {
             <Link href='/contacto' className='text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
           </div>
 
-          <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[60px] bg-gray-700 transition-all duration-700 ease-out`}>
+          <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] bg-gray-700 transition-all duration-700 ease-out`}>
           <div className='w-[90%]'>
             <SearchBar onSearch={handleSearchCloseMenu}/>
           </div>

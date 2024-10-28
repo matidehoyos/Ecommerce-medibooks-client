@@ -28,7 +28,7 @@ const CategoriesMovil = () => {
 
 
   return (
-    <div className="w-full px-[2%] py-3 flex justify-start items-stretch lg:hidden bg-gray-200 overflow-hidden">
+    <div className="w-full px-[2%] py-3 flex justify-start items-stretch lg:hidden bg-gray-700 overflow-hidden">
       <Link
         href="/productos"
         className="block text-[#1b7b7e] text-xl font-bold text-center bg-gray-50 py-1 px-4 rounded-md border border-gray-400"

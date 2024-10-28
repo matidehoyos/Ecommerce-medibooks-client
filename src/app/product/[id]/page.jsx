@@ -69,16 +69,16 @@ const ProductDetailPage = () => {
   return (
     <div className='min-h-screen  bg-gray-200'>
       {loading && <Loader />}
-      <div className='w-full h-auto pt-[70px] md:pt-[170px] flex flex-col md:items-center md:justify-center md:pb-20 overflow-hidden'>
+      <div className='w-full h-auto pt-[60px] md:pt-[170px] flex flex-col md:items-center md:justify-center md:pb-20 overflow-hidden'>
         <div className='w-full flex flex-col md:flex-row md:justify-center md:items-stretch gap-0 md:gap-8 pb-12 md:pb-20'>
           <div className='md:w-[50%] p-0 flex md:justify-end overflow-hidden'>
-            <div className='w-auto md:py-8 px-[5%] md:px-10 flex md:items-center md:bg-gray-300 '>
+            <div className='w-auto md:py-8 px-[12%] md:px-10 flex md:items-center md:bg-gray-300 '>
               <Image
                 src={producto.imagen || '/default.png'}
                 alt={producto.titulo}
                 width={500}
                 height={500}
-                className="w-[180px] py-10 md:py-0 md:w-[260px] h-auto object-contain md:hover:scale-[1.6] transition-all duration-500"
+                className="w-full py-10 md:py-0 md:w-[260px] h-auto object-contain md:hover:scale-[1.6] transition-all duration-500"
                 style={{ filter: 'drop-shadow(10px 10px 10px #374151)' }}
               />
             </div>

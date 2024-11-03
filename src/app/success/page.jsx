@@ -1,23 +1,24 @@
 'use client';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useUser } from '@auth0/nextjs-auth0/client'; 
+import { useSearchParams } from 'next/navigation'; // Importa useSearchParams
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 const SuccessPage = () => {
-  const router = useRouter();
-  const { user } = useUser(); 
-  const cart = JSON.parse(localStorage.getItem('cart')) || []; 
+  const searchParams = useSearchParams();
+  const { user } = useUser();
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
   useEffect(() => {
     const saveTransactionData = async () => {
-      const { id: transactionId, status } = router.query; 
+      const transactionId = searchParams.get('id'); // Obtén el parámetro 'id'
+      const status = searchParams.get('status'); // Obtén el parámetro 'status'
 
       if (transactionId && status && user) {
         const totalAmount = cart.reduce((acc, item) => acc + item.precio * item.quantity, 0);
-        const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0); // Total de items
+        const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
         const items = cart.map(item => ({
-          productId: item.id, 
+          productId: item.id,
           title: item.titulo,
           unitPrice: item.precio,
           quantity: item.quantity,
@@ -34,8 +35,8 @@ const SuccessPage = () => {
               transactionId,
               status,
               totalAmount: totalAmount.toFixed(2),
-              userId: user.sub, 
-              totalItems, 
+              userId: user.sub,
+              totalItems,
               items,
             }),
           });
@@ -52,22 +53,22 @@ const SuccessPage = () => {
       }
     };
 
-    if (router.query.id) {
+    if (searchParams.get('id')) {
       saveTransactionData();
     }
-  }, [router.query, user, cart]);
+  }, [searchParams, user, cart]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-bold mb-4">¡Compra Exitosa!</h1>
       <p className="text-lg">Gracias por tu compra, {user?.name || 'Cliente'}!</p>
       <p className="mt-2">Tu transacción ha sido completada.</p>
-      <p className="mt-2">ID de la Transacción: {router.query.id}</p>
-      <p className="mt-2">Estado: {router.query.status}</p>
-      <p className="mt-2">Total: ${totalAmount.toFixed(2)}</p>
+      <p className="mt-2">ID de la Transacción: {searchParams.get('id')}</p>
+      <p className="mt-2">Estado: {searchParams.get('status')}</p>
+      <p className="mt-2">Total: ${cart.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2)}</p>
       <button
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-        onClick={() => router.push('/')}
+        onClick={() => window.location.href = '/'}
       >
         Volver a la Tienda
       </button>
@@ -76,3 +77,4 @@ const SuccessPage = () => {
 };
 
 export default SuccessPage;
+

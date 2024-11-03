@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
@@ -88,10 +88,13 @@ const SuccessPage = () => {
   }, []);
 
   return (
-    <SuccessContent cart={cart} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <SuccessContent cart={cart} />
+    </Suspense>
   );
 };
 
 export default SuccessPage;
+
 
 

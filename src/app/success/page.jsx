@@ -1,4 +1,3 @@
-// app/success/page.js
 'use client';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -81,7 +80,12 @@ const SuccessContent = ({ cart }) => {
 };
 
 const SuccessPage = () => {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(storedCart);
+  }, []);
 
   return (
     <SuccessContent cart={cart} />
@@ -89,4 +93,5 @@ const SuccessPage = () => {
 };
 
 export default SuccessPage;
+
 

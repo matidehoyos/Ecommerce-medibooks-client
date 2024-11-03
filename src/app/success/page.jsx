@@ -1,6 +1,8 @@
+
+
 'use client';
-import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation'; // Importa useSearchParams
+import { Suspense, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 const SuccessPage = () => {
@@ -10,8 +12,8 @@ const SuccessPage = () => {
 
   useEffect(() => {
     const saveTransactionData = async () => {
-      const transactionId = searchParams.get('id'); // Obtén el parámetro 'id'
-      const status = searchParams.get('status'); // Obtén el parámetro 'status'
+      const transactionId = searchParams.get('id');
+      const status = searchParams.get('status');
 
       if (transactionId && status && user) {
         const totalAmount = cart.reduce((acc, item) => acc + item.precio * item.quantity, 0);
@@ -26,7 +28,7 @@ const SuccessPage = () => {
         }));
 
         try {
-          const response = await fetch('http://localhost:5000/api/save-transaction', {
+          const response = await fetch('https://medibooks-server-production.up.railway.app/api//transaction/save', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -59,22 +61,25 @@ const SuccessPage = () => {
   }, [searchParams, user, cart]);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold mb-4">¡Compra Exitosa!</h1>
-      <p className="text-lg">Gracias por tu compra, {user?.name || 'Cliente'}!</p>
-      <p className="mt-2">Tu transacción ha sido completada.</p>
-      <p className="mt-2">ID de la Transacción: {searchParams.get('id')}</p>
-      <p className="mt-2">Estado: {searchParams.get('status')}</p>
-      <p className="mt-2">Total: ${cart.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2)}</p>
-      <button
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-        onClick={() => window.location.href = '/'}
-      >
-        Volver a la Tienda
-      </button>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-3xl font-bold mb-4">¡Compra Exitosa!</h1>
+        <p className="text-lg">Gracias por tu compra, {user?.name || 'Cliente'}!</p>
+        <p className="mt-2">Tu transacción ha sido completada.</p>
+        <p className="mt-2">ID de la Transacción: {searchParams.get('id')}</p>
+        <p className="mt-2">Estado: {searchParams.get('status')}</p>
+        <p className="mt-2">Total: ${cart.reduce((acc, item) => acc + item.precio * item.quantity, 0).toFixed(2)}</p>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => window.location.href = '/'}
+        >
+          Volver a la Tienda
+        </button>
+      </div>
+    </Suspense>
   );
 };
 
 export default SuccessPage;
+
 

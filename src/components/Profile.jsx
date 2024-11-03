@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { saveUserToDatabase } from '../services/serviceUser';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Profile({ user }) {
 

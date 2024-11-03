@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { BiTrash } from 'react-icons/bi';
-import { eliminarUser, getUsuarios, updateEstado, updateUserRole } from '@/services/serviceUser';
+import { eliminarUser, getUsuarios, updateEstado, updateUserRole } from '../../../services/serviceUser.js';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';

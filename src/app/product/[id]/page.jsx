@@ -67,92 +67,73 @@ const ProductDetailPage = () => {
   if (!producto) return <div>Cargando...</div>;
 
   return (
-    <div className='min-h-screen  bg-gray-200'>
+    <div className='min-h-screen bg-gray-200'>
       {loading && <Loader />}
-      <div className='w-full h-auto pt-[60px] md:pt-[170px] flex flex-col md:items-center md:justify-center md:pb-20 overflow-hidden'>
-        <div className='w-full flex flex-col md:flex-row md:justify-center md:items-stretch gap-0 md:gap-8 pb-12 md:pb-20'>
-          <div className='md:w-[50%] p-0 flex md:justify-end overflow-hidden'>
-            <div className='w-auto md:py-8 px-[12%] md:px-10 flex md:items-center md:bg-gray-300 '>
+      <div className='w-full h-auto md:h-auto pt-[60px] md:pt-[80px] flex flex-col justify-start md:flex-row md:items-center md:justify-center'>
+          <div className='md:w-[80%] h-auto overflow-hidden'>
+            <div className='w-auto h-auto px-5 md:p-5 md:px-0 flex items-center md:justify-end'>
               <Image
                 src={producto.imagen || '/default.png'}
                 alt={producto.titulo}
                 width={500}
                 height={500}
-                className="w-[160px] py-10 md:py-0 md:w-[260px] h-auto object-contain md:hover:scale-[1.6] transition-all duration-500"
-                style={{ filter: 'drop-shadow(10px 10px 10px #374151)' }}
+                className="w-[160px] md:w-[360px] h-auto py-10 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
+                style={{ filter: 'drop-shadow(10px 10px 10px rgba(0,0,0,.7))' }}
               />
             </div>
           </div>
-          <div className='md:w-[50%] px-[4%] md:px-0 flex flex-col md:justify-around'>
-            <p className='text-lg md:text-xl font-bold text-gray-500 md:text-[#1b7b7e]'>de {producto.autor}</p>
-            <h1 className='text-2xl leading-[102%] md:leading-normal md:text-3xl font-bold text-gray-900'>{producto.titulo}</h1>
-            <p className='md:text-lg font-bold text-gray-500 mt-3 md:mt-0'>{producto.categoria}</p>
+          <div className='md:w-full px-[4%] pb-8 md:pb-0 md:px-0 md:pt-[0px] flex flex-col md:justify-start'>
+            <p className='text-lg md:text-[22px] md:pt-[12px] font-[800] text-gray-500 md:text-gray-600 font-sans'><span className='font-[400] text-[18px]'>Autor/es: </span>{producto.autor}</p>
+            <h1 className='text-2xl leading-[102%] md:leading-normal md:text-[40px] font-bold text-gray-800 font-sans'>{producto.titulo}</h1>
             <div className='w-auto mt-2 flex justify-start items-center gap-2'>
+              <p className='mt-3 md:mt-0text-xl md:text-3xl font-extrabold text-[#1b7b7e]'>${producto.precio}</p>
               {producto.precioAnterior !== producto.precio && (
                 <p className='md:text-xl text-gray-400 font-bold line-through'>${producto.precioAnterior}</p>
               )}
-              <p className='text-3xl font-bold text-[#1b7b7e]'>${producto.precio}</p>
-              {producto.descuento > 0 && (
-                <p className='md:text-xl md:font-extrabold text-red-400 md:text-red-500'>{producto.descuento}% off!</p>
-              )}
             </div>
-            {
-              producto.stock > 0 ? (
-                <p className='mt-2 text-lg font-light text-gray-700'>Stock disponible.</p>
-              ) : null
-            }
-            <label className='mt-5 md:mt-2 text-md font-normal text-gray-900'>
-              Terminación:
-              <select
-                className='ml-2 p-1 border border-gray-700 rounded-md bg-transparent'
-                value={terminacion}
-                onChange={(e) => setTerminacion(e.target.value)}
-              >
-                <option value="Encuadernado">Encuadernado</option>
-                <option value="Anillado">Anillado</option>
-              </select>
-            </label>
-            
-            <div className='flex md:flex-col items-start mt-8 md:mt-4 gap-2 md:gap-4'>
-              <div className='flex items-center border border-gray-400 rounded-md'>
-                <button
-                  onClick={decrementarCantidad}
-                  className='px-4 py-0 text-4xl bg-gray-300 md:hover:bg-gray-400 text-gray-800 rounded-l'
+            <label className='mt-5 md:mt-6 text-md font-medium text-gray-800'>
+                Terminación:
+                <select
+                  className='ml-2 p-1 border text-sm border-gray-700 rounded-md bg-transparent'
+                  value={terminacion}
+                  onChange={(e) => setTerminacion(e.target.value)}
                 >
-                  -
-                </button>
-                <span className='px-4 py-2 bg-gray-100 text-gray-800 font-bold'>
-                  {cantidad}
-                </span>
-                <button
-                  onClick={incrementarCantidad}
-                  className='py-1 md:py-0 h-full px-4 text-2xl bg-gray-300 md:hover:bg-gray-400 text-gray-800 font-bold rounded-r'
-                >
-                  +
-                </button>
+                  <option value="Encuadernado">Encuadernado</option>
+                  <option value="Anillado">Anillado</option>
+                </select>
+              </label>
+            <div className='flex items-center justify-start mt-8 gap-4'>
+            <div className="h-full">
+                <input
+                  type="number"
+                  min="1"
+                  max={producto.stock}
+                  value={cantidad}
+                  onChange={(e) => setCantidad(parseInt(e.target.value))}
+                  className="w-12 h-full border border-gray-600 text-center text-lg text-extrabold rounded-md bg-transparent"
+                />
               </div>
               <button
                 onClick={agregarAlCarrito}
-                className='px-6 py-2 bg-red-600 text-white font-bold rounded-md md:rounded md:hover:bg-red-700 transition-colors duration-300'
+                className='px-6 py-2 bg-red-500 text-white font-bold border border-gray-500 rounded-md md:rounded-md md:hover:bg-red-400 transition-colors duration-300'
               >
                 Agregar al Carrito
               </button>
-            </div>
+            </div>     
           </div>
-        </div>
-      <div className='md:w-[90%] px-[3%] py-5 md:py-0 md:px-0 mt-2 md:text-[18px] md:tracking-[.6px] md:leading-[23px] font-medium text-gray-800 text-left bg-gray-300 md:bg-transparent'>
-        <p>
-           <span className='font-bold text-gray-700'>Descripción: </span>
-             {isExpanded ? producto.detalle : `${producto.detalle.slice(0, 160)}...`}
-        </p>
-        <button 
-        onClick={toggleExpand}
-        className="text-gray-500 mt-2 font-semibold underline"
-        >
-        {isExpanded ? 'Leer menos' : 'Leer más'}
-        </button>
-    </div>      
-    </div>
+      </div>
+      <div className='md:w-full px-[3%] py-8 md:py-8 md:px-[10%] mt-2 md:mt-0 md:text-[20px] md:tracking-[.6px] md:leading-[23px] font-medium text-gray-800 text-left bg-gray-300'>
+              <p>
+                <span className='font-bold text-gray-700'>Descripción: </span>
+                  {isExpanded ? producto.detalle : `${producto.detalle.slice(0, 460)}...`}
+              </p>
+              <button 
+              onClick={toggleExpand}
+              className="text-gray-500 mt-2 font-semibold underline"
+              >
+              {isExpanded ? 'Leer menos' : 'Leer más'}
+              </button>
+            </div> 
       { relacionados.length > 0 ? (
       <div className='w-full flex flex-col md:items-center py-12 md:py-20 bg-[#1b7b7e] md:bg-gray-400  gap-6 md:gap-10'>
         <h3 className='pl-[3%] md:pl-0 text-xl md:text-2xl font-bold text-gray-100 md:text-gray-800'>Productos similares</h3>

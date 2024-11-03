@@ -81,7 +81,8 @@ export const saveUserToDatabase = async (userData) => {
 
 
   export const eliminarUser = async (id) => {
-    const res = await fetch(`${BASE_URL}/user/${id}`, { method: 'DELETE' });
+    const res = await fetch(`${BASE_URL}/user/${id}`,
+     { method: 'DELETE' });
     if (!res.ok) throw new Error('Error deleting user');
   };
   

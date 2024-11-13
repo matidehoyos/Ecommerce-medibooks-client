@@ -52,6 +52,8 @@ const Productos = () => {
     router.push(`/productos?category=${e.target.value}`);
   };
 
+  console.log(productos)
+
   return (
     <div className="w-full min-h-screen bg-gray-200">
       {loading && <Loader />}

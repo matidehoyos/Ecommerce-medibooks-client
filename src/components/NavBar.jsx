@@ -103,7 +103,7 @@ const NavBar = () => {
                 <Image src={user.picture} width={90} height={90} alt='Imagen user.' className='w-[26px] h-auto object-contain'/>
               )}
             </button>
-            <ul className={`w-[auto] p-4 absolute top-[75px] flex flex-col ${visible ? 'right-0' : '-right-[200%]'} bg-[#1b7b7e] transition-all duration-700`}>
+            <ul className={`w-[auto] p-4 absolute top-[75px] flex gap-5 ${visible ? 'right-0' : '-right-[200%]'} bg-[#1b7b7e] transition-all duration-700`}>
             {!user ? (
                 <>
                   <Link href="/api/auth/login" className="mb-1 text-xl font-medium text-gray-50 hover:scale-110">

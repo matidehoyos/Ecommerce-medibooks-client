@@ -140,9 +140,9 @@ const AdminCategoriasPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+        <div className="h-full p-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 bg-gray-50 rounded-lg">
           {currentItems.map((categoria) => (
-            <div key={categoria.id} className="bg-gray-50 border border-gray-300 rounded-lg p-4">
+            <div key={categoria.id} className="h-[48px] bg-white border border-gray-300 rounded-lg p-2">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-lg text-gray-700">{categoria.nombre}</span>
                 <div className="flex gap-2">
@@ -168,17 +168,20 @@ const AdminCategoriasPage = () => {
           ))}
         </div>
 
-        <div className='flex justify-center'>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentPage(index + 1)}
-              className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
+        { totalPages > 1 ? (
+          <div className='flex justify-center'>
+                  {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                      key={index}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
+                  >
+                      {index + 1}
+                  </button>
+                  ))}
+          </div> 
+          ) : null
+          }
       </div>
     </div>
   );

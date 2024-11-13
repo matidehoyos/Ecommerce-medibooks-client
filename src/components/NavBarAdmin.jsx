@@ -30,6 +30,16 @@ const NavBarAdmin = () => {
               Usuarios
             </Link>
           </li>
+          <li>
+            <Link href="/admin/ventas" className='hover:text-gray-700'>
+              Ventas
+            </Link>
+          </li>
+          <li>
+            <Link href="/admin/pedidos" className='hover:text-gray-700'>
+              Pedidos
+            </Link>
+          </li>
         </ul>
       </nav>
     </aside>

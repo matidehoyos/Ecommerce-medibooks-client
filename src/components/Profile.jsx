@@ -1,20 +1,22 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { saveUserToDatabase } from '../services/serviceUser';
 import Link from 'next/link';
 
 export default function Profile({ user }) {
+    const [userDB , setUserDB] = useState(null)
 
   useEffect(() => {
     const saveUser = async () => {
       try {
         const userData = {
           auth0Id: user.sub,
-          username: user.name || user.nickname,
+          username: user.name,
           email: user.email,
           profilePicture: user.picture,
         };
-        await saveUserToDatabase(userData);
+        const usuario = await saveUserToDatabase(userData);
+        setUserDB(usuario.user);
       } catch (err) {
         console.error('Error al guardar el usuario:', err.message);
       }
@@ -26,9 +28,13 @@ export default function Profile({ user }) {
 
   return (
     <div>
-      {user && (
-        <div className=''>
-          <Link href="/api/auth/logout" className="font-medium text-gray-200 hover:text-white">Cerrar sesión</Link>
+      {user &&  (
+        <div className='flex gap-5'>
+          {  userDB && userDB.role === 'admin' ? (
+            <Link href="/admin" className="font-[600] text-gray-100 text-lg hover:text-white">Administrador</Link>
+          ) : null}
+
+           <Link href="/api/auth/logout" className="font-[600] text-gray-100 text-lg hover:text-white">Cerrar sesión</Link>
         </div>
       )}
     </div>

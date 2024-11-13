@@ -35,6 +35,22 @@ export const saveUserToDatabase = async (userData) => {
     }
   };
 
+  export const getUserByEmail = async (email) => {
+    try {
+      const res = await fetch(`${BASE_URL}/user/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+      if (!res.ok) throw new Error('Error fetching usuarios');
+      return await res.json();
+    } catch (error) {
+      console.error('Error in fetchUsuarios:', error);
+      throw error; 
+    }
+  };
+
   export const updateUserRole = async (userId, role) => {
     try {
       const response = await fetch(`${BASE_URL}/user/${userId}/role`, {

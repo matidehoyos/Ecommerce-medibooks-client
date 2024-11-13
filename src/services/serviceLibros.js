@@ -6,7 +6,7 @@ export const getLibros = async () => {
     if (!res.ok) throw new Error('Error fetching books');
     return await res.json();
   } catch (error) {
-    console.error('Error in fetchLibros:', error);
+    console.log('Error in fetchLibros:', error);
     throw error;
   }
 };

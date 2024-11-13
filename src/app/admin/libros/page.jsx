@@ -18,6 +18,10 @@ const AdminLibrosPage = () => {
   const [stock, setStock] = useState('');
   const [precioAnterior, setPrecioAnterior] = useState('');
   const [descuento, setDescuento] = useState('');
+  const [peso, setPeso] = useState('');
+  const [largo, setLargo] = useState('');
+  const [ancho, setAncho] = useState('');
+  const [alto, setAlto] = useState('');
   const [detalle, setDetalle] = useState('');
   const [imagen, setImagen] = useState(null);
   const [editandoId, setEditandoId] = useState(null);
@@ -68,7 +72,7 @@ const AdminLibrosPage = () => {
       if (imagen) {
         imageUrl = await handleImageUpload(imagen);
       }
-      await crearLibro({ titulo, autor, categoria, precio, stock, precioAnterior: precioAnterior, descuento, detalle, imagen: imageUrl });
+      await crearLibro({ titulo, autor, categoria, precio, stock, precioAnterior: precioAnterior, descuento, peso, largo, ancho, alto, detalle, imagen: imageUrl });
       toast.success("Libro creado exitosamente!");
       const data = await getLibros();
       setLibros(data);
@@ -95,6 +99,10 @@ const AdminLibrosPage = () => {
         stock, 
         precioAnterior: precioAnterior, 
         descuento, 
+        peso,
+        largo,
+        ancho,
+        alto,
         detalle, 
         imagen: imageUrl 
       };
@@ -135,6 +143,10 @@ const AdminLibrosPage = () => {
     setStock('');
     setPrecioAnterior('');
     setDescuento('');
+    setPeso('');
+    setLargo('');
+    setAncho('');
+    setAlto('');
     setDetalle('');
     setImagen(null);
   };
@@ -152,8 +164,11 @@ const AdminLibrosPage = () => {
     setStock(libro.stock);
     setPrecioAnterior(libro.precioAnterior);
     setDescuento(libro.descuento);
-    setDetalle(libro.detalle);
-    setImagen(null);
+    setPeso(libro.peso);
+    setLargo(libro.largo);
+    setAncho(libro.ancho);
+    setAlto(libro.alto);
+    setImagen(libro.imagen);
     setFormOpen(!formOpen)
   };
 
@@ -292,10 +307,8 @@ const AdminLibrosPage = () => {
             </div>
           </div>
 
-       {/* tabla y paginado */}
         <div className="w-full h-[calc(100vh-120px)] flex flex-col justify-center items-start gap-4 text-gray-800 font-bold overflow-hidden">
          
-          {/* formulario de creacion y edicion de producto */}
           <div className={`w-auto h-full p-4 rounded-lg bg-gray-50 ${formOpen ? 'block' : 'hidden'} `}>
             <div className='flex pb-6 items-center justify-between'>
               <h3 className="w-full text-lg font-bold font-sans text-gray-800">{editandoId ? "Editar libro" : "Crear nuevo libro"}</h3>
@@ -310,7 +323,7 @@ const AdminLibrosPage = () => {
               >
                 <option value="" disabled className='text-gray-700'>Categoría</option>
                 {categorias.map((cat) => (
-                  <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+                  <option key={cat.id} value={cat.nombre}>{cat.nombre}</option>
                 ))}
               </select>
               <input 
@@ -358,7 +371,6 @@ const AdminLibrosPage = () => {
                 placeholder="Precio anterior"
                 className="w-[33%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
               />
-              
               <input 
                 type="number"
                 value={descuento}
@@ -366,12 +378,40 @@ const AdminLibrosPage = () => {
                 placeholder="Descuento"
                 className="w-[33%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
               />
+              <input 
+                type="number"
+                value={peso}
+                onChange={(e) => setPeso(e.target.value)}
+                placeholder="Peso"
+                className="w-[24%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
+              />
+              <input 
+                type="number"
+                value={largo}
+                onChange={(e) => setLargo(e.target.value)}
+                placeholder="Largo"
+                className="w-[24%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
+              />
+              <input 
+                type="number"
+                value={ancho}
+                onChange={(e) => setAncho(e.target.value)}
+                placeholder="Ancho"
+                className="w-[24%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
+              />
+              <input 
+                type="number"
+                value={alto}
+                onChange={(e) => setAlto(e.target.value)}
+                placeholder="Alto"
+                className="w-[24%] border border-gray-500 pl-3 py-3 rounded text-gray-800 placeholder:text-gray-700"
+              />
               <textarea 
                 value={detalle}
                 onChange={(e) => setDetalle(e.target.value)}
                 placeholder="Detalles del libro"
                 required
-                className="w-full h-[210px] border border-gray-500 px-3 py-2 rounded text-gray-800 placeholder:text-gray-700"
+                className="w-full h-[150px] border border-gray-500 px-3 py-2 rounded text-gray-800 placeholder:text-gray-700"
               />
               
               <button 
@@ -389,7 +429,7 @@ const AdminLibrosPage = () => {
                 <thead>
                   <tr className='border-b border-gray-200'>
                     <th className='px-4 py-2 text-gray-900 text-left w-20'>Imagen</th>
-                    <th className='px-4 py-2 text-gray-900 text-left w-[500px]'>Título</th>
+                    <th className='px-4 py-2 text-gray-900 text-left w-[300px] truncate'>Título</th>
                     <th className='px-4 py-2 text-gray-900 text-center'>Precio</th>
                     <th className='px-4 py-2 text-gray-900 text-center'>Descuento</th>
                     <th className='px-4 py-2 text-gray-900 text-center'>Stock</th>
@@ -401,7 +441,7 @@ const AdminLibrosPage = () => {
                   {currentBooks.map((libro) => (
                     <tr key={libro.id} className='border-b'>
                       <td className='px-4 py-2 flex justify-center'>
-                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={37} height={37} className="object-cover" />
+                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={60} height={60} className='p-2 w-[52px] h-auto border border-gray-400 rounded-lg' />
                       </td>
                       <td className='px-4 py-2 text-gray-700'>{libro.titulo}</td>
                       <td className='px-4 py-2 text-gray-700 text-center'>${libro.precio}</td>
@@ -436,17 +476,20 @@ const AdminLibrosPage = () => {
                   ))}
                 </tbody>
               </table>
-              <div className='flex justify-center'>
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPage(index + 1)}
-                    className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
-              </div>
+              { totalPages > 1 ? (
+                <div className='flex justify-center'>
+                        {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentPage(index + 1)}
+                            className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
+                        >
+                            {index + 1}
+                        </button>
+                        ))}
+                </div> 
+                ) : null
+              }
           </div>
         </div>
 

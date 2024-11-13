@@ -37,16 +37,6 @@ const ProductDetailPage = () => {
     getProducto();
   }, [id]);
 
-  const incrementarCantidad = () => {
-    setCantidad(cantidad + 1);
-  };
-
-  const decrementarCantidad = () => {
-    if (cantidad > 1) {
-      setCantidad(cantidad - 1);
-    }
-  };
-
   const agregarAlCarrito = () => {
     const productoConTerminacion = {
       ...producto,

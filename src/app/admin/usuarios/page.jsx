@@ -137,7 +137,7 @@ const AdminUserPage = () => {
                         <button className='py-1 px-4 text-white rounded-lg bg-[#1b7b7e] hover:bg-[#175254]'>+ Agregar usuario</button>
                       </div>
                 </div>
-                <div className='w-full h-full bg-gray-50 rounded-lg'>
+                <div className='w-full h-full pb-4 bg-gray-50 rounded-lg flex flex-col justify-between'>
                     <table className='w-full table-fixed text-center'>
                         <thead>
                             <tr className='border-b border-gray-200'>
@@ -193,14 +193,21 @@ const AdminUserPage = () => {
                             ))}
                         </tbody>
                     </table>
-                </div>
-                <div className="flex justify-between items-center">
-                    <p className="text-gray-500 text-sm">Total: {paginatedUsuarios.length} usuarios</p>
-                    <div className="flex items-center gap-2">
-                        {currentPage > 1 && <button onClick={() => setCurrentPage(currentPage - 1)} className="bg-gray-200 px-2 py-1 rounded">Anterior</button>}
-                        {currentPage < totalPages && <button onClick={() => setCurrentPage(currentPage + 1)} className="bg-gray-200 px-2 py-1 rounded">Siguiente</button>}
-                    </div>
-                </div>
+                    { totalPages > 1 ? (
+                    <div className='flex justify-center'>
+                            {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentPage(index + 1)}
+                                className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
+                            >
+                                {index + 1}
+                            </button>
+                            ))}
+                    </div> 
+                    ) : null
+                    }
+            </div>
             </div>
         </div>
     );

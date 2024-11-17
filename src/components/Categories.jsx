@@ -1,23 +1,10 @@
 'use client'
-import { getCategorias } from '@/services/serviceCategoria';
+import { useCategorias } from '@/contexts/categoryContexts';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
 const Categories = () => {
   const router = useRouter();
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    const loadCategorias = async () => {
-      try {
-        const data = await getCategorias();
-        setCategorias(data);
-      } catch (error) {
-        console.log('Error loading categories from categories: ' + error.message);
-      }
-    };
-    loadCategorias();
-  },[]);  
+  const categorias = useCategorias(); 
 
   const handleCategoryChange = (category) => {
     router.push(`/productos?category=${category}`);

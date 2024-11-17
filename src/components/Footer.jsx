@@ -16,7 +16,7 @@ const Footer = () => {
             alt="Logo del Proyecto" 
             width={200} 
             height={100} 
-            className="object-contain"
+            className="w-full h-auto object-contain"
           />
         </Link>
         

@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import PaginateAdmin from '@/components/admin/PaginateAdmin.jsx';
+import AdminHeader from '@/components/admin/AdminHeader.jsx';
+import Loader from '@/components/Loader.jsx';
 
 const AdminUserPage = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -15,6 +18,7 @@ const AdminUserPage = () => {
     const [filterEstado, setFilterEstado] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 7;
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadUsuarios = async () => {
@@ -29,6 +33,8 @@ const AdminUserPage = () => {
             }
         };
         loadUsuarios();
+        const timeout = setTimeout(() => setLoading(false), 1000);
+         return () => clearTimeout(timeout);
     }, [filterRole, filterEstado]);
 
     const handleRoleChange = async (userId, newRole) => {
@@ -59,8 +65,8 @@ const AdminUserPage = () => {
     const handleSearchChange = (e) => {
         const query = e.target.value;
         setSearchQuery(query);
-        if (query) {
-            const filteredUsuarios = usuarios.filter(user =>
+        if(query) {
+            const filteredUsuarios = usuarios.filter((user) =>
                 user.username.toLowerCase().includes(query.toLowerCase())
             );
             setSuggestedUsuarios(filteredUsuarios);
@@ -95,38 +101,41 @@ const AdminUserPage = () => {
     
     return (
         <div className='w-full h-[100vh] flex flex-col overflow-hidden'>
-            <div className='w-full h-[60px] sticky top-0 px-[3%] flex items-center justify-start bg-gray-50 border-b border-gray-200'>
-                <h2 className='text-gray-500 font-semibold text-2xl font-sans'>Administrador de usuarios</h2>
-            </div>
-            <div className='w-full px-[3%] py-5 h-[calc(100vh-60px)] flex flex-col gap-4'> 
-                <div className='w-full px-6 py-4 flex items-stretch justify-between gap-3 bg-gray-50 rounded-xl'>
-                      <div className='flex gap-3'>
+            <AdminHeader name='de usuarios'/>
+            { loading ? (
+          <div className="w-full h-[calc(100vh-60px)]">
+            <Loader />
+          </div>
+        ) : (
+            <div className='w-full px-[2%] py-3 h-[calc(100vh-60px)] flex flex-col gap-3'>   
+                <div className='w-full px-6 py-3 flex items-strech justify-between bg-white rounded-lg border border-gray-400'>
+                    <div className='flex gap-3'>
                         <div className='w-auto flex justify-between'>
-                          <form onSubmit={handleSearchSubmit} className="w-auto px-3 py-1 flex rounded-lg bg-gray-200">
+                          <form onSubmit={handleSearchSubmit} className="w-[160px] pr-2 py-1 flex rounded-md bg-gray-200 border border-gray-400">
                               <input
                                   type="text"
                                   value={searchQuery}
                                   onChange={handleSearchChange}
                                   placeholder="Buscar usuario..."
-                                  className="w-[180px] text-sm md:text-sm text-gray-500 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-500 placeholder:text-sm"
+                                  className="w-full px-4 text-sm md:text-sm text-gray-700 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 placeholder:text-sm"
                                   autoComplete="off"
                               />
                               <button type="submit">
-                                  <FontAwesomeIcon icon={faSearch} className='text-gray-500' />
+                                  <FontAwesomeIcon icon={faSearch} className='text-gray-700 text-sm' />
                               </button>
                           </form>
                         </div>
-                        <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+                        <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400 gap-0">
                             <label htmlFor="" className='text-gray-500 text-sm'>Rol:</label>
-                            <select value={filterRole} onChange={(e) => setFilterRole(e.target.value)} className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'>
+                            <select value={filterRole} onChange={(e) => setFilterRole(e.target.value)} className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'>
                                 <option value="user">Usuarios</option>
                                 <option value="admin">Admin</option>
                                 <option value="all">Todos</option>
                             </select>
                         </div>
-                        <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+                        <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400 gap-0">
                             <label htmlFor="" className='text-gray-500 text-sm'>Estado:</label>
-                            <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value)} className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'>
+                            <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value)} className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'>
                                 <option value="all">Todos</option>
                                 <option value="activo">Activos</option>
                                 <option value="desactivo">Desactivados</option>
@@ -137,8 +146,9 @@ const AdminUserPage = () => {
                         <button className='py-1 px-4 text-white rounded-lg bg-[#1b7b7e] hover:bg-[#175254]'>+ Agregar usuario</button>
                       </div>
                 </div>
-                <div className='w-full h-full pb-4 bg-gray-50 rounded-lg flex flex-col justify-between'>
-                    <table className='w-full table-fixed text-center'>
+             
+                <div className={`w-full pb-2 h-full bg-white rounded-lg flex flex-col justify-between border border-gray-400`}>
+                <table className='w-full table-fixed text-center'>
                         <thead>
                             <tr className='border-b border-gray-200'>
                                 <th className='px-4 py-2 text-gray-900 w-10'>Id</th>
@@ -154,14 +164,14 @@ const AdminUserPage = () => {
                         <tbody>
                             {currentItems.map((user) => (
                                 <tr key={user.id} className='border-b'>
-                                    <td className='px-4 py-2 text-gray-700'>{user.id}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{user.id}</td>
                                     <td className='px-4 py-2 flex justify-center'>
                                         <Image src={`${user.profilePicture ? user.profilePicture : '/user.png'}`} alt={'Imagen de ' + user.username} width={40} height={40} className="object-cover rounded-full" />
                                     </td>
-                                    <td className='px-4 py-2 text-gray-700'>{user.email}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{user.username}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{user.createdAt.slice(0,10).split('-').reverse().join('/')}</td>
-                                    <td className='px-4 py-2 text-gray-700'>
+                                    <td className='px-4 py-2 text-gray-900'>{user.email}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{user.username}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{user.createdAt.slice(0,10).split('-').reverse().join('/')}</td>
+                                    <td className='px-4 py-2 text-gray-900'>
                                         <select
                                             value={user.role}
                                             onChange={(e) => handleRoleChange(user.id, e.target.value)}
@@ -171,7 +181,7 @@ const AdminUserPage = () => {
                                             <option value="admin">Admin</option>
                                         </select>
                                     </td>
-                                    <td className='px-2 py-2 text-gray-700 text-center'>
+                                    <td className='px-2 py-2 text-gray-900 text-center'>
                                         <div className='border border-gray-300 rounded px-2 py-1 flex items-center justify-center'>
                                             <span className={`relative inline h-2 w-2 rounded-full ${!user.suspendido ? 'bg-green-500' : 'bg-red-500'}`}></span>
                                             <select
@@ -185,7 +195,7 @@ const AdminUserPage = () => {
                                         </div>
                                     </td>
                                     <td className='h-full px-4'>
-                                        <button onClick={() => handleEliminarUser(user.id)} className="text-center text-xl text-gray-700 hover:text-red-500">
+                                        <button onClick={() => handleEliminarUser(user.id)} className="p-1 text-center text-xl text-gray-900 border border-gray-400 rounded md:hover:text-white md:hover:bg-red-500">
                                             <BiTrash />
                                         </button>
                                     </td>
@@ -193,22 +203,10 @@ const AdminUserPage = () => {
                             ))}
                         </tbody>
                     </table>
-                    { totalPages > 1 ? (
-                    <div className='flex justify-center'>
-                            {Array.from({ length: totalPages }, (_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentPage(index + 1)}
-                                className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
-                            >
-                                {index + 1}
-                            </button>
-                            ))}
-                    </div> 
-                    ) : null
-                    }
+                    <PaginateAdmin currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
             </div>
             </div>
+        )}
         </div>
     );
 };

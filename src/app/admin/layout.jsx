@@ -1,6 +1,7 @@
 'use client';
+import AdminHeader from '@/components/admin/AdminHeader';
 import Loader from '@/components/Loader';
-import NavBarAdmin from '@/components/NavBarAdmin';
+import NavBarAdmin from '@/components/admin/NavBarAdmin';
 import { getUserByEmail } from '@/services/serviceUser';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/navigation';
@@ -11,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const AdminLayout = ({ children }) => {
   const { user, isLoading } = useUser();
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
 
@@ -32,18 +32,10 @@ const AdminLayout = ({ children }) => {
       } catch (error) {
         console.error('Error al verificar el rol:', error);
         router.push('/');
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
     checkAdminAccess();
   }, [user]);
-
-  if (loading) {
-    return (
-      <Loader />
-    );
-  }
 
   if (!isAdmin) return null;
 
@@ -56,7 +48,7 @@ const AdminLayout = ({ children }) => {
 
       <ToastContainer 
         position="top-center" 
-        autoClose={2300}
+        autoClose={1200}
         hideProgressBar={false} 
         closeOnClick 
         draggable 
@@ -65,12 +57,12 @@ const AdminLayout = ({ children }) => {
           top: '50%',  
           transform: 'translateY(-50%)', 
           zIndex: 9999,
-          maxWidth: '400px', 
+          maxWidth: '600px', 
           backgroundColor: '#1b7b7e', 
           color: 'white',
-          borderRadius: '8px', 
+          borderRadius: '15px', 
           padding: '20px',
-          fontSize: '20px',
+          fontSize: '26px',
         }}
       />
     </div>

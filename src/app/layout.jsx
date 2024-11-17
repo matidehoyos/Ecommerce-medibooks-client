@@ -1,11 +1,13 @@
-import localFont from 'next/font/local';
 import '../../globals.css';
-import NavBarClient from '@/components/NavBarClient';
+import localFont from 'next/font/local';
+import Script from 'next/script';
 import { CartProvider } from '../contexts/CartContexts';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-import CartDrawer from '@/components/CartDrawer';
+import { ProductosProvider } from '@/contexts/productsContexts';
+import { CategoryProvider } from '@/contexts/categoryContexts';
+import NavBarClient from '@/components/NavBarClient';
+import CartDrawer from '@/components/cart/CartDrawer';
 import BotonFlotante from '@/components/BotonFlotante';
-import Script from 'next/script';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,20 +33,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script src="https://sdk.mercadopago.com/js/v2" strategy="beforeInteractive" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <UserProvider>
-          <CartProvider>
-            <header>
-              <NavBarClient />
-            </header>
-            <main>
-              {children}
-              <CartDrawer />
-              <BotonFlotante />
-            </main>
-          </CartProvider>
+          <ProductosProvider>
+            <CategoryProvider>
+              <CartProvider>
+                <header>
+                  <NavBarClient />
+                </header>
+                <main>
+                  {children}
+                  <CartDrawer />
+                  <BotonFlotante />
+                </main>
+              </CartProvider>
+            </CategoryProvider>
+          </ProductosProvider>
         </UserProvider>
       </body>
     </html>

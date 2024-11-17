@@ -1,34 +1,21 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
-import { getLibros } from '@/services/serviceLibros';
+import { useProductos } from '@/contexts/productsContexts';
 
 const SearchBar = () => {
-  const [products, setProducts] = useState([]);
+  const productos = useProductos();
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const router = useRouter();
-
-  const fetchData = async () => {
-    try {
-      const productos = await getLibros();
-      setProducts(productos);
-    } catch (error) {
-      console.error('Error fetching products:', error.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
     if (query) {
-      const filteredProducts = products.filter((product) =>
+      const filteredProducts = productos.filter((product) =>
         product.titulo.toLowerCase().includes(query.toLowerCase())
       );
       setSuggestedProducts(filteredProducts);

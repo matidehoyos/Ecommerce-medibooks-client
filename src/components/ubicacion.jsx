@@ -1,7 +1,3 @@
-'use client';
-
-import { BiPin, BiSolidTruck } from "react-icons/bi";
-
 export default function Ubicacion() {
 
 

@@ -1,38 +1,26 @@
 'use client'
-
 import dynamic from 'next/dynamic';
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProductCard from '../../components/ProductCard';
-import { getLibros } from '@/services/serviceLibros';
-import { getCategorias } from '@/services/serviceCategoria';
 import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 import Image from 'next/image';
 import Link from 'next/link';
 import SearchBar from '@/components/SeachBar';
+import { useProductos } from '@/contexts/productsContexts';
+import { useCategorias } from '@/contexts/categoryContexts';
 
 const Productos = () => {
-  const [productos, setProductos] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const productos = useProductos();
+  const categorias = useCategorias();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryCategory = searchParams.get('category') || 'all';
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      const [libros, categorias] = await Promise.all([getLibros(), getCategorias()]);
-      setProductos(libros);
-      setCategorias(categorias);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
   useEffect(() => {
-    fetchData();
     const timeout = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timeout);
   }, []);
@@ -51,8 +39,6 @@ const Productos = () => {
   const handleCategoryChange = (e) => {
     router.push(`/productos?category=${e.target.value}`);
   };
-
-  console.log(productos)
 
   return (
     <div className="w-full min-h-screen bg-gray-200">

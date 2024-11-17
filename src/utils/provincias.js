@@ -1,0 +1,27 @@
+export const provincias = [
+    { nombre: 'Buenos Aires', codigo: 'AR-B' },
+    { nombre: 'Ciudad Autónoma de Buenos Aires', codigo: 'AR-C' },
+    { nombre: 'Catamarca', codigo: 'AR-K' },
+    { nombre: 'Chaco', codigo: 'AR-H' },
+    { nombre: 'Chubut', codigo: 'AR-U' },
+    { nombre: 'Córdoba', codigo: 'AR-X' },
+    { nombre: 'Corrientes', codigo: 'AR-W' },
+    { nombre: 'Entre Ríos', codigo: 'AR-E' },
+    { nombre: 'Formosa', codigo: 'AR-P' },
+    { nombre: 'Jujuy', codigo: 'AR-Y' },
+    { nombre: 'La Pampa', codigo: 'AR-L' },
+    { nombre: 'La Rioja', codigo: 'AR-F' },
+    { nombre: 'Mendoza', codigo: 'AR-M' },
+    { nombre: 'Misiones', codigo: 'AR-N' },
+    { nombre: 'Neuquén', codigo: 'AR-Q' },
+    { nombre: 'Río Negro', codigo: 'AR-R' },
+    { nombre: 'Salta', codigo: 'AR-A' },
+    { nombre: 'San Juan', codigo: 'AR-J' },
+    { nombre: 'San Luis', codigo: 'AR-D' },
+    { nombre: 'Santa Cruz', codigo: 'AR-Z' },
+    { nombre: 'Santa Fe', codigo: 'AR-S' },
+    { nombre: 'Santiago del Estero', codigo: 'AR-G' },
+    { nombre: 'Tierra del Fuego', codigo: 'AR-V' },
+    { nombre: 'Tucumán', codigo: 'AR-T' }
+  ];
+  

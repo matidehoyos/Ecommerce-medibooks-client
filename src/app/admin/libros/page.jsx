@@ -7,8 +7,13 @@ import { BiPencil, BiTrash } from 'react-icons/bi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { toast } from "react-toastify";
+import PaginateAdmin from '@/components/admin/PaginateAdmin';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import AdminHeader from '@/components/admin/AdminHeader';
+import Loader from '@/components/Loader';
 
 const AdminLibrosPage = () => {
+  const { user } = useUser();
   const [libros, setLibros] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [titulo, setTitulo] = useState('');
@@ -28,13 +33,11 @@ const AdminLibrosPage = () => {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [booksPerPage] = useState(6);
   const [formOpen, setFormOpen] = useState(false);
   const [filterCriteria, setFilterCriteria] = useState(''); 
   const [order, setOrder] = useState('asc');
   const [estadoFiltro, setEstadoFiltro] = useState('Todos'); 
-
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -45,9 +48,10 @@ const AdminLibrosPage = () => {
       console.error('Error fetching data:', error);
     }
   };
-
   useEffect(() => {
     fetchData();
+    const timeout = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timeout);
   }, []);
 
   const handleImageUpload = async (file) => {
@@ -164,6 +168,7 @@ const AdminLibrosPage = () => {
     setStock(libro.stock);
     setPrecioAnterior(libro.precioAnterior);
     setDescuento(libro.descuento);
+    setDetalle(libro.detalle);
     setPeso(libro.peso);
     setLargo(libro.largo);
     setAncho(libro.ancho);
@@ -192,6 +197,8 @@ const AdminLibrosPage = () => {
 
   const handleOpenForm = () => {
     setFormOpen(!formOpen)
+    setEditandoId(null)
+    resetForm()
   }
 
   const handleActiveChange = async (id, isActive) => {
@@ -239,63 +246,66 @@ const AdminLibrosPage = () => {
   
   
   
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(6);
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = suggestedProducts.length ? suggestedProducts.slice(indexOfFirstBook, indexOfLastBook) : filterBooks().slice(indexOfFirstBook, indexOfLastBook);
   const totalPages = Math.ceil((suggestedProducts.length ? suggestedProducts.length : libros.length) / booksPerPage);
 
-
+console.log(user)
   return (
     <div className='w-full h-[100vh] flex flex-col'>
-        <div className='w-full h-[60px] sticky top-0 px-[3%] flex items-center justify-start bg-gray-50 border-b border-gray-200'>
-          <h2 className='text-gray-500 font-semibold text-2xl font-sans'>Administrador de libros</h2>
-        </div>
-
-        <div className='w-full px-[3%] py-5 h-[calc(100vh-60px)]  flex flex-col gap-4'>   
-          <div className='w-full px-6 py-4 flex items-strech justify-between bg-gray-50 rounded-xl'>
+        <AdminHeader name='de productos'/>
+        { loading ? (
+          <div className="w-full h-[calc(100vh-60px)]">
+            <Loader />
+          </div>
+        ) : (
+        <div className='w-full px-[2%] py-3 h-[calc(100vh-60px)] flex flex-col gap-3'>   
+          <div className='w-full px-6 py-3 flex items-strech justify-between bg-white rounded-lg border border-gray-400'>
             <div className='flex gap-3'>
-              <form onSubmit={handleSearchSubmit} className="w-[180px] py-1 flex rounded-lg bg-gray-200">
+              <form onSubmit={handleSearchSubmit} className="w-[160px] py-1 flex rounded-md bg-gray-200 border border-gray-400">
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={handleSearchChange}
                   placeholder="Buscar libro..."
-                  className="w-full px-4 text-sm md:text-sm text-gray-500 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-500 placeholder:text-sm"
+                  className="w-full px-4 text-sm md:text-sm text-gray-700 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 placeholder:text-sm"
                   style={{ touchAction: 'manipulation', fontSize: '16px' }} 
                   autoComplete="off"
                 />
                 <button type="submit" className="h-full px-2">
-                  <FontAwesomeIcon icon={faSearch} className='text-gray-500 text-sm' />
+                  <FontAwesomeIcon icon={faSearch} className='text-gray-700 text-sm' />
                 </button>
               </form>
-              <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+              <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400  gap-0">
                 <label htmlFor="" className='text-gray-500 text-sm'>Estado:</label>
                 <select 
                   onChange={(e) => setEstadoFiltro(e.target.value)} 
-                  className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'
+                  className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'
                 >
                   <option value="Todos">Todos</option>
                   <option value="Activos">Activos</option>
-                  <option value="Desactivos">Desactivos</option>
+                  <option value="Desactivos">Inactivos</option>
                 </select>
               </div>
-              <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+              <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400  gap-0">
                 <label htmlFor="" className='text-gray-500 text-sm'>Filtrar por:</label>
                 <select 
                     onChange={handleFilterChange} 
-                    className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'
+                    className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'
                   >
                     <option value="stock">Stock</option>
                     <option value="fecha">Fecha</option>
                     <option value="precio">Precio</option>
                   </select>
               </div>
-              <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+              <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400  gap-0">
                 <label htmlFor="" className='text-gray-500 text-sm'>Orden:</label>
                 <select 
                     onChange={handleOrderChange} 
-                    className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'
+                    className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'
                   >
                     <option value="asc">Menor a mayor</option>
                     <option value="desc">Mayor a menor</option>
@@ -307,11 +317,10 @@ const AdminLibrosPage = () => {
             </div>
           </div>
 
-        <div className="w-full h-[calc(100vh-120px)] flex flex-col justify-center items-start gap-4 text-gray-800 font-bold overflow-hidden">
-         
-          <div className={`w-auto h-full p-4 rounded-lg bg-gray-50 ${formOpen ? 'block' : 'hidden'} `}>
+        <div className="w-full h-[calc(100vh-120px)] flex flex-col justify-center items-start gap-4 text-gray-950 font-medium overflow-hidden rounded-lg border border-gray-400">
+          <div className={`w-auto h-full p-4 bg-white ${formOpen ? 'block' : 'hidden'} `}>
             <div className='flex pb-6 items-center justify-between'>
-              <h3 className="w-full text-lg font-bold font-sans text-gray-800">{editandoId ? "Editar libro" : "Crear nuevo libro"}</h3>
+              <h3 className="w-full text-lg font-bold font-sans text-gray-700">{editandoId ? "Editar libro existente" : "Crear nuevo libro"}</h3>
               <button onClick={() => { handleOpenForm() }} className='px-2 text-md text-gray-700 rounded-full border border-gray-700 md:hover:bg-gray-600 md:hover:text-white'>X</button>
             </div>
             <form onSubmit={editandoId ? handleEditarLibro : handleCrearLibro} className={`w-full flex flex-wrap justify-between items-stretch gap-y-2`}>
@@ -424,51 +433,51 @@ const AdminLibrosPage = () => {
             </form>
           </div>
 
-          <div className={`w-full pb-4 h-full ${formOpen ? 'hidden' : 'block'} bg-gray-50 rounded-lg flex flex-col justify-between`}>
+          <div className={`w-full pb-2 h-full ${formOpen ? 'hidden' : 'block'} bg-white rounded-lg flex flex-col justify-between`}>
               <table className='w-full table-fixed'>
                 <thead>
                   <tr className='border-b border-gray-200'>
-                    <th className='px-4 py-2 text-gray-900 text-left w-20'>Imagen</th>
-                    <th className='px-4 py-2 text-gray-900 text-left w-[300px] truncate'>Título</th>
-                    <th className='px-4 py-2 text-gray-900 text-center'>Precio</th>
-                    <th className='px-4 py-2 text-gray-900 text-center'>Descuento</th>
-                    <th className='px-4 py-2 text-gray-900 text-center'>Stock</th>
-                    <th className='px-4 py-2 text-gray-900 text-center w-[160px]'>Estado</th>
-                    <th className='px-4 py-2 text-gray-900 text-center w-[160px]'>Acciones</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-20'>Imagen</th>
+                    <th className='px-4 py-2 text-gray-900 text-left w-[300px]'>Título</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-32'>Precio</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-24'>Desc</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-24'>Stock</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-[100px]'>Estado</th>
+                    <th className='px-4 py-2 text-gray-900 text-center w-[100px]'>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {currentBooks.map((libro) => (
                     <tr key={libro.id} className='border-b'>
                       <td className='px-4 py-2 flex justify-center'>
-                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={60} height={60} className='p-2 w-[52px] h-auto border border-gray-400 rounded-lg' />
+                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={60} height={60} className='p-1 w-[44px] h-auto border border-gray-400 rounded-md' />
                       </td>
-                      <td className='px-4 py-2 text-gray-700'>{libro.titulo}</td>
-                      <td className='px-4 py-2 text-gray-700 text-center'>${libro.precio}</td>
-                      <td className='px-4 py-2 text-gray-700 text-center'>{libro.descuento}</td>
-                      <td className='px-4 py-2 text-gray-700 text-center'>{libro.stock}</td>
-                      <td className='px-4 py-2 text-gray-600 text-center'>
-                        <div className='flex justify-center items-center'>
-                          <span className={`inline h-2 w-2 rounded-full ${libro.active ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                      <td className='px-4 py-2 text-gray-900'>{libro.titulo}</td>
+                      <td className='px-4 py-2 text-gray-900 text-center'>${libro.precio}</td>
+                      <td className='px-4 py-2 text-gray-900 text-center'>%{libro.descuento}</td>
+                      <td className='px-4 py-2 text-gray-900 text-center'>{libro.stock}u</td>
+                      <td className='px-4 py-2 text-gray-900 text-center'>
+                        <div>
                           <select
                             value={libro.active ? 'activo' : 'desactivo'}
                             onChange={(e) => handleActiveChange(libro.id, e.target.value === 'activo')}
-                            className='text-gray-600 border-none outline-none focus:ring-0 text-center'
+                            className={`p-1 text-gray-900 border border-gray-300 ${libro.active ? 'bg-green-200' : 'bg-red-200'} outline-none focus:ring-0 text-center rounded`}
                           >
-                            <option value="activo">Activo</option>
-                            <option value="desactivo">Desactivo</option>
+                            <option value="activo" className='bg-white'>Activo</option>
+                            <option value="desactivo" className='bg-white'>Inactivo</option>
                           </select>
                         </div>
                       </td>
                       <td className='px-2 py-2'>
                        <div className='h-full flex items-center justify-center space-x-2'>
                           <button onClick={() => handleEditClick(libro)} 
-                          className="bg-gray-200 hover:bg-[#1b7b7e] text-gray-600 hover:text-white border border-gray-300 py-1 px-2 rounded text-sm"
+                          className="hover:bg-gray-700 text-gray-700 hover:text-white border border-gray-400 py-2 px-1 rounded"
                           >
-                            <BiPencil className='text-base inline' /><span>Editar</span>
+                            <BiPencil size={18}/>
                           </button>
-                          <button onClick={() => handleEliminarLibro(libro.id)} className='text-gray-700 hover:text-red-600 text-xl flex items-center'>
-                            <BiTrash />
+                          <button onClick={() => handleEliminarLibro(libro.id)} 
+                          className="hover:bg-red-500 text-gray-700 hover:text-white border border-gray-400 py-2 px-1 rounded" >
+                          <BiTrash size={18} />
                           </button>
                          </div>
                       </td>
@@ -476,24 +485,11 @@ const AdminLibrosPage = () => {
                   ))}
                 </tbody>
               </table>
-              { totalPages > 1 ? (
-                <div className='flex justify-center'>
-                        {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentPage(index + 1)}
-                            className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
-                        >
-                            {index + 1}
-                        </button>
-                        ))}
-                </div> 
-                ) : null
-              }
+              <PaginateAdmin currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
           </div>
-        </div>
-
-      </div>
+         </div>
+       </div>
+        )}
     </div>
   );
 };

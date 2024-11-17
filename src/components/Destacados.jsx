@@ -1,25 +1,9 @@
-'use client';
-import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
-import { getLibros } from '../services/serviceLibros';
 import Link from 'next/link';
+import { useProductos } from '@/contexts/productsContexts';
 
 const Destacados = () => {
-  const [libros, setLibros] = useState([]);
-
-  useEffect(() => {
-    const loadLibros = async () => {
-      try {
-        const data = await getLibros();
-        setLibros(data);
-      } catch (error) {
-        setError('Error loading books: ' + error.message);
-      }
-    };
-
-    loadLibros();
-  }, []);
-
+  const libros = useProductos();
 
   return (
     <div className="w-full py-12 md:py-20 flex bg-gray-50">

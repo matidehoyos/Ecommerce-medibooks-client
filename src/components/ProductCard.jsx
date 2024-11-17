@@ -4,7 +4,6 @@ import Link from "next/link";
 const ProductCard = ({ libro }) => {
   const defaultImage = "/default.png"; 
 
-
   return (
     <Link href={`/product/${libro.id}`} className="w-full relative p-2 border border-gray-400 rounded-md shadow-lg overflow-hidden bg-gray-100 group md:hover:border-gray-500 md:hover:shadow-gray-600 transition-all duration-500">
       {

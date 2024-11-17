@@ -5,6 +5,9 @@ import { eliminarVenta, getVentas } from '../../../services/serviceVentas.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import PaginateAdmin from '@/components/admin/PaginateAdmin.jsx';
+import AdminHeader from '@/components/admin/AdminHeader.jsx';
+import Loader from '@/components/Loader.jsx';
 
 const AdminVentasPage = () => {
     const [ventas, setVentas] = useState([]);
@@ -13,8 +16,7 @@ const AdminVentasPage = () => {
     const [filterEstado, setFilterEstado] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 7;
-
-console.log(ventas)
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const loadVentas = async () => {
@@ -27,6 +29,8 @@ console.log(ventas)
             }
         };
         loadVentas();
+        const timeout = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timeout);
     }, [filterEstado]);
 
     const handleSearchChange = (e) => {
@@ -34,7 +38,7 @@ console.log(ventas)
         setSearchQuery(query);
         if (query) {
             const filteredVentas = ventas.filter(venta =>
-                venta.transactionId.toLowerCase().includes(query.toLowerCase())
+                venta.User.username.toLowerCase().includes(query.toLowerCase())
             );
             setSuggestedVentas(filteredVentas);
         } else {
@@ -67,30 +71,33 @@ console.log(ventas)
     
     return (
         <div className='w-full h-[100vh] flex flex-col overflow-hidden'>
-            <div className='w-full h-[60px] sticky top-0 px-[3%] flex items-center justify-start bg-gray-50 border-b border-gray-200'>
-                <h2 className='text-gray-500 font-semibold text-2xl font-sans'>Administrador de ventas</h2>
-            </div>
-            <div className='w-full px-[3%] py-5 h-[calc(100vh-60px)] flex flex-col gap-4'> 
-                <div className='w-full px-6 py-4 flex items-stretch justify-between gap-3 bg-gray-50 rounded-xl'>
+            <AdminHeader name='de ventas'/>
+            { loading ? (
+                <div className="w-full h-[calc(100vh-60px)]">
+                    <Loader />
+                </div>
+             ) : (
+            <div className='w-full px-[2%] py-3 h-[calc(100vh-60px)] flex flex-col gap-3'>   
+                <div className='w-full px-6 py-3 flex items-strech justify-between bg-white rounded-lg border border-gray-400'>
                     <div className='flex gap-3'>
                         <div className='w-auto flex justify-between'>
-                            <form onSubmit={handleSearchSubmit} className="w-auto px-3 py-1 flex rounded-lg bg-gray-200">
+                            <form onSubmit={handleSearchSubmit} className="w-[160px] px-3 py-1 flex rounded-md bg-gray-200 border border-gray-400">
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={handleSearchChange}
                                     placeholder="Buscar venta..."
-                                    className="w-[180px] text-sm text-gray-500 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-500 placeholder:text-sm"
+                                    className="w-full text-sm text-gray-700 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 placeholder:text-sm"
                                     autoComplete="off"
                                 />
                                 <button type="submit">
-                                    <FontAwesomeIcon icon={faSearch} className='text-gray-500' />
+                                    <FontAwesomeIcon icon={faSearch} className='text-gray-700 text-sm' />
                                 </button>
                             </form>
                         </div>
-                        <div className="w-auto px-4 flex justify-center items-center rounded-lg bg-gray-200 gap-0">
+                        <div className="w-auto px-4 flex justify-center items-center rounded-md bg-gray-200 border border-gray-400 gap-0">
                             <label htmlFor="" className='text-gray-500 text-sm'>Estado:</label>
-                            <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value)} className='bg-transparent text-sm font-bold text-gray-500 focus:outline-none focus:ring-0'>
+                            <select value={filterEstado} onChange={(e) => setFilterEstado(e.target.value)} className='bg-transparent text-sm font-bold text-gray-600 focus:outline-none focus:ring-0'>
                                 <option value="all">Todos</option>
                                 <option value="completed">Completadas</option>
                                 <option value="pending">Pendientes</option>
@@ -99,7 +106,8 @@ console.log(ventas)
                         </div>
                     </div>
                 </div>
-                <div className='w-full h-full pb-4 bg-gray-50 rounded-lg flex flex-col justify-between'>
+                
+                <div className='w-full h-full pb-2 bg-white rounded-md flex flex-col justify-between border border-gray-400'>
                     <table className='w-full table-fixed text-center'>
                         <thead>
                             <tr className='border-b border-gray-200'>
@@ -116,13 +124,13 @@ console.log(ventas)
                         <tbody>
                             {currentItems.map((venta) => (
                                 <tr key={venta.id} className='border-b'>
-                                    <td className='px-4 py-2 text-gray-700'>{venta.id}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{venta.transactionId}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{venta.createdAt.slice(5,10).split('-').reverse().join('/')  + " " + venta.createdAt.slice(11,16)}</td>
-                                    <td className='px-4 py-2 text-gray-700 truncate'>{venta.User.username}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{venta.paymentMethod}</td>
-                                    <td className='px-4 py-2 text-gray-700'>${venta.totalAmount}</td>
-                                    <td className='px-4 py-2 text-gray-700'>{venta.status}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{venta.id}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{venta.transactionId}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{venta.createdAt.slice(5,10).split('-').reverse().join('/')  + " " + venta.createdAt.slice(11,16)}</td>
+                                    <td className='px-4 py-2 text-gray-900 truncate'>{venta.User.username}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{venta.paymentMethod}</td>
+                                    <td className='px-4 py-2 text-gray-900'>${venta.totalAmount}</td>
+                                    <td className='px-4 py-2 text-gray-900'>{venta.status}</td>
                                     <td className='h-full px-4'>
                                         <button onClick={() => handleEliminarVenta(venta.id)} className="text-center text-xl text-gray-700 hover:text-red-500">
                                             <BiTrash />
@@ -132,22 +140,10 @@ console.log(ventas)
                             ))}
                         </tbody>
                     </table>
-                    { totalPages > 1 ? (
-                        <div className='flex justify-center'>
-                                {Array.from({ length: totalPages }, (_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setCurrentPage(index + 1)}
-                                    className={`px-3 py-1 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'text-gray-600'}`}
-                                >
-                                    {index + 1}
-                                </button>
-                                ))}
-                        </div> 
-                        ) : null
-                    }
+                    <PaginateAdmin currentPage={currentPage} totalPages={totalPages} setCurrentPage={setCurrentPage} />
                 </div>
             </div>
+            )}
         </div>
     );
 };

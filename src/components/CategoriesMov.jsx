@@ -1,31 +1,16 @@
 'use client';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCategorias } from '@/contexts/categoryContexts';
 import Link from 'next/link';
-import { getCategorias } from '@/services/serviceCategoria';
 
 const CategoriesMovil = () => {
   const router = useRouter();
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    const loadCategorias = async () => {
-      try {
-        const data = await getCategorias();
-        setCategorias(data);
-      } catch (error) {
-        console.log('Error loading categories from categories: ' + error.message);
-      }
-    };
-    loadCategorias();
-  },[]);  
+  const categorias = useCategorias(); 
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     router.push(`/productos?category=${category}`);
   };
-
-
 
   return (
     <div className="w-full px-[2%] py-3 flex justify-start items-stretch lg:hidden bg-gray-700 overflow-hidden">

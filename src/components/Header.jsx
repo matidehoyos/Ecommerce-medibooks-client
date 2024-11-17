@@ -6,15 +6,15 @@ const Header = () => {
 
     return (
         <div className="w-full md:border-b border-gray-300 flex bg-gradient-to-t md:bg-gradient-to-r from-[#1b7b7e] to-gray-300" >
-            <div className="hidden md:block w-full pt-[200px] pb-[140px] md:pl-[100px] bg-bottom bg-no-repeat overflow-hidden" style={{ backgroundImage: `url('/bgHead1.png')`, backgroundSize: '1300px'} }>
+            <div className="hidden md:block w-full pt-[200px] pb-[140px] md:pl-[30px] lg:pl-[60px] xl:pl-[100px] bg-bottom bg-no-repeat overflow-hidden" style={{ backgroundImage: `url('/bgHead1.png')`, backgroundSize: '1300px'} }>
                 <Image 
                     src='/marca.png'
                     alt='Logo Medibooks.'
                     width={2400}
                     height={600}
-                    className="w-[700px] h-auto object-contain"
+                    className="md:w-[560px] lg:w-[620px] xl:w-[700px] h-auto object-contain"
                 />
-                <h4 className="w-auto relative -top-[30px] left-[5px] text-[33px] font-medium text-gray-300">TE ACOMPAÑA EN TODA TU CARRERA</h4>
+                <h4 className="w-auto relative -top-[30px] left-[5px] md:text-[26px] lg:text-[31px] xl:text-[34px] md:font-bold lg:font-semibold md:text-gray-700 lg:text-gray-100">TE ACOMPAÑA EN TODA TU CARRERA</h4>
                 <Link href='/productos' className="relative left-[8px] px-[16px] py-[8px] text-[22px] text-gray-300 border border-gray-300 rounded-md hover:bg-gray-300 hover:text-[#1b7b7e] hover:border-gray-100 transition-all duration-500" >Ver tienda</Link>
             </div>
             <div className="md:hidden w-full pt-[135px] pb-[290px] pl-[2%] bg-right-bottom bg-no-repeat" style={{ backgroundImage: `url('/headMov.png')`, backgroundSize: '380px'} }>

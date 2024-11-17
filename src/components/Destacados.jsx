@@ -6,10 +6,10 @@ const Destacados = () => {
   const libros = useProductos();
 
   return (
-    <div className="w-full py-12 md:py-20 flex bg-gray-50">
-      <div className="w-full px-[3%] md:px-[3%]">
+    <div className="w-full py-12 md:py-14 lg:py-20 flex bg-gray-50">
+      <div className="w-full px-[3%]">
         <h2 className="pb-6 md:pb-12 text-left text-xl md:text-2xl text-gray-700 md:text-gray-600 font-semibold">Productos destacados</h2>
-        <div className="w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-5">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
                 {libros.map((libro, index) => (
                    <ProductCard key={index} libro={libro} />
                   ))}

@@ -37,19 +37,19 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full md:w-[380px] relative">
-      <form onSubmit={handleSearchSubmit} className="flex border border-gray-400 md:border-gray-300 rounded-md overflow-hidden bg-white bg-opacity-40 md:bg-opacity-40 py-1">
+    <div className="w-full md:w-[220px] lg:w-[240px] xl:w-[320px] relative">
+      <form onSubmit={handleSearchSubmit} className="flex border border-gray-400 md:border-gray-300 rounded-md overflow-hidden bg-white bg-opacity-40 md:bg-opacity-10 py-1">
         <input
           type="text"
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder="Buscar libro..."
-          className="w-full py-0 px-2 text-lg md:text-base text-gray-600 md:text-gray-200 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 md:placeholder:text-gray-50 md:placeholder:text-xl placeholder:font-bold md:placeholder:font-medium"
+          className="w-full py-0 px-2 text-lg md:text-base text-gray-600 md:text-gray-100 focus:outline-none focus:ring-0 bg-transparent placeholder:text-gray-700 md:placeholder:text-gray-300  xl:placeholder:text-md placeholder:font-bold md:placeholder:font-semibold"
           style={{ touchAction: 'manipulation', fontSize: '16px' }}
           autoComplete="off"
         />
         <button type="submit" className="text-gray-50 px-2">
-          <FontAwesomeIcon icon={faSearch} className='text-gray-700 md:text-gray-50 text-lg' />
+          <FontAwesomeIcon icon={faSearch} className='text-gray-700 md:text-gray-100' />
         </button>
       </form>
 

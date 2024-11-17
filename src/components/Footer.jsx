@@ -8,24 +8,20 @@ import { faAt, faEnvelope, faEnvelopeOpen, faEnvelopeOpenText, faMailBulk, faMai
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white flex flex-col">
-      <div className="pt-12 md:pt-20 pb-12 w-full px-[2%] md:px-[10%] flex flex-col md:flex-row md:justify-around md:items-center">
+      <div className="pt-10 md:pt-20 pb-12 w-full px-[2%] md:px-[4%] lg:px-[8%] flex flex-col md:flex-row md:justify-between md:items-center">
         
-        <Link href='/' className="flex flex-col items-center justify-center">
+        <Link href='/' className="w-[33%]">
           <Image 
             src="/logo3.png" 
             alt="Logo del Proyecto" 
-            width={200} 
-            height={100} 
-            className="w-full h-auto object-contain"
+            width={400} 
+            height={120} 
+            className="w-[200px] lg:w-[240px] h-auto object-contain hidden md:block"
           />
         </Link>
         
-        <div className="flex flex-col items-center mt-6 md:mt-0">
-          <p>Mar Del Plata, Bs As, Argentina</p>
-          <p>Gaboto 5434</p>
-        </div>
 
-        <div className="mt-8 md:mt-0 flex justify-center space-x-6 md:space-x-4">
+        <div className="w-full md:w-[33%] mt-8 md:mt-0 flex justify-center space-x-6 md:space-x-4">
                 <a 
                 href="https://www.instagram.com/tuusuario" 
                 target="_blank" 
@@ -51,6 +47,21 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faEnvelope} size="2x" />
                 </a>
             </div>
+
+            <div className="w-full md:w-[33%] mt-10 md:mt-0">
+              <p className='text-center md:text-right text-gray-400'>Mar Del Plata, Bs As, Argentina</p>
+              <p className='text-center md:text-right text-gray-400'>Gaboto 5434</p>
+            </div>
+
+            <Link href='/'>
+              <Image 
+                src="/logo3.png" 
+                alt="Logo del Proyecto" 
+                width={400} 
+                height={120} 
+                className="w-[180px] h-auto mx-auto mt-6 object-contain md:hidden"
+              />
+          </Link>
       </div>
       <div className="py-3 md:py-8 md:mt-12 text-center text-gray-300 text-xs md:text-lg md:font-semibold bg-gray-900">
         <p>Copyright Medibooks - 2024. Todos los derechos reservados.</p>

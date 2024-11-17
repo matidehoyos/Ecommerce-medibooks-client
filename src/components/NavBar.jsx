@@ -23,45 +23,29 @@ const NavBar = () => {
     <nav className="w-full h-[68px] md:h-[75px] pt-[8px] md:pt-0 fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
       <div className="w-full flex">
         <div className="w-full px-[2%] flex justify-between items-center">
-            <div className="h-[40px] md:h-[60px] lg:h-[80px] flex items-center overflow-hidden">
+          <div className="h-[40px] md:h-[60px] xl:h-[80px] flex items-center overflow-hidden">
               <Link href="/" aria-label="Go to homepage">
                 <Image
                   src="/navLog.png"
                   alt="Logo Medibooks"
                   width={200}
                   height={90}
-                  className="w-[180px] md:w-[200px] lg:w-[200px] h-auto max-w-full object-contain object-center"
+                  className="w-[180px] md:w-[190px] xl:w-[210px]  h-auto max-w-full object-contain object-center"
                 />
               </Link>
-           </div>
-          <div className='hidden md:block'>
+          </div>
+          <div className='hidden lg:block'>
             <SearchBar />
           </div>
-          <div className="relative md:mr-6">
-            {cartCount > 0 && (
-              <>
-                <button onClick={toggleCart} aria-label="View cart">
-                  <Image 
-                    src="/cart.png" 
-                    alt="Carrito de compras." 
-                    width={170} 
-                    height={150} 
-                    className="w-[28px] h-auto object-contain md:hover:scale-125 transition-all duration-500 relative top-[3px]"
-                  />
-                </button>
-                <span className="inline-flex items-center justify-center px-1 md:px-0 py-[1px] text-s lg:text-lg font-bold leading-none text-red-500">
-                  {cartCount}
-                </span>
-              </>
-            )}
-          </div>            
-          <div className='hidden md:block space-x-4'>
-            <Link href='/' className='text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Inicio</Link>
-            <Link href='/productos' className='text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Productos</Link>
-            <Link href='/contacto' className='text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
+
+                    
+          <div className='hidden lg:block lg:space-x-3 xl:space-x-4'>
+            <Link href='/' className='lg:text-md xl:text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Inicio</Link>
+            <Link href='/productos' className='lg:text-md xl:text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Productos</Link>
+            <Link href='/contacto' className='lg:text-md xl:text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
           </div>
 
-          <div className={`md:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] bg-gray-700 transition-all duration-700 ease-out`}>
+          <div className={`lg:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] bg-gray-700 transition-all duration-700 ease-out`}>
           <div className='w-[90%]'>
             <SearchBarMov onSearch={handleSearchCloseMenu}/>
           </div>
@@ -82,20 +66,41 @@ const NavBar = () => {
           </ul>
         </div>
 
-          <div className='flex justify-end md:hidden w-[40px] h-auto'>
-            {
-              !abierto ? (
-                <button onClick={() => setAbierto(!abierto)}>
-                  <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[36px] h-auto object-contain' />
-                </button>
-              ) : (
-                <button onClick={() => setAbierto(!abierto)}>
-                  <p className='text-gray-100 text-2xl pr-3'>X</p>
-                </button>
+      
+          <div className='flex justify-end w-auto h-auto'>
+            <div className="flex relative">
+              {cartCount > 0 && (
+                <>
+                  <button onClick={toggleCart} aria-label="View cart">
+                    <Image 
+                      src="/cart.png" 
+                      alt="Carrito de compras." 
+                      width={170} 
+                      height={150} 
+                      className="w-[28px] h-auto object-contain md:hover:scale-125 transition-all duration-500"
+                    />
+                  </button>
+                  <span className="inline-flex items-center justify-center px-1 md:px-0 py-[1px] text-s lg:text-lg font-bold leading-none text-red-500 relative top-[5px]">
+                    {cartCount}
+                  </span>
+                </>
               )}
+            </div> 
+            <div className='w-[40px] h-auto flex lg:hidden ml-8'>
+                {
+                  !abierto ? (
+                    <button onClick={() => setAbierto(!abierto)}>
+                      <Image src='/menuLight.png' alt='Imagen menu colapse.' width={110} height={90} className='w-[36px] h-auto object-contain' />
+                    </button>
+                  ) : (
+                    <button onClick={() => setAbierto(!abierto)}>
+                      <p className='text-gray-100 text-2xl pr-3'>X</p>
+                    </button>
+                  )}
+            </div> 
           </div>
 
-          <div className='hidden md:flex'>
+          <div className='hidden lg:flex'>
             <button onClick={() => {setVisible(!visible)}} className='rounded-full overflow-hidden'>
               { !user ? (
                 <Image src='/user.png' width={90} height={90} alt='Imagen user icon.' className='w-[26px] h-auto object-contain'/>

@@ -39,46 +39,77 @@ const AdminPage = () => {
       return () => clearTimeout(timeout);
     }, []);
 
-    const hoy = new Date(); 
-    const ayer = new Date(); 
-    ayer.setDate(ayer.getDate() - 1); 
-    const startOfWeek = new Date(); 
-    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay()); 
-    const endOfWeek = new Date(startOfWeek); 
-    endOfWeek.setDate(endOfWeek.getDate() + 6); 
-    const startOfMonth = new Date(); startOfMonth.setDate(startOfMonth.getDate() - 30);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+  
+    const startOfWeek = new Date(hoy);
+    const dayOfWeek = hoy.getDay();
+    const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+    startOfWeek.setDate(hoy.getDate() - diffToMonday);
+    startOfWeek.setHours(0, 0, 0, 0);
+  
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+  
+    const startOfMonth = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
 
-    const filtrarVentas = () => { 
-      let ventasFiltradas; 
-      switch (filtro) { 
-        case 'hoy': 
-        ventasFiltradas = ventas.filter(venta => { 
-          const fechaVenta = new Date(venta.createdAt); 
-        return fechaVenta.toDateString() === hoy.toDateString(); 
-      }); 
-      break; 
-      case 'semana': 
-      ventasFiltradas = ventas.filter(venta => { 
-        const fechaVenta = new Date(venta.createdAt); 
-        return fechaVenta >= startOfWeek && fechaVenta <= endOfWeek; 
-      }); 
-      break; 
-      case 'mes': 
-      ventasFiltradas = ventas.filter(venta => { 
-       const fechaVenta = new Date(venta.createdAt); 
-       return fechaVenta >= startOfMonth && fechaVenta <= hoy;
-      }); 
-      break; 
-      default: ventasFiltradas = ventas; 
-      break; 
-    } 
-    return ventasFiltradas; 
-  };
+    const filtrarVentas = () => {
+      let ventasFiltradas;
+      
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+    
+      const startOfWeek = new Date(hoy);
+      const dayOfWeek = hoy.getDay();
+      const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+      startOfWeek.setDate(hoy.getDate() - diffToMonday);
+      startOfWeek.setHours(0, 0, 0, 0);
+    
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 6);
+      endOfWeek.setHours(23, 59, 59, 999);
+    
+      const startOfMonth = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+      startOfMonth.setHours(0, 0, 0, 0);
+    
+      switch (filtro) {
+        case 'hoy':
+          ventasFiltradas = ventas.filter(venta => {
+            const fechaVenta = new Date(venta.createdAt);
+            fechaVenta.setHours(0, 0, 0, 0); 
+            return fechaVenta.getTime() === hoy.getTime();
+          });
+          break;
+        case 'semana':
+          ventasFiltradas = ventas.filter(venta => {
+            const fechaVenta = new Date(venta.createdAt);
+            return fechaVenta >= startOfWeek && fechaVenta <= endOfWeek;
+          });
+          break;
+        case 'mes':
+          ventasFiltradas = ventas.filter(venta => {
+            const fechaVenta = new Date(venta.createdAt);
+            fechaVenta.setHours(0, 0, 0, 0); 
+            return fechaVenta >= startOfMonth && fechaVenta <= hoy;
+          });
+          break;
+        default:
+          ventasFiltradas = ventas;
+          break;
+      }
+    
+      return ventasFiltradas;
+    };
+    
+    
 
   const ventasFiltradas = filtrarVentas(); 
   const cantidadVentas = ventasFiltradas.length; 
   const totalFacturacion = ventasFiltradas.reduce((acc, venta) => acc + parseFloat(venta.totalAmount), 0).toFixed(2); 
   const ticketPromedio = cantidadVentas > 0 ? (totalFacturacion / cantidadVentas).toFixed(2) : '0.00';
+
+  console.log(ventas)
     
   return (
       <div className='w-full h-[100vh] flex flex-col'>       

@@ -1,5 +1,6 @@
-// SuccessPage.jsx
+
 'use client';
+import BASE_URL from '../../config';
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useUser } from '@auth0/nextjs-auth0/client';
@@ -25,7 +26,7 @@ const saveTransactionData = async ({ transactionId, statusValue, paymentType, ca
   const direccionId = localStorage.getItem('direccionId');
 
 
-  const response = await fetch('http://localhost:5000/api/transaction/save', {
+  const response = await fetch(`${BASE_URL}/transaction/save`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

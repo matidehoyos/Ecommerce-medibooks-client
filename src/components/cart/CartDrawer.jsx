@@ -54,7 +54,7 @@ const CartDrawer = () => {
           <div className='w-full px-[4%] mt-3 flex justify-end'>
             <Wallet
               initialization={{ preferenceId }}
-              customization={{ texts: { valueProp: 'smart_option' } }}
+              customization={{ texts: { valueProp: 'smart_option' },  locale: 'es_AR',}}
             />
           </div>
         )}

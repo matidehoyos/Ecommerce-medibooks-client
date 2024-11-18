@@ -64,7 +64,7 @@ const CartItems = ({envio}) => {
           )}
           {cart.length > 0 && !envio && (
             <div className='mt-6 flex justify-end'>
-              <p className='font-normal text-[24px] text-gray-600'>Subtotal: ${calculateTotal()}</p>
+              <p className='font-normal text-[24px] text-gray-600 pr-3 lg:pr-0'>Subtotal: ${calculateTotal()}</p>
             </div>
             )}
         </div>

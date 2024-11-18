@@ -67,14 +67,14 @@ const Productos = () => {
     <div className="w-full min-h-screen bg-gray-200">
       {loading && <Loader />}
       
-      <div className="w-full pt-[86px] md:pt-[120px] px-[2%] flex flex-row justify-start items-stretch md:items-center mb-4 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
+      <div className="w-full pt-[80px] md:pt-[120px] px-[2%] flex flex-row justify-start items-stretch md:items-center mb-3 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
         <div className='w-[49.2%] md:hidden'>
           <SearchBar />
         </div>
         <div className='w-[49.2%] md:w-[200px]'>
           <select
             id="category"
-            className="w-full lg:w-[200px] px-1 lg:px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none "
+            className="w-full lg:w-[200px] px-1 lg:px-4 py-[8px] lg:py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none "
             onChange={handleCategoryChange}
             value={queryCategory}
           >

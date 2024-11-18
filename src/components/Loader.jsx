@@ -7,6 +7,7 @@ const Loader = () => {
         <Image 
           src="/marca.png" 
           alt="Logo Medibooks" 
+          priority
           width={2400} 
           height={600} 
           className="w-full h-auto object-cover"

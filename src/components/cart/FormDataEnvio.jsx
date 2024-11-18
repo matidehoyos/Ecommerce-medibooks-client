@@ -86,7 +86,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
             <p><BiSolidTruck size={46} className="mt-4 text-gray-600 animate-bounce" /></p>
           </div>
         ) : (
-          <div className="w-[96%] mx-auto mt-6 p-4 bg-white bg-opacity-25 border border-gray-400 rounded-sm">
+          <div className="w-[96%] mx-auto mt-6 p-2 lg:p-4 bg-white bg-opacity-25 border border-gray-400 rounded-sm">
               <h3 className="mb-2 text-lg font-semibold text-gray-700">Datos de envio:</h3>
               <form onSubmit={handleSubmit} className='flex flex-wrap justify-between'>
                   <div className="w-[49.8%]">
@@ -96,7 +96,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder="Provincia"
                       value={clienteData.provincia}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-[6px] px-1 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 text-gray-600 font-semibold`}
+                      className={`w-full mt-1 py-[7px] px-1 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 text-gray-600 font-semibold`}
                       required
                   >
                       <option value="">Provincia:</option>
@@ -148,7 +148,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       type="text"
                       id="departamento"
                       name="departamento"
-                      placeholder="Departamento:"
+                      placeholder="Dto:"
                       value={clienteData.departamento}
                       onChange={handleChange}
                       className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold`}
@@ -191,7 +191,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       rows="1"
                   ></textarea>
                   </div>
-                  <button type="submit" className="mt-0 px-4 py-1 bg-[#1b7b7e] text-white rounded-md md:hover:bg-[#084244]">Enviar datos</button>
+                  <button type="submit" className="mt-1 lg:mt-0 px-4 py-1 bg-[#1b7b7e] text-white rounded-md md:hover:bg-[#084244]">Enviar datos</button>
               </form>
           </div>
         )}

@@ -5,7 +5,7 @@ const auth0 = initAuth0({
   clientSecret: process.env.AUTH0_CLIENT_SECRET,
   scope: 'openid profile',
   domain: process.env.AUTH0_ISSUER_BASE_URL,
-  redirectUri: `${process.env.AUTH0_BASE_URL}/api/callback`,
+  redirectUri: `${process.env.AUTH0_BASE_URL}/api/auth/callback`,
   postLogoutRedirectUri: process.env.AUTH0_BASE_URL,
   session: {
     cookieSecret: process.env.AUTH0_SECRET,

@@ -30,7 +30,7 @@ const NavBar = () => {
                   alt="Logo Medibooks"
                   width={200}
                   height={90}
-                  className="w-[180px] md:w-[190px] xl:w-[210px]  h-auto max-w-full object-contain object-center"
+                  className="xs:w-[175px] sm:w-[190px] md:w-[220px] xl:w-[230px]  h-auto max-w-full object-contain object-center"
                 />
               </Link>
           </div>
@@ -61,7 +61,9 @@ const NavBar = () => {
                 <Link href="/api/auth/login" className="text-2xl font-semibold text-[#26a5aa]" onClick={() => setAbierto(false)}>Registrarte</Link>
               </>
             ) : ( 
-              <Link href="/api/auth/logout" className="text-xl font-medium text-gray-50 hover:scale-110" onClick={() => setAbierto(false)}>Cerrar sesión</Link>
+              <div>
+                <Profile user={user} />
+              </div>
             )}
           </ul>
         </div>

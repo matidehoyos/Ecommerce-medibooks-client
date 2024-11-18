@@ -43,6 +43,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
         if (validateForm()) {
           try {
             setLoader(true);
+            setIsFormVisible(false);
             const cotizacion = await obtenerCotizacionEnvio(
               clienteData.provincia,
               clienteData.codigoPostal,
@@ -53,7 +54,6 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
               localStorage.setItem('clienteId', response.clienteId);
               localStorage.setItem('direccionId', response.direccionId);
             }
-            setIsFormVisible(false);
             const timeout = setTimeout(() => setLoader(false), 4000);
             setEnvio({
                 aSucursal: cotizacion.paqarClasico.aSucursal,

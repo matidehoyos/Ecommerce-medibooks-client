@@ -67,7 +67,7 @@ const Productos = () => {
     <div className="w-full min-h-screen bg-gray-200">
       {loading && <Loader />}
       
-      <div className="w-full pt-[86px] md:pt-[120px] px-[2%] flex flex-row justify-start items-center mb-4 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
+      <div className="w-full pt-[86px] md:pt-[120px] px-[2%] flex flex-row justify-start items-stretch md:items-center mb-4 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
         <div className='w-[49.2%] md:hidden'>
           <SearchBar />
         </div>

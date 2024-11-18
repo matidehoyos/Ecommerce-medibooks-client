@@ -11,14 +11,14 @@ const ProductCard = ({ libro }) => {
           <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
         ) : null
       }
-      <div className="w-full h-[188px] md:h-[250px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md md:group-hover:bg-gray-400 transition-colors duration-500">
+      <div className="w-full h-[160px] md:h-[250px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md md:group-hover:bg-gray-400 transition-colors duration-500">
         {libro.imagen ? (
           <Image 
             src={libro.imagen} 
             alt={libro.titulo} 
             width={500}
             height={500}
-            className="w-[100%] h-[88%] md:h-[80%] object-contain" 
+            className="w-[100%] h-[90%] md:h-[80%] object-contain" 
           />
         ) : (
           <Image 

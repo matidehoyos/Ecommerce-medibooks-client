@@ -19,7 +19,7 @@ const Header = () => {
                     <h4 className="w-auto relative -top-[20px] lg:-top-[24px] xl:-top-[34px] left-[5px] text-[23px] lg:text-[26px] xl:text-[34px] font-[500] lg:font-[500] md:text-gray-200 lg:text-gray-100">TE ACOMPAÑA EN TODA TU CARRERA</h4>
                     <Link href='/productos' className="w-auto relative left-[8px] -top-[8px] lg:-top-[11px] xl:-top-[16px] px-[26px] lg:px-[32px] xl:px-[40px] py-1 text-[20px] lg:text-[24px] text-gray-50 border border-gray-400 rounded-md lg:hover:bg-gray-300 lg:hover:text-[#1b7b7e] lg:hover:border-gray-100 transition-all duration-500" >Ver tienda</Link>
                 </div>
-                <div className="md:hidden w-full pb-[320px] pl-[2%]">
+                <div className="md:hidden w-full pb-[295px] pl-[2%]">
                     <div className="w-[96%] pt-[86px] pb-[34px]">
                         <SearchBar />
                     </div>

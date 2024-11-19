@@ -5,7 +5,7 @@ import SearchBar from './SeachBar';
 import { useCart } from '@/contexts/CartContexts';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import Profile from './Profile';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchBarMov from './SearchBarMov';
 
 const NavBar = () => {
@@ -14,13 +14,27 @@ const NavBar = () => {
   const { user } = useUser();
   const [visible, setVisible] = useState(false);
   const [abierto, setAbierto] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 28) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSearchCloseMenu = () => {
     setAbierto(false); 
   };
 
   return (
-    <nav className="w-full h-[68px] md:h-[75px] pt-[8px] md:pt-0 fixed flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]">
+    <nav className={`w-full h-[68px] md:h-[75px] pt-[8px] md:pt-0 fixed ${scrolling ? 'top-0' : 'top-[28px]'} flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]`}>
       <div className="w-full flex">
         <div className="w-full px-[2%] flex justify-between items-center">
           <div className="h-[40px] md:h-[60px] xl:h-[80px] flex items-center overflow-hidden">

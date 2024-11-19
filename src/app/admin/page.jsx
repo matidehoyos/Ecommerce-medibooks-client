@@ -108,8 +108,6 @@ const AdminPage = () => {
   const cantidadVentas = ventasFiltradas.length; 
   const totalFacturacion = ventasFiltradas.reduce((acc, venta) => acc + parseFloat(venta.totalAmount), 0).toFixed(2); 
   const ticketPromedio = cantidadVentas > 0 ? (totalFacturacion / cantidadVentas).toFixed(2) : '0.00';
-
-  console.log(ventas)
     
   return (
       <div className='w-full h-[100vh] flex flex-col'>       

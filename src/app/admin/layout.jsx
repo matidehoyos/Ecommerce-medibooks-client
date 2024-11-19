@@ -37,7 +37,7 @@ const AdminLayout = ({ children }) => {
     checkAdminAccess();
   }, [user]);
 
-  if (!isAdmin) return null;
+ if (!isAdmin) return null;
 
   return (
     <div className="min-h-screen flex">

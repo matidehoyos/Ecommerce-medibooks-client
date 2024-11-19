@@ -1,6 +1,5 @@
 import '../../globals.css';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 import { CartProvider } from '../contexts/CartContexts';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { ProductosProvider } from '@/contexts/productsContexts';
@@ -8,6 +7,7 @@ import { CategoryProvider } from '@/contexts/categoryContexts';
 import NavBarClient from '@/components/NavBarClient';
 import CartDrawer from '@/components/cart/CartDrawer';
 import BotonFlotante from '@/components/BotonFlotante';
+import PreNav from '@/components/PreNav';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -40,6 +40,7 @@ export default function RootLayout({ children }) {
             <CategoryProvider>
               <CartProvider>
                 <header>
+                  <PreNav />
                   <NavBarClient />
                 </header>
                 <main>

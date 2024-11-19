@@ -8,12 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { toast } from "react-toastify";
 import PaginateAdmin from '@/components/admin/PaginateAdmin';
-import { useUser } from '@auth0/nextjs-auth0/client';
 import AdminHeader from '@/components/admin/AdminHeader';
 import Loader from '@/components/Loader';
 
 const AdminLibrosPage = () => {
-  const { user } = useUser();
   const [libros, setLibros] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [titulo, setTitulo] = useState('');
@@ -253,7 +251,6 @@ const AdminLibrosPage = () => {
   const currentBooks = suggestedProducts.length ? suggestedProducts.slice(indexOfFirstBook, indexOfLastBook) : filterBooks().slice(indexOfFirstBook, indexOfLastBook);
   const totalPages = Math.ceil((suggestedProducts.length ? suggestedProducts.length : libros.length) / booksPerPage);
 
-console.log(user)
   return (
     <div className='w-full h-[100vh] flex flex-col'>
         <AdminHeader name='de productos'/>

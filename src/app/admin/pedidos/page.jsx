@@ -18,7 +18,6 @@ const AdminPedidosPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterEstado, setFilterEstado] = useState('all');
   const [loading, setLoading] = useState(true)
-  const itemsPerPage = 7;
 
   useEffect(() => {
     fetchPedidos();
@@ -75,12 +74,15 @@ const AdminPedidosPage = () => {
         setSearchQuery('');
     };
 
-
   const filteredPedidos = pedidos.filter(pedido =>
     filterEstado === 'all' || pedido.estado === filterEstado
   );
 
-  const paginatedPedidos = filteredPedidos.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const itemsPerPage = 7;
+  const indexOfLastPedido = currentPage * itemsPerPage;
+  const indexOfFirstPedido = indexOfLastPedido - itemsPerPage;
+  const paginatedPedidos = suggestedPedido.length ? suggestedPedido.slice(indexOfFirstPedido, indexOfLastPedido) : filteredPedidos.sort((a,b) => b.id - a.id).slice(indexOfFirstPedido, indexOfLastPedido);
   const totalPages = Math.ceil(filteredPedidos.length / itemsPerPage);
 
   const calculateTotal = () => {

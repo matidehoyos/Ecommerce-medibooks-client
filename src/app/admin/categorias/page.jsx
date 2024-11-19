@@ -18,7 +18,7 @@ const AdminCategoriasPage = () => {
   const [suggestedCategories, setSuggestedCategories] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 21;
+  const itemsPerPage = 27;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

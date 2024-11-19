@@ -19,7 +19,7 @@ export const updatePedidoEstado = async (pedidoId, nuevoEstado) => {
 };
 
 export const deletePedido = async (pedidoId) => {
-  const response = await fetch(`${BASE_URL}/pedidos/${pedidoId}`, {
+  const response = await fetch(`${BASE_URL}/pedidos/delete/${pedidoId}`, {
     method: 'DELETE',
   });
   if (!response.ok) throw new Error('Error al eliminar el pedido');

@@ -51,7 +51,7 @@ const ProductDetailPage = () => {
   };
 
   const filtrados = similares.filter(libro => libro.categoria === producto?.categoria);
-  const relacionados = filtrados.filter(libro => libro.id !== producto?.id);
+  const relacionados = filtrados.filter(libro => libro.id !== producto?.id).slice(0,5);
 
   if (error) return <div>{error}</div>;
   if (!producto) return <div>Cargando...</div>;
@@ -67,7 +67,7 @@ const ProductDetailPage = () => {
                 alt={producto.titulo}
                 width={500}
                 height={500}
-                className="w-[44%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-10 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
+                className="w-[44%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-6 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
                 style={{ filter: 'drop-shadow(10px 10px 10px rgba(0,0,0,.6))' }}
               />
             </div>
@@ -125,11 +125,11 @@ const ProductDetailPage = () => {
         <h3 className='pl-[3%] md:pl-0 text-xl md:text-2xl font-bold text-gray-100 md:text-gray-800'>Productos similares</h3>
         <div className='w-full px-[3%] flex md:flex-wrap justify-start md:justify-center gap-3 md:gap-5 overflow-scroll' style={{ scrollbarWidth: 'none'}}>
           {relacionados.map((libro) => (
-            <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg  bg-white group md:hover:border-gray-500 md:hover:shadow-gray-600 transition-all duration-500">
+            <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg  bg-white group lg:hover:border-gray-500 lg:hover:shadow-gray-600 transition-all duration-500">
               {libro.descuento > 0 && (
                 <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
               )}
-              <div className="w-full h-[200px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md group-hover:bg-gray-400 transition-colors duration-500">
+              <div className="w-full h-[200px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md lg:group-hover:bg-gray-400 transition-colors duration-500">
                 <Image
                   src={libro.imagen || '/default.png'}
                   alt={libro.titulo}
@@ -139,7 +139,7 @@ const ProductDetailPage = () => {
                 />
               </div>
               <div className="pt-1">
-                <h2 className="w-full truncate text-md text-gray-950 font-semibold">{libro.titulo}</h2>
+                <h2 className="w-[230px] md:w-full truncate text-md text-gray-950 font-semibold">{libro.titulo}</h2>
                 <p className="w-full truncate text-sm text-gray-600 font-semibold">{libro.autor}</p>
                 <div className="w-full flex justify-start items-center gap-2">
                   {libro.precioAnterior !== libro.precio && (

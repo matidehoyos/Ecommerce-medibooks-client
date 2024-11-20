@@ -18,7 +18,7 @@ const ProductCard = ({ libro }) => {
             alt={libro.titulo} 
             width={500}
             height={500}
-            className="w-[100%] h-[90%] md:h-[80%] object-contain" 
+            className="w-auto h-[90%] md:h-[80%] object-contain" 
           />
         ) : (
           <Image 
@@ -26,7 +26,7 @@ const ProductCard = ({ libro }) => {
             alt="Imagen no disponible" 
             width={500}
             height={500}
-            className="w-[100%] h-[80%] object-contain" 
+            className="w-auto h-[80%] object-contain" 
           />
         )}
       </div>

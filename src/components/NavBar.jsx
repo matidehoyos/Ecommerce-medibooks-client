@@ -7,6 +7,8 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 import Profile from './Profile';
 import { useEffect, useState } from 'react';
 import SearchBarMov from './SearchBarMov';
+import PreNav from './PreNav';
+import { usePathname } from 'next/navigation';
 
 const NavBar = () => {
   const { cart, toggleCart } = useCart();
@@ -15,6 +17,8 @@ const NavBar = () => {
   const [visible, setVisible] = useState(false);
   const [abierto, setAbierto] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,14 +38,18 @@ const NavBar = () => {
   };
 
   return (
-    <nav className={`w-full h-[68px] md:h-[75px] pt-[8px] md:pt-0 fixed ${scrolling ? 'top-0' : 'top-[28px]'} flex bg-gray-800 border-b border-[#1b7b7e] z-[1000]`}>
+    <nav className={`w-full h-auto fixed flex flex-col bg-gray-800 border-b border-[#1b7b7e] z-[1000]`}>
+      <div className={`w-full ${isHome && !scrolling && !abierto && !visible ? 'block' : 'hidden'} transition-all duration-500`}>
+          <PreNav />
+      </div>
       <div className="w-full flex">
-        <div className="w-full px-[2%] flex justify-between items-center">
+        <div className="w-full h-[68px] md:h-[75px] px-[2%] pt-[8px] lg:pt-0 flex justify-between items-center">
           <div className="h-[40px] md:h-[60px] xl:h-[80px] flex items-center overflow-hidden">
               <Link href="/" aria-label="Go to homepage">
                 <Image
                   src="/navLog.png"
                   alt="Logo Medibooks"
+                  priority
                   width={200}
                   height={90}
                   className="xs:w-[175px] sm:w-[190px] md:w-[220px] xl:w-[230px]  h-auto max-w-full object-contain object-center"
@@ -59,7 +67,7 @@ const NavBar = () => {
             <Link href='/contacto' className='lg:text-md xl:text-lg font-bold text-[#eee] hover:text-[#57c0c4] transition-all duration-300'>Contacto</Link>
           </div>
 
-          <div className={`lg:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] bg-gray-700 transition-all duration-700 ease-out`}>
+          <div className={`lg:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] md:top-[75px] bg-gray-700 transition-all duration-700 ease-out`}>
           <div className='w-[90%]'>
             <SearchBarMov onSearch={handleSearchCloseMenu}/>
           </div>
@@ -124,7 +132,7 @@ const NavBar = () => {
                 <Image src={user.picture} width={90} height={90} alt='Imagen user.' className='w-[26px] h-auto object-contain'/>
               )}
             </button>
-            <ul className={`w-[auto] p-4 absolute top-[75px] flex gap-5 ${visible ? 'right-0' : '-right-[200%]'} bg-[#1b7b7e] transition-all duration-700`}>
+            <ul className={`w-[auto] p-4 absolute top-[75px] flex gap-5 ${visible ? 'right-0' : '-right-[200%]'} border-t border-gray-700 bg-gray-800 transition-all duration-500`}>
             {!user ? (
                 <>
                   <Link href="/api/auth/login" className="mb-1 text-xl font-medium text-gray-50 hover:scale-110">

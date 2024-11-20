@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
             <CategoryProvider>
               <CartProvider>
                 <header>
-                  <PreNav />
                   <NavBarClient />
                 </header>
                 <main>

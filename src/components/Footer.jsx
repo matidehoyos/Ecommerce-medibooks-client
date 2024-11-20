@@ -23,7 +23,7 @@ const Footer = () => {
 
         <div className="w-full md:w-[33%] mt-8 md:mt-0 flex justify-center space-x-6 md:space-x-4">
                 <a 
-                href="https://www.instagram.com/tuusuario" 
+                href="https://www.instagram.com/medibooks.oficial?igsh=MWx4Zzkza3YyZzlwMw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#e1306c] md:text-gray-600 md:hover:text-[#E1306C] transition-colors duration-300"
@@ -31,7 +31,7 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faInstagram} size="2x" />
                 </a>
                 <a 
-                href="https://wa.me/tu-numero" 
+                href="https://api.whatsapp.com/send?phone=542233414157" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[#25d366] md:text-gray-600 md:hover:text-[#25D366] transition-colors duration-300"

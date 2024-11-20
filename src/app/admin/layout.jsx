@@ -48,7 +48,7 @@ const AdminLayout = ({ children }) => {
 
       <ToastContainer 
         position="top-center" 
-        autoClose={1200}
+        autoClose={600}
         hideProgressBar={false} 
         closeOnClick 
         draggable 
@@ -62,7 +62,7 @@ const AdminLayout = ({ children }) => {
           color: 'white',
           borderRadius: '15px', 
           padding: '20px',
-          fontSize: '26px',
+          fontSize: '22px',
         }}
       />
     </div>

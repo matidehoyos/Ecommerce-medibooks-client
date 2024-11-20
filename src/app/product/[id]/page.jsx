@@ -67,7 +67,7 @@ const ProductDetailPage = () => {
                 alt={producto.titulo}
                 width={500}
                 height={500}
-                className="w-[44%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-6 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
+                className="w-[38%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-10 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
                 style={{ filter: 'drop-shadow(10px 10px 10px rgba(0,0,0,.6))' }}
               />
             </div>

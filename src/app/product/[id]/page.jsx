@@ -64,11 +64,12 @@ const ProductDetailPage = () => {
             <div className='w-auto h-auto px-5 md:p-5 sm:px-3 md:px-0 flex items-center md:justify-end'>
               <Image
                 src={producto.imagen || '/default.png'}
-                alt={producto.titulo}
+                alt={`Portada del libro ${producto.titulo}`}
                 width={500}
                 height={500}
                 className="w-[38%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-10 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700"
                 style={{ filter: 'drop-shadow(10px 10px 10px rgba(0,0,0,.6))' }}
+                loading="lazy"
               />
             </div>
           </div>
@@ -132,10 +133,13 @@ const ProductDetailPage = () => {
               <div className="w-full h-[200px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md lg:group-hover:bg-gray-400 transition-colors duration-500">
                 <Image
                   src={libro.imagen || '/default.png'}
-                  alt={libro.titulo}
+                  alt={`Portada del libro ${libro.titulo}`}
                   width={500}
                   height={500}
                   className="w-[100%] h-[80%] object-contain"
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL='/blur.jpg'
                 />
               </div>
               <div className="pt-1">
@@ -153,7 +157,6 @@ const ProductDetailPage = () => {
         </div>
       </div> 
       ) : null }
-      <Footer />
     </div>
   );
 };

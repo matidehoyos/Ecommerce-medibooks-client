@@ -5,7 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import { useProductos } from '@/contexts/productsContexts';
 
-const SearchBarMov = ({ onSearch }) => {
+const SearchBarMov = ({ setAbierto }) => {
   const products = useProductos();
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState([]);
@@ -32,7 +32,7 @@ const SearchBarMov = ({ onSearch }) => {
   };
 
   const handleSuggestionClick = (productId) => {
-    onSearch();  
+    setAbierto(false)  
     router.push(`/product/${productId}`);
     setSearchQuery('');
     setSuggestedProducts([]);

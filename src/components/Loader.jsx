@@ -6,8 +6,8 @@ const Loader = () => {
       <div className="w-[62%] md:w-[40%]">
         <Image 
           src="/marca.png" 
-          alt="Logo Medibooks" 
-          priority
+          alt="Logo de Medibooks" 
+          priority={true}
           width={2400} 
           height={600} 
           className="w-full h-auto object-cover"

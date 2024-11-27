@@ -1,6 +1,4 @@
 'use client';
-import AdminHeader from '@/components/admin/AdminHeader';
-import Loader from '@/components/Loader';
 import NavBarAdmin from '@/components/admin/NavBarAdmin';
 import { getUserByEmail } from '@/services/serviceUser';
 import { useUser } from '@auth0/nextjs-auth0/client';

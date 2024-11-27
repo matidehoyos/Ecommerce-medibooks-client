@@ -10,7 +10,7 @@ const AdminHeader = ({name}) => {
           <h2 className='text-gray-50 font-semibold text-xl font-sans'>Administrador {name}</h2>
           <div className='flex items-center'>
             <span className='text-gray-400 font-semibold text-sm mr-1'>Admin:</span>
-            <Image width={24} height={24} src={user.picture} className='rounded-full mr-1' alt="Imagen usuario." />
+            <Image width={24} height={24} src={user.picture} loading="lazy" className='rounded-full mr-1' alt="Imagen usuario." />
             <span className='text-gray-300 font-semibold text-sm'> {user.name}</span>
           </div>
         </div>

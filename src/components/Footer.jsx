@@ -13,10 +13,11 @@ const Footer = () => {
         <Link href='/' className="w-[33%]">
           <Image 
             src="/logo3.png" 
-            alt="Logo del Proyecto" 
+            alt="Logo de Medibooks." 
             width={400} 
             height={120} 
             className="w-[200px] lg:w-[240px] h-auto object-contain hidden md:block"
+            loading="lazy"
           />
         </Link>
         
@@ -56,10 +57,11 @@ const Footer = () => {
             <Link href='/'>
               <Image 
                 src="/logo3.png" 
-                alt="Logo del Proyecto" 
+                alt="Logo de Medibooks." 
                 width={400} 
                 height={120} 
                 className="w-[180px] h-auto mx-auto mt-6 object-contain md:hidden"
+                loading="lazy"
               />
           </Link>
       </div>

@@ -447,7 +447,7 @@ const AdminLibrosPage = () => {
                   {currentBooks.map((libro) => (
                     <tr key={libro.id} className='border-b'>
                       <td className='px-4 py-2 flex justify-center'>
-                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={60} height={60} className='p-1 w-[44px] h-auto border border-gray-400 rounded-md' />
+                        <Image src={`${libro.imagen ? libro.imagen : '/default.jpeg'}`} alt={libro.titulo} width={60} height={60} loading='lazy' placeholder="blur" blurDataURL='/blur.jpg'  className='p-1 w-[44px] h-auto border border-gray-400 rounded-md' />
                       </td>
                       <td className='px-4 py-2 text-gray-900'>{libro.titulo}</td>
                       <td className='px-4 py-2 text-gray-900 text-center'>${libro.precio}</td>

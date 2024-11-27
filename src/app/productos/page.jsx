@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
 import Image from 'next/image';
 import Link from 'next/link';
-import SearchBar from '@/components/SeachBar';
+import SearchBar from '@/components/SearchBar';
 import { useProductos } from '@/contexts/productsContexts';
 import { useCategorias } from '@/contexts/categoryContexts';
 
@@ -126,10 +126,9 @@ const Productos = () => {
           <Link href='/productos' className='text-left text-lg md:text-xl font-semibold text-[#1b7b7e] underline'>
             Explore aquí libros disponibles.
           </Link>
-          <Image src='/logoDark.png' width={2400} height={600} alt='Logo Medibooks.' className='w-[30%] mt-20 hidden md:block' />
+          <Image src='/logoDark.png' width={2400} height={600} alt='Logo de Medibooks.' className='w-[30%] mt-20 hidden md:block' />
         </div>
       )}
-      <Footer />
     </div>
   );
 };

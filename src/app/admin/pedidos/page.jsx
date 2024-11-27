@@ -223,6 +223,9 @@ const AdminPedidosPage = () => {
                                               width={28}
                                               height={36}
                                               className="object-cover mx-auto rounded"
+                                              loading='lazy'
+                                              placeholder="blur"
+                                              blurDataURL='/blur.jpg'
                                             />
                                           </td>
                                           <td className="text-left text-sm">{detalle.title}</td>

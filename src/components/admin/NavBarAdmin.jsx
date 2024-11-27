@@ -6,7 +6,7 @@ const NavBarAdmin = () => {
   return (
     <aside className="w-[15%] h-[100vh] fixed bg-gray-700 border-r border-gray-400">
         <Link href='/' className='w-auto h-[60px] p-6 flex justify-center items-center border-b border-gray-400 bg-gray-900 hover:bg-gray-950 transition-all duration-500 overflow-hidden'>
-            <Image src='/navLog.png' width={2400} height={600} alt='Logo Medibooks' className='w-full h-auto object-center object-contain'/>
+            <Image src='/navLog.png' width={2400} height={600} loading='lazy' alt='Logo Medibooks' className='w-full h-auto object-center object-contain'/>
         </Link>
       <nav>
         <ul className="pl-6 py-6 space-y-2 text-gray-300 text-[18px] font-sans font-semibold">

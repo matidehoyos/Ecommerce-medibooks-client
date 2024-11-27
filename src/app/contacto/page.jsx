@@ -113,7 +113,6 @@ const Contacto = () => {
                 </form>
             </div>
         </div>
-        <Footer />
     </div>
   );
 };

@@ -4,10 +4,10 @@ import { CartProvider } from '../contexts/CartContexts';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { ProductosProvider } from '@/contexts/productsContexts';
 import { CategoryProvider } from '@/contexts/categoryContexts';
-import NavBarClient from '@/components/NavBarClient';
+import NavBarClient from '@/components/navbar/NavBarClient';
 import CartDrawer from '@/components/cart/CartDrawer';
-import BotonFlotante from '@/components/BotonFlotante';
-import PreNav from '@/components/PreNav';
+import BotonFlotante from '@/components/whatsApp/BotonFlotante';
+import FooterClient from '@/components/FooterClient';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -31,22 +31,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-      </head>
+    <html lang="es">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <UserProvider>
           <ProductosProvider>
             <CategoryProvider>
               <CartProvider>
-                <header>
-                  <NavBarClient />
-                </header>
-                <main>
-                  {children}
-                  <CartDrawer />
-                  <BotonFlotante />
-                </main>
+                  <header>
+                    <NavBarClient />
+                  </header>
+                  <main>
+                    {children}
+                    <CartDrawer />
+                    <BotonFlotante />
+                  </main>
+                  <footer>
+                    <FooterClient />
+                  </footer>
               </CartProvider>
             </CategoryProvider>
           </ProductosProvider>

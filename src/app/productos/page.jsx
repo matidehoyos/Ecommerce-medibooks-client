@@ -64,10 +64,10 @@ const Productos = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-200">
+    <div className="w-full min-h-screen bg-gray-50 lg:bg-gray-200">
       {loading && <Loader />}
       
-      <div className="w-full pt-[80px] md:pt-[120px] px-[2%] flex flex-row justify-start items-stretch md:items-center mb-3 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
+      <div className="w-full pt-[80px] md:pt-[120px] px-[2%] lg:px-[6%] flex flex-row justify-start items-stretch md:items-center mb-3 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
         <div className='w-[49.2%] md:hidden'>
           <SearchBar />
         </div>
@@ -113,7 +113,7 @@ const Productos = () => {
       </div>
 
       {filteredProducts.length > 0 ? (
-        <div className="w-full grid mt-0 px-[2%] pb-12 md:pb-40 mx-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 lg:gap-3">
+        <div className="w-full grid mt-0 px-[2%] lg:px-[6%] pb-12 md:pb-40 mx-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-10">
           {filteredProducts.map(libro => (
             <ProductCard key={libro.id} libro={libro} />
           ))}

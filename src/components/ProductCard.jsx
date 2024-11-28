@@ -5,7 +5,7 @@ const ProductCard = ({ libro }) => {
   const defaultImage = "/default.png"; 
 
   return (
-    <Link href={`/product/${libro.id}`} className="w-full max-w-[260px] relative p-0 rounded-md overflow-hidden bg-transparent group transition-all duration-700 lg:hover:bg-white lg:hover:border lg:hover:border-gray-300" aria-label="Ir a la página de detalle del producto.">
+    <Link href={`/product/${libro.id}`} className="w-full max-w-[260px] relative p-0 lg:p-[5px] rounded-md overflow-hidden bg-transparent lg:border lg:border-gray-400 group transition-all duration-700 lg:hover:bg-white " aria-label="Ir a la página de detalle del producto.">
       {
         libro.descuento > 0 ? (
           <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400 z-10">% {libro.descuento} off!</p>

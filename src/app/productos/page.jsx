@@ -67,11 +67,11 @@ const Productos = () => {
     <div className="w-full min-h-screen bg-gray-50 lg:bg-gray-200">
       {loading && <Loader />}
       
-      <div className="w-full pt-[80px] md:pt-[120px] px-[2%] lg:px-[6%] flex flex-row justify-start items-stretch md:items-center mb-3 md:mb-10 gap-1 sm:gap-2 md:gap-3 lg:gap-4 flex-wrap">
-        <div className='w-[49.2%] md:hidden'>
+      <div className="w-full pt-[85px] md:pt-[120px] px-[3%] lg:px-[6%] flex flex-col md:flex-row justify-center md:justify-start items-center md:items-stretch mb-4 md:mb-10 gap-2 md:gap-3 lg:gap-4">
+        <div className='w-full md:hidden'>
           <SearchBar />
         </div>
-        <div className='w-[49.2%] md:w-[200px]'>
+        <div className='w-full md:w-[200px]'>
           <select
             id="category"
             className="w-full lg:w-[200px] px-1 lg:px-4 py-[8px] lg:py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none "
@@ -87,33 +87,35 @@ const Productos = () => {
           </select>
         </div>
 
-        <div className='w-[49.2%] md:w-[200px]'>
-          <select
-            id="price"
-            className="w-full md:w-[200px] px-1 lg:px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none"
-            onChange={handlePriceChange}
-            value={priceFilter}
-          >
-            <option value="asc">Más barato</option>
-            <option value="desc">Más caro</option>
-          </select>
-        </div>
+        <div className='w-full md:w-auto flex gap-2 lg:gap-4'>
+          <div className='w-full md:w-[200px]'>
+            <select
+              id="price"
+              className="w-full md:w-[200px] px-1 lg:px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none"
+              onChange={handlePriceChange}
+              value={priceFilter}
+            >
+              <option value="asc">Más barato</option>
+              <option value="desc">Más caro</option>
+            </select>
+          </div>
 
-        <div className='w-[49.2%] md:w-[200px]'>
-          <select
-            id="date"
-            className="w-full md:w-[200px] px-1 lg:px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none"
-            onChange={handleDateChange}
-            value={dateFilter}
-          >
-            <option value="newest">Más reciente</option>
-            <option value="oldest">Más antiguo</option>
-          </select>
+          <div className='w-full md:w-[200px]'>
+            <select
+              id="date"
+              className="w-full md:w-[200px] px-1 lg:px-4 py-2 text-gray-700 font-bold border rounded-md border-gray-400 bg-gray-100 focus:outline-none"
+              onChange={handleDateChange}
+              value={dateFilter}
+            >
+              <option value="newest">Más reciente</option>
+              <option value="oldest">Más antiguo</option>
+            </select>
+          </div>
         </div>
       </div>
 
       {filteredProducts.length > 0 ? (
-        <div className="w-full grid mt-0 px-[2%] lg:px-[6%] pb-12 md:pb-40 mx-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-10">
+        <div className="w-full grid mt-0 px-[3%] lg:px-[6%] pb-12 md:pb-40 mx-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-10">
           {filteredProducts.map(libro => (
             <ProductCard key={libro.id} libro={libro} />
           ))}

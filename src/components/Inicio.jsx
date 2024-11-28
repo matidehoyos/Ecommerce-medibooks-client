@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from "react";
 import Categories from "./Categories";
 import CategoriesMovil from "./CategoriesMov";
 import Destacados from "./Destacados";
@@ -10,16 +9,10 @@ import Ubicacion from "./ubicacion";
 import Header from "./header/Header";
 
 const Inicio = () => {
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-      const timeout = setTimeout(() => setLoading(false), 1000);
-      return () => clearTimeout(timeout);
-    }, []);
-
+    
     return (
       <>
-        {loading && <Loader />}
+        <Loader />
         <Header />
         <Categories />
         <CategoriesMovil />

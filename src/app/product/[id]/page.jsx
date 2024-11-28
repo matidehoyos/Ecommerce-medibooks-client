@@ -1,41 +1,21 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Footer from '@/components/Footer';
-import { getLibro, getLibros } from '@/services/serviceLibros';
-import Link from 'next/link';
+import { useState } from 'react';
+import { useProductos } from '@/contexts/productsContexts';
 import { useCart } from '@/contexts/CartContexts';
+import Image from 'next/image';
 import Loader from '@/components/Loader';
+import RelatedCard from '@/components/RelatedCard';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const { addToCart } = useCart();
-  const [producto, setProducto] = useState(null);
-  const [similares, setSimilares] = useState([]);
+  const productos = useProductos();
+  const producto = productos.find((p) => Number(p.id) === Number(id));
   const [cantidad, setCantidad] = useState(1);
   const [terminacion, setTerminacion] = useState('Encuadernado');
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
+  const { addToCart } = useCart();
 
-
-
-  useEffect(() => {
-    const getProducto = async () => {
-      try {
-        const data = await getLibro(id);
-        setProducto(data);
-        const similaresData = await getLibros();
-        setSimilares(similaresData);
-        const timeout = setTimeout(() => setLoading(false), 1000);
-        return () => clearTimeout(timeout);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    getProducto();
-  }, [id]);
 
   const agregarAlCarrito = () => {
     const productoConTerminacion = {
@@ -50,26 +30,26 @@ const ProductDetailPage = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const filtrados = similares.filter(libro => libro.categoria === producto?.categoria);
+  const filtrados = productos.filter(libro => libro.categoria === producto?.categoria);
   const relacionados = filtrados.filter(libro => libro.id !== producto?.id).slice(0,5);
-
-  if (error) return <div>{error}</div>;
+  const contenido = relacionados.length > 0 ? relacionados : productos.slice(0,5);
+  
   if (!producto) return <div>Cargando...</div>;
 
   return (
     <div className='min-h-screen bg-gray-100'>
-      {loading && <Loader />}
-      <div className='w-full h-auto md:h-auto pt-[68px] md:pt-[80px] flex flex-col justify-start sm:flex-row sm:items-center sm:justify-start md:justify-center'>
+      <Loader />
+      <div className='w-full h-auto md:h-auto pt-[78px] md:pt-[80px] flex flex-col justify-start sm:flex-row sm:items-center sm:justify-start md:justify-center'>
           <div className='sm:w-[40%] md:w-[60%] lg:w-[80%] h-auto overflow-hidden'>
-            <div className='w-auto h-auto px-0 md:p-5 sm:px-3 md:px-0 flex items-center md:justify-end'>
+            <div className='w-auto h-auto px-0 pb-6 sm:pb-0 md:p-5 sm:px-3 md:px-0 flex items-center md:justify-end'>
               <Image
                 src={producto.imagen || '/default.png'}
                 alt={`Portada del libro ${producto.titulo}`}
                 width={500}
                 height={500}
-                className="w-[68%] sm:w-[96%] md:w-[96%] lg:w-[360px] h-auto py-4 md:py-10 md:px-10 object-scale-down md:hover:scale-[1.1] transition-all duration-700 overflow-visible"
+                className="w-[240px] sm:w-[96%] md:w-[96%] lg:w-[360px] h-[330px] sm:h-auto ml-3 sm:ml-0 py-4 md:py-10 md:px-10 object-contain lg:hover:scale-[1.1] transition-all duration-700 overflow-visible"
                 style={{ filter: 'drop-shadow(6px 6px 6px rgba(0,0,0,.6))' }}
-                loading="lazy"
+                priority
               />
             </div>
           </div>
@@ -83,7 +63,7 @@ const ProductDetailPage = () => {
               <p className='text-[24px] md:text-3xl font-[700] text-green-600'>${producto.precio}</p>
             </div>
             <label className='mt-3 md:mt-6 text-[18px] lg:text-[20px] font-medium text-gray-800'>
-                Terminación:
+                <span className='hidden md:inline'>Terminación:</span>
                 <select
                   className='ml-1 p-1 border text-[16px] lg:text-[18px] border-gray-700 rounded-md bg-transparent'
                   value={terminacion}
@@ -96,9 +76,9 @@ const ProductDetailPage = () => {
             <div className='flex items-center justify-start mt-6 md:mt-8 gap-4'>
               <div className="h-full">
                 <span className='hidden md:inline'>Cantidad:</span>
-                <button className='px-[6px] py-0 ml-1 bg-gray-300 lg:hover:bg-gray-500 lg:hover:text-gray-50 border border-gray-400 rounded-sm' onClick={() => setCantidad(cantidad - 1)} disabled={cantidad < 2}>-</button>
-                <span className='font-bold mx-1 md:mx-2'>{cantidad}</span>
-                <button className='px-[6px] py-0 mr-1 bg-gray-300 lg:hover:bg-gray-500 lg:hover:text-gray-50 border border-gray-400 rounded-sm' onClick={() => setCantidad(cantidad + 1)} disabled={cantidad === producto.stock}>+</button>
+                <button className='px-[6px] py-0 ml-1 text-2xl bg-gray-300 lg:hover:bg-gray-500 lg:hover:text-gray-50 border border-gray-400 rounded-sm' onClick={() => setCantidad(cantidad - 1)} disabled={cantidad < 2}>-</button>
+                <span className='font-bold mx-2 text-xl'>{cantidad}</span>
+                <button className='px-[6px] py-0 mr-1 text-2xl bg-gray-300 lg:hover:bg-gray-500 lg:hover:text-gray-50 border border-gray-400 rounded-sm' onClick={() => setCantidad(cantidad + 1)} disabled={cantidad === producto.stock}>+</button>
               </div>
               <button
                 onClick={agregarAlCarrito}
@@ -109,7 +89,7 @@ const ProductDetailPage = () => {
             </div>     
           </div>
       </div>
-      <div className='md:w-full px-[3%] py-8 md:py-8 md:px-[6%] mt-2 md:mt-0 md:text-[20px] md:tracking-[.6px] md:leading-[23px] font-medium text-gray-800 text-left bg-gray-300'>
+      <div className='md:w-full px-[3%] py-5 md:py-8 md:px-[6%] md:text-[20px] md:tracking-[.6px] md:leading-[23px] font-medium text-gray-800 text-left bg-gray-300'>
               <p className='text-md font-normal leading-5 lg:leading-7'>
                 <span className='text-md font-bold text-gray-800'>Descripción: </span>
                   {isExpanded && producto.detalle.length > 300 ? producto.detalle : `${producto.detalle.slice(0, 300)}...`}
@@ -121,42 +101,14 @@ const ProductDetailPage = () => {
               {isExpanded ? 'Leer menos' : 'Leer más'}
               </button>
             </div> 
-      { relacionados.length > 0 ? (
-      <div className='w-full flex flex-col md:items-center py-12 md:py-20 bg-[#1b7b7e] md:bg-gray-400  gap-6 md:gap-10'>
-        <h3 className='pl-[3%] md:pl-0 text-xl md:text-2xl font-bold text-gray-100 md:text-gray-800'>Productos similares</h3>
-        <div className='w-full px-[3%] flex md:flex-wrap justify-start md:justify-center gap-3 md:gap-5 overflow-scroll' style={{ scrollbarWidth: 'none'}}>
-          {relacionados.map((libro) => (
-            <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg  bg-white group lg:hover:border-gray-500 lg:hover:shadow-gray-600 transition-all duration-500">
-              {libro.descuento > 0 && (
-                <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
-              )}
-              <div className="w-full h-[200px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md lg:group-hover:bg-gray-400 transition-colors duration-500">
-                <Image
-                  src={libro.imagen || '/default.png'}
-                  alt={`Portada del libro ${libro.titulo}`}
-                  width={500}
-                  height={500}
-                  className="w-[100%] h-[80%] object-contain"
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL='/blur.jpg'
-                />
+              <div className='w-full flex flex-col md:items-center py-12 md:py-20 bg-[#1b7b7e] md:bg-gray-400  gap-6 md:gap-10'>
+                <h3 className='pl-[3%] md:pl-0 text-2xl font-normal md:font-bold text-gray-50 md:text-gray-800'>También te puede interesar</h3>
+                <div className='w-full px-[3%] flex md:flex-wrap justify-start md:justify-center gap-3 md:gap-5 overflow-scroll' style={{ scrollbarWidth: 'none' }}>
+                 { contenido.map(libro => (
+                  <RelatedCard key={libro.id} libro={libro} />
+                 ))}
               </div>
-              <div className="pt-1">
-                <h2 className="w-[230px] md:w-full truncate text-md text-gray-950 font-semibold">{libro.titulo}</h2>
-                <p className="w-full truncate text-sm text-gray-600 font-semibold">{libro.autor}</p>
-                <div className="w-full flex justify-start items-center gap-2">
-                  {libro.precioAnterior !== libro.precio && (
-                    <p className="text-gray-400 text-xs line-through">${libro.precioAnterior}</p>
-                  )}
-                  <p className="text-sm font-bold text-red-600">${libro.precio.toFixed(2)}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div> 
-      ) : null }
+            </div>
     </div>
   );
 };

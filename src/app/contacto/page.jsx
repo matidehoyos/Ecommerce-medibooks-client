@@ -1,21 +1,14 @@
 'use client'
-import Footer from '@/components/Footer';
 import Loader from '@/components/Loader';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const Contacto = () => {
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
     telefono: '',
     mensaje: '',
   });
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timeout);
-  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +25,8 @@ const Contacto = () => {
 
   return (
     <div className="w-full bg-gray-300">
-      {loading && <Loader />}
-        <div className='md:w-[80%] px-[3%] pt-[60px] md:pt-[170px] mx-auto pb-20 flex flex-col md:flex-row-reverse md:justify-center md:items-stretch gap-8'>
+        <Loader />
+        <div className='md:w-[80%] px-[3%] pt-[60px] md:pt-[170px] mx-auto pb-20 flex flex-col lg:flex-row-reverse md:justify-center md:items-stretch gap-8'>
             <div className="w-full h-full mt-8 md:mt-0 p-4 text-gray-700 space-y-3 md:border md:border-gray-800 md:rounded-lg md:bg-white">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Información de Contacto</h2>
                 <p>Email: <a href="mailto:somosmedibooks@gmail.com" target="_blank"  className="text-gray-800 font-bold hover:underline">somosmedibooks@gmail.com</a></p>
@@ -59,7 +52,7 @@ const Contacto = () => {
                     className="w-full p-2 border border-gray-400 rounded-md focus:outline-none focus:border-[#1b7b7e] bg-gray-50"
                     />
                 </div>
-                <div className='w-full flex flex-col md:flex-row gap-2'>
+                <div className='w-full flex flex-col lg:flex-row gap-2'>
                     <div className='w-full'>
                         <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
                         Email

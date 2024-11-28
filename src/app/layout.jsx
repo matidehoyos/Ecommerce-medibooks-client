@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
                   <header>
                     <NavBarClient />
                   </header>
-                  <main>
+                  <main className='min-h-screen'>
                     {children}
                     <CartDrawer />
                     <BotonFlotante />

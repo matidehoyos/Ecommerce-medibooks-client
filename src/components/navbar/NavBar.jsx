@@ -29,7 +29,7 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', debouncedScroll);
   }, []);
   
-  
+
   return (
     <header className={`w-full h-auto fixed flex flex-col bg-gray-800 border-b border-[#1b7b7e] z-[1000]`}>
         <div className={`w-full ${shouldShowPreNav ? 'block' : 'hidden'} transition-all duration-500`}>
@@ -42,11 +42,11 @@ const NavBar = () => {
               <SearchBar />
             </div>
             <NavLinks />
-            <MenuMovil abierto={abierto} setAbierto={setAbierto} />
             <div className='flex justify-end w-auto h-auto'>
               <CartButton />
               <ToggleMenu abierto={abierto} setAbierto={setAbierto} />
             </div>
+            <MenuMovil abierto={abierto} setAbierto={setAbierto} />
             <LoginPc visible={visible} setVisible={setVisible} />
           </div>
         </div>

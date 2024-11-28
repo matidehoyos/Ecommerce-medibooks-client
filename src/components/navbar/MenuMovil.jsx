@@ -5,8 +5,8 @@ import SearchBarMov from "../SearchBarMov";
 const MenuMovil = ({abierto, setAbierto}) => {
 
 return (
-    <div className={`lg:hidden py-8 px-4 absolute w-full h-screen ${abierto ? 'right-0' : '-right-[200%]' } top-[68px] md:top-[75px] bg-gray-700 transition-all duration-700 ease-out`}>
-        <div className='w-[90%]'>
+    <div className={`lg:hidden px-4 absolute w-full h-screen right-0 top-[69px] md:top-[75px] bg-gray-800 transition-all duration-1000 ease-in-out ${abierto ? 'max-h-[calc(100vh-69px)] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+        <div className='w-[96%] pt-4'>
             <SearchBarMov setAbierto={setAbierto} />
         </div>
         <NavLinksMov setAbierto={setAbierto} />

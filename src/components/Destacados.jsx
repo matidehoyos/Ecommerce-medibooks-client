@@ -1,10 +1,8 @@
 import ProductCard from './ProductCard';
 import Link from 'next/link';
-import { useProductos } from '@/contexts/productsContexts';
 
-const Destacados = () => {
-  const libros = useProductos();
-  const destacados = libros
+const Destacados = ({productos}) => {
+  const destacados = productos
     .slice() 
     .slice(0, 10); 
 

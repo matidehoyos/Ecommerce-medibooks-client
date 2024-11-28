@@ -1,12 +1,12 @@
 import ProductCard from './ProductCard';
-import { useProductos } from '@/contexts/productsContexts';
 
-const Oferts = () => {
-  const libros = useProductos();
-  const ofertas = libros
+const Oferts = ({productos}) => {
+
+  const ofertas = productos
   .filter(libro => libro.descuento > 2) 
   .sort((a, b) => b.descuento - a.descuento) 
   .slice(0, 10); 
+  
   return (
     <div className="w-full py-12 md:py-20 px-[3%] flex flex-col bg-red-50">
         <h2 className="pb-4 text-left text-2xl md:text-3xl text-red-600 font-semibold">Productos en oferta</h2>

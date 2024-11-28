@@ -1,12 +1,9 @@
 'use client'
-import Categories from "./Categories";
-import CategoriesMovil from "./CategoriesMov";
-import Destacados from "./Destacados";
 import Loader from "./Loader";
-import Oferts from "./Oferts";
-import Recientes from "./Recientes";
 import Ubicacion from "./ubicacion";
 import Header from "./header/Header";
+import HomeProductos from "./HomeProductos";
+import Categorias from "./categorias/Categorias";
 
 const Inicio = () => {
     
@@ -14,11 +11,8 @@ const Inicio = () => {
       <>
         <Loader />
         <Header />
-        <Categories />
-        <CategoriesMovil />
-        <Recientes />
-        <Destacados />
-        <Oferts />
+        <Categorias />
+        <HomeProductos />
         <Ubicacion />
       </>
     );

@@ -1,6 +1,5 @@
 export default function Ubicacion() {
 
-
   return (
     <div className="w-full md:w-auto px-[3%] md:mx-auto md:px-0 py-14 lg:py-32 flex flex-col-reverse lg:flex-row lg:justify-center lg:items-center bg-gray-50 md:gap-4">
             <div className="w-full flex justify-center lg:justify-end">

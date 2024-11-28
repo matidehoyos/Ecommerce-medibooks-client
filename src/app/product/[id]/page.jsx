@@ -60,7 +60,7 @@ const ProductDetailPage = () => {
               {producto.precioAnterior !== producto.precio && (
                 <p className='md:text-xl text-gray-400 font-bold line-through'>${producto.precioAnterior}</p>
               )}
-              <p className='text-[24px] md:text-3xl font-[700] text-green-600'>${producto.precio}</p>
+              <p className='text-[24px] md:text-3xl font-[700] lg:font-[800] text-green-600'>${producto.precio}</p>
             </div>
             <label className='mt-3 md:mt-6 text-[18px] lg:text-[20px] font-medium text-gray-800'>
                 <span className='hidden md:inline'>Terminación:</span>

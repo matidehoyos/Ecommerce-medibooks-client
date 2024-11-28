@@ -1,10 +1,7 @@
 import ProductCard from './ProductCard';
-import { useProductos } from '@/contexts/productsContexts';
 
-const Recientes = () => {
-  const libros = useProductos();
-
-  const recientes = libros
+const Recientes = ({productos}) => {
+  const recientes = productos
     .slice() 
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
     .slice(0, 5); 

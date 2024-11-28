@@ -86,17 +86,30 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
             <p><BiSolidTruck size={46} className="mt-4 text-gray-600 animate-bounce" /></p>
           </div>
         ) : (
-          <div className="w-[96%] mx-auto mt-6 p-2 lg:p-4 bg-white bg-opacity-25 border border-gray-400 rounded-sm">
+          <div className="w-[96%] mx-auto mt-6 p-2 lg:p-4 bg-white border border-gray-400 rounded-md">
               <h3 className="mb-2 text-lg font-semibold text-gray-700">Datos de envio:</h3>
               <form onSubmit={handleSubmit} className='flex flex-wrap justify-between'>
-                  <div className="w-[49.8%]">
+                  <div className="w-full md:w-[49.8%]">
+                  <input
+                      type="text"
+                      id="ciudad"
+                      name="ciudad"
+                      placeholder='Ciudad:'
+                      value={clienteData.ciudad}
+                      onChange={handleChange}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
+                      required
+                  />
+                  {errors.ciudad && <p className="text-red-500 text-sm">{errors.ciudad}</p>}
+                  </div>
+                  <div className="w-full md:w-[49.8%]">
                   <select
                       id="provincia"
                       name="provincia"
                       placeholder="Provincia"
                       value={clienteData.provincia}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-[7px] px-1 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 text-gray-600 font-semibold`}
+                      className={`w-full mt-1 py-[7px] px-1 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 text-gray-600 font-semibold`}
                       required
                   >
                       <option value="">Provincia:</option>
@@ -107,20 +120,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       ))}
                   </select>
                   </div>
-                  <div className="w-[49.8%]">
-                  <input
-                      type="text"
-                      id="ciudad"
-                      name="ciudad"
-                      placeholder='Ciudad:'
-                      value={clienteData.ciudad}
-                      onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
-                      required
-                  />
-                  {errors.ciudad && <p className="text-red-500 text-sm">{errors.ciudad}</p>}
-                  </div>
-                  <div className="w-[49.8%]">
+                  <div className="w-full md:w-[49.8%]">
                   <input
                       type="text"
                       id="direccion"
@@ -128,11 +128,11 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder='Dirección:'
                       value={clienteData.direccion}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
                       required
                   />
                   </div>
-                  <div className="w-[24.8%]">
+                  <div className="w-[49.5%] md:w-[24.8%]">
                   <input
                       type="text"
                       id="piso"
@@ -140,10 +140,10 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder='Piso:'
                       value={clienteData.piso}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold`}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold`}
                   />
                   </div>
-                  <div className="w-[24.8%]">
+                  <div className="w-[49.5%] md:w-[24.8%]">
                   <input
                       type="text"
                       id="departamento"
@@ -151,7 +151,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder="Dto:"
                       value={clienteData.departamento}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold`}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold`}
                       />
                   </div>
                   <div className="w-[49.8%]">
@@ -162,7 +162,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder='Código postal:'
                       value={clienteData.codigoPostal}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
                       required
                   />
                   {errors.codigoPostal && <p className="text-red-500 text-sm">{errors.codigoPostal}</p>}
@@ -175,7 +175,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder='Telefono:'
                       value={clienteData.telefono}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
+                      className={`w-full mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
                       required
                   />
                   {errors.telefono && <p className="text-red-500 text-sm">{errors.telefono}</p>}
@@ -187,7 +187,7 @@ const FormDataEnvio = ({setIsFormVisible, setEnvio}) => {
                       placeholder='Observaciones:'
                       value={clienteData.observaciones}
                       onChange={handleChange}
-                      className={`w-full mt-1 py-1 px-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
+                      className={`w-full min-h-[60px] mt-1 py-1 px-2 bg-gray-100 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-0 placeholder:text-gray-600 placeholder:font-semibold ${errors.direccion ? 'border-red-500' : ''}`}
                       rows="1"
                   ></textarea>
                   </div>

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const Loader = ({ duration = 1000 }) => {
+const Loader = ({ duration = 800 }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

@@ -5,9 +5,9 @@ import Link from "next/link";
 const RelatedCard = ({ libro }) => {
 
   return (
-    <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg bg-white group lg:hover:border-gray-500 lg:hover:shadow-gray-600 transition-all duration-500" aria-label="Ir a la página de detalle del producto.">
+    <Link href={`/product/${libro.id}`} key={libro.id} className="w-[240px] md:w-[280px] relative p-2 border border-gray-400 rounded-md shadow-lg bg-white group lg:hover:border-gray-500 lg:hover:shadow-gray-600 transition-all duration-500 overflow-hidden" aria-label="Ir a la página de detalle del producto.">
             {libro.descuento > 0 && (
-            <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-400">% {libro.descuento} off!</p>
+            <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-500">% {libro.descuento} off!</p>
             )}
             <div className="w-full h-[200px] flex justify-center items-center bg-gray-200 overflow-hidden rounded-md lg:group-hover:bg-gray-400 transition-colors duration-500">
             <Image
@@ -28,7 +28,7 @@ const RelatedCard = ({ libro }) => {
                 {libro.precioAnterior !== libro.precio && (
                 <p className="text-gray-400 text-xs line-through">${libro.precioAnterior}</p>
                 )}
-                <p className="text-sm font-bold text-red-600">${libro.precio.toFixed(2)}</p>
+                <p className="text-md font-bold text-green-600">${libro.precio.toFixed(2)}</p>
             </div>
             </div>
     </Link>

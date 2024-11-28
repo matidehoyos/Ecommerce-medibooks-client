@@ -1,48 +1,46 @@
 import BASE_URL from '../config';
 
+const fetchAPI = async (url, options = {}) => {
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || `HTTP error! status: ${res.status}`);
+    }
+
+    return options.method === 'DELETE' ? null : await res.json();
+  } catch (error) {
+    console.error(`Error in fetchAPI with URL: ${url}`, error);
+    throw error;
+  }
+};
 
 export const getCategorias = async () => {
-  try {
-    const res = await fetch(`${BASE_URL}/categories`);
-    if (!res.ok) throw new Error('Error fetching categories');
-    return await res.json();
-  } catch (error) {
-    console.error('Error in fetchCategorias:', error);
-    throw error; 
-  }
+  return fetchAPI(`${BASE_URL}/categories`);
 };
 
 export const crearCategoria = async (nombre) => {
-    const res = await fetch(`${BASE_URL}/categories`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre }), 
-    });
-    if (!res.ok) throw new Error('Error creating category');
-    return await res.json();
-  };
+  if (!nombre) throw new Error('El nombre de la categoría es obligatorio.');
   
+  return fetchAPI(`${BASE_URL}/categories`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre }),
+  });
+};
+
 export const editarCategoria = async (id, nombre) => {
-  try {
-    const res = await fetch(`${BASE_URL}/categories/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre }),
-    });
-    if (!res.ok) throw new Error('Error updating category');
-    return await res.json();
-  } catch (error) {
-    console.error('Error in editarCategoria:', error);
-    throw error; 
-  }
+  if (!id || !nombre) throw new Error('ID y nombre de categoría son obligatorios.');
+  
+  return fetchAPI(`${BASE_URL}/categories/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre }),
+  });
 };
 
 export const eliminarCategoria = async (id) => {
-  try {
-    const res = await fetch(`${BASE_URL}/categories/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Error deleting category');
-  } catch (error) {
-    console.error('Error in eliminarCategoria:', error);
-    throw error; 
-  }
+  if (!id) throw new Error('ID de categoría es obligatorio.');
+  
+  return fetchAPI(`${BASE_URL}/categories/${id}`, { method: 'DELETE' });
 };

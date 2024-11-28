@@ -41,13 +41,13 @@ const ProductDetailPage = () => {
       <Loader />
       <div className='w-full h-auto md:h-auto pt-[78px] md:pt-[80px] flex flex-col justify-start sm:flex-row sm:items-center sm:justify-start md:justify-center'>
           <div className='sm:w-[40%] md:w-[60%] lg:w-[80%] h-auto overflow-hidden'>
-            <div className='w-auto h-auto px-0 pb-6 sm:pb-0 md:p-5 sm:px-3 md:px-0 flex items-center md:justify-end'>
+            <div className='w-auto h-auto px-0 pb-2 sm:pb-0 md:p-5 sm:px-3 md:px-0 flex items-center md:justify-end'>
               <Image
                 src={producto.imagen || '/default.png'}
                 alt={`Portada del libro ${producto.titulo}`}
                 width={500}
                 height={500}
-                className="w-[240px] sm:w-[96%] md:w-[96%] lg:w-[360px] h-[330px] sm:h-auto ml-3 sm:ml-0 py-4 md:py-10 md:px-10 object-contain lg:hover:scale-[1.1] transition-all duration-700 overflow-visible"
+                className="w-[210px] sm:w-[96%] md:w-[96%] lg:w-[360px] h-[330px] sm:h-auto ml-3 sm:ml-0 py-4 md:py-10 md:px-10 object-contain lg:hover:scale-[1.1] transition-all duration-700 overflow-visible"
                 style={{ filter: 'drop-shadow(6px 6px 6px rgba(0,0,0,.6))' }}
                 priority
               />
@@ -82,7 +82,7 @@ const ProductDetailPage = () => {
               </div>
               <button
                 onClick={agregarAlCarrito}
-                className='w-auto px-4 py-1 md:px-6 md:py-2 bg-red-400 text-white font-bold border border-gray-500 rounded-md md:rounded-md md:hover:bg-red-300 transition-colors duration-300'
+                className='w-auto px-4 py-1 md:px-6 md:py-2 bg-red-400 lg:bg-red-500 text-white font-bold border border-gray-500 rounded-md md:rounded-md md:hover:bg-red-300 transition-colors duration-300'
               >
                 Agregar al Carrito
               </button>

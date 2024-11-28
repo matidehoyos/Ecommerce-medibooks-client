@@ -24,7 +24,7 @@ const Contacto = () => {
   };
 
   return (
-    <div className="w-full bg-gray-300">
+    <div className="w-full min-h-screen bg-gray-300">
         <Loader />
         <div className='md:w-[80%] px-[3%] pt-[60px] md:pt-[170px] mx-auto pb-20 flex flex-col lg:flex-row-reverse md:justify-center md:items-stretch gap-8'>
             <div className="w-full h-full mt-8 md:mt-0 p-4 text-gray-700 space-y-3 md:border md:border-gray-800 md:rounded-lg md:bg-white">

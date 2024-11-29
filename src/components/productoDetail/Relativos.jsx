@@ -1,4 +1,4 @@
-import RelatedCard from "./cards/RelatedCard";
+import RelatedCard from "../cards/RelatedCard";
 
 
 const Relativos = ({contenido}) => {

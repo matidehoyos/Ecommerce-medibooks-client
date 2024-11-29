@@ -110,7 +110,7 @@ const AdminCategoriasPage = () => {
         </div>
         <div className='w-full h-full px-[2%] py-3 flex flex-col gap-3'>
           <div className='w-full px-6 py-3 flex items-strech justify-between bg-white rounded-lg border border-gray-400'>
-          <div className='w-full flex justify-between'>
+            <div className='w-full flex justify-between'>
                 <form onSubmit={handleSearchSubmit} className="w-[180px] py-1 flex rounded-md bg-gray-200 border border-gray-400">
                   <input
                     type="text"

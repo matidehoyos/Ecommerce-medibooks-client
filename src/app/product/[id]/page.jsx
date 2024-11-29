@@ -5,9 +5,9 @@ import { useProductos } from '@/contexts/productsContexts';
 import { useCart } from '@/contexts/CartContexts';
 import Loader from '@/components/Loader';
 import Head from 'next/head';
-import Producto from '@/components/Producto';
-import ProductoDetalle from '@/components/ProductoDetalle';
-import Relativos from '@/components/Relativos';
+import Producto from '@/components/productoDetail/Producto';
+import ProductoDetalle from '@/components/productoDetail/ProductoDetalle';
+import Relativos from '@/components/productoDetail/Relativos';
 
 const ProductDetailPage = () => {
   const { id } = useParams();

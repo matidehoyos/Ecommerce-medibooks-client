@@ -10,7 +10,7 @@ const Destacados = ({productos}) => {
     <div className="w-full py-12 md:py-14 lg:py-20 flex bg-gray-100">
       <div className="w-full px-[3%]">
       <h2 className="pb-4 text-left text-2xl md:text-3xl text-gray-700 font-semibold">Productos destacados</h2>
-        <div className="w-full lg:px-[3%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-9">
+        <div className="w-full lg:px-[3%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
             {destacados.map((libro, index) => (
                 <ProductCard key={index} libro={libro} />
               ))}

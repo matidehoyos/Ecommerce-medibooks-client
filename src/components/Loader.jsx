@@ -6,7 +6,7 @@ const Loader = ({ duration = 1000 }) => {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    const fadeTimeout = setTimeout(() => setFading(true), 0); 
+    const fadeTimeout = setTimeout(() => setFading(true), duration - 500); 
     const hideTimeout = setTimeout(() => setVisible(false), duration);
     
     return () => {

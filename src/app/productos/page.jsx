@@ -50,7 +50,7 @@ const Productos = () => {
         <meta name="description" content={`Explora los mejores productos en la categoría ${queryCategory}`} />
       </Head>
 
-      <div className="w-full min-h-screen bg-gray-50 lg:bg-gray-200">
+      <div className="w-full min-h-screen bg-gray-50 lg:bg-gray-100">
         { loading && <Loader /> } 
         <FiltersProductos 
           handleDateChange={handleDateChange} 

@@ -7,8 +7,8 @@ const SearchInput = ({isMobile = false, handleSearchChange, handleSearchSubmit, 
 
     return(
         <form onSubmit={handleSearchSubmit}
-              className={`flex border rounded-md overflow-hidden py-1 ${
-              isMobile ? 'border-gray-400 bg-opacity-10' : 'border-gray-800 lg:border-gray-300 bg-opacity-40' }`}>
+              className={`flex border rounded-md overflow-hidden ${
+              isMobile ? 'border-gray-400 bg-opacity-10' : 'border-gray-800 lg:border-white bg-[rgba(256,256,256,.8)]' }`}>
             
             <input
             type="text"
@@ -17,15 +17,15 @@ const SearchInput = ({isMobile = false, handleSearchChange, handleSearchSubmit, 
             placeholder="Buscar libro..."
             className={`w-full px-2 focus:outline-none focus:ring-0 bg-transparent ${
                 isMobile 
-                ? 'py-1 text-lg  text-gray-200 placeholder:text-gray-50 placeholder:text-xl'
-                : 'text-base text-gray-700 lg:text-gray-200 placeholder:text-gray-800 lg:placeholder:text-gray-300'
+                ? 'py-2 text-md font-bold  text-gray-700 placeholder:text-gray-700 placeholder:text-md bg-[rgba(256,256,256,.8)]'
+                : 'text-base text-gray-700 lg:text-gray-700 placeholder:text-gray-800 lg:placeholder:text-gray-700'
             }`}
             autoComplete="off"
             />
-            <button type="submit" className="px-2">
+            <button type="submit" className={`px-2 ${isMobile ? 'bg-[rgba(256,256,256,.8)]' : ''}`}>
             <FontAwesomeIcon
                 icon={faSearch}
-                className={`${isMobile ? 'text-gray-50 text-lg' : 'text-gray-800 lg:text-gray-50'}`}
+                className={`${isMobile ? 'text-gray-700 text-md' : 'text-gray-800 lg:text-gray-700'}`}
             />
             </button>
       </form>

@@ -1,6 +1,6 @@
 'use client'
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loader from '@/components/Loader';
 import { useProductos } from '@/contexts/productsContexts';
@@ -14,6 +14,7 @@ const Productos = () => {
   const productos = useProductos();
   const [priceFilter, setPriceFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+  const [loading, setLoading] = useState(true)
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryCategory = searchParams.get('category') || 'all';
@@ -23,6 +24,12 @@ const Productos = () => {
     priceFilter, 
     dateFilter 
   });
+
+  useEffect(() => {
+    setLoading(true);
+    const timeout = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timeout);
+  }, [filteredProducts]);
 
   const handleCategoryChange = (e) => {
     router.push(`/productos?category=${e.target.value}`);
@@ -44,7 +51,7 @@ const Productos = () => {
       </Head>
 
       <div className="w-full min-h-screen bg-gray-50 lg:bg-gray-200">
-        <Loader />
+        { loading && <Loader /> } 
         <FiltersProductos 
           handleDateChange={handleDateChange} 
           handleCategoryChange={handleCategoryChange} 

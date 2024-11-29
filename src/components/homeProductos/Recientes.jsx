@@ -7,7 +7,7 @@ const Recientes = ({productos}) => {
     .slice(0, 5); 
 
   return (
-    <div className="w-full py-12 md:py-14 lg:py-24 flex bg-white lg:bg-gray-200">
+    <div className="w-full py-12 md:py-14 lg:py-24 flex bg-white">
       <div className="w-full px-[3%]">
         <h2 className="pb-4 text-left text-2xl md:text-3xl text-gray-700 font-semibold">
           Últimos ingresos

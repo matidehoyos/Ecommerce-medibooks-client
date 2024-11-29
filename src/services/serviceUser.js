@@ -1,6 +1,5 @@
 import BASE_URL from '../config';
 
-
 export const saveUserToDatabase = async (userData) => {
     try {
       const response = await fetch(`${BASE_URL}/user`, {

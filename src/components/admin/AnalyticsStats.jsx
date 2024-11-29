@@ -55,7 +55,7 @@ const AnalyticsDashboard = () => {
     day: 'numeric'
   });
 
-  // Calcular promedios
+
   const calculateAverages = (rows) => {
     let totalSessions = 0;
     let totalPageViews = 0;

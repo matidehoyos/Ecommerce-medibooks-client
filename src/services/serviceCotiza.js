@@ -1,7 +1,7 @@
 import BASE_URL from '../config';
 
 
-export const obtenerCotizacionEnvio = async (provincia,destino, pesoTotal, largoTotal, anchoTotal, altoTotal, tipoEnvio) => {
+export const obtenerCotizacionEnvio = async (provincia,destino, pesoTotal) => {
     try {
       const response = await fetch(`${BASE_URL}/correo`, {
         method: 'POST',
@@ -11,11 +11,7 @@ export const obtenerCotizacionEnvio = async (provincia,destino, pesoTotal, largo
         body: JSON.stringify({
           provincia,
           destino,
-          pesoTotal,
-          largoTotal,
-          anchoTotal, 
-          altoTotal, 
-          tipoEnvio,
+          pesoTotal
         }),
       });
   

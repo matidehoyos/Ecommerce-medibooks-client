@@ -7,7 +7,7 @@ import { CategoryProvider } from '@/contexts/categoryContexts';
 import NavBarClient from '@/components/navbar/NavBarClient';
 import CartDrawer from '@/components/cart/CartDrawer';
 import BotonFlotante from '@/components/whatsApp/BotonFlotante';
-import FooterClient from '@/components/FooterClient';
+import FooterClient from '@/components/footer/FooterClient';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

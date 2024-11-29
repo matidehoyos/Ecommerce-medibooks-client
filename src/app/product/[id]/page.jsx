@@ -5,7 +5,7 @@ import { useProductos } from '@/contexts/productsContexts';
 import { useCart } from '@/contexts/CartContexts';
 import Image from 'next/image';
 import Loader from '@/components/Loader';
-import RelatedCard from '@/components/RelatedCard';
+import RelatedCard from '@/components/cards/RelatedCard';
 
 const ProductDetailPage = () => {
   const { id } = useParams();

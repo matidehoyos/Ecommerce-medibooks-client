@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard';
+import ProductCard from '../cards/ProductCard';
 
 const Oferts = ({productos}) => {
 

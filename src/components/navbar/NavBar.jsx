@@ -8,8 +8,9 @@ import NavLinks from './NavLinks';
 import MenuMovil from './MenuMovil';
 import CartButton from './CartButton';
 import ToggleMenu from './ToggleMenu';
-import SearchBar from '../SearchBar';
+import SearchBar from '../searchBars/SearchBar';
 import LoginPc from './LoginPc';
+import Cabecera from './Cabecera';
 
 const NavBar = () => {
   const [visible, setVisible] = useState(false);
@@ -35,21 +36,7 @@ const NavBar = () => {
         <div className={`w-full ${shouldShowPreNav ? 'block' : 'hidden'} transition-all duration-500`}>
             <PreNav />
         </div>
-        <div className="w-full flex">
-          <div className="w-full h-[68px] md:h-[75px] px-[2%] pt-[8px] lg:pt-0 flex justify-between items-center">
-            <Logo />
-            <div className='hidden lg:block'>
-              <SearchBar />
-            </div>
-            <NavLinks />
-            <div className='flex justify-end w-auto h-auto'>
-              <CartButton />
-              <ToggleMenu abierto={abierto} setAbierto={setAbierto} />
-            </div>
-            <MenuMovil abierto={abierto} setAbierto={setAbierto} />
-            <LoginPc visible={visible} setVisible={setVisible} />
-          </div>
-        </div>
+        <Cabecera abierto={abierto} setAbierto={setAbierto} visible={visible} setVisible={setVisible} />
     </header>
   );
 };

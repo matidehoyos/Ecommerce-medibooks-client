@@ -5,13 +5,13 @@ const ProductCard = ({ libro }) => {
   const defaultImage = "/default.png"; 
 
   return (
-    <Link href={`/product/${libro.id}`} className="w-full max-w-[320px] relative p-1 lg:p-2 rounded-md overflow-hidden bg-transparent border border-gray-300 shadow-md shadow-gray-300 lg:hover:border-gray-800 transition-all duration-500" aria-label="Ir a la página de detalle del producto.">
+    <Link href={`/product/${libro.id}`} className="w-full max-w-[320px] relative p-1 lg:p-2 rounded-md overflow-hidden bg-transparent border border-gray-300 shadow-md shadow-gray-300 lg:hover:border-gray-900 transition-all duration-500 group" aria-label="Ir a la página de detalle del producto.">
       {
         libro.descuento > 0 ? (
           <p className="absolute w-auto top-0 left-0 px-3 text-white font-semibold bg-red-500 z-10 lg:group-hover:hidden">% {libro.descuento} off!</p>
         ) : null
       }
-      <div className="w-full lg:w-auto h-[160px] md:h-[180px] lg:h-[220px] flex justify-center items-center bg-gray-300 overflow-hidden rounded-md rounded-b-none transition-all duration-500">
+      <div className="w-full lg:w-auto h-[160px] md:h-[180px] lg:h-[220px] flex justify-center items-center bg-gray-300 overflow-hidden rounded-md rounded-b-none transition-all duration-500 lg:group-hover:bg-gray-400">
       <Image
           src={libro.imagen || defaultImage}
           alt={`Portada del libro ${libro.titulo}`}

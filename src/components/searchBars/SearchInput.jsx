@@ -8,7 +8,7 @@ const SearchInput = ({isMobile = false, handleSearchChange, handleSearchSubmit, 
     return(
         <form onSubmit={handleSearchSubmit}
               className={`flex border rounded-md overflow-hidden ${
-              isMobile ? 'border-gray-400 bg-opacity-10' : 'border-gray-800 lg:border-white bg-[rgba(256,256,256,.8)]' }`}>
+              isMobile ? 'border-gray-400 bg-opacity-10' : 'lg:py-1 border-gray-800 lg:border-white bg-[rgba(256,256,256,.8)]' }`}>
             
             <input
             type="text"

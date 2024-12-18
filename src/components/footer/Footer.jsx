@@ -61,7 +61,7 @@ const Footer = () => {
             alt="Medibooks, tienda online de libros en Mar del Plata" 
             width={400} 
             height={120} 
-            className="w-[180px] h-auto mx-auto mt-6 object-contain md:hidden"
+            className="w-[179px] h-auto mx-auto mt-6 object-contain md:hidden"
             loading="lazy"
           />
         </Link>

@@ -42,7 +42,7 @@ const CartDrawer = () => {
               : (
                 <CartAuthentication />
               )}
-              {isFormVisible && <FormDataEnvio setIsFormVisible={setIsFormVisible} setEnvio={setEnvio} />}
+              {/*isFormVisible && <FormDataEnvio setIsFormVisible={setIsFormVisible} setEnvio={setEnvio} />}
               {envio && !preferenceId && <EnvioTotalFinal handlePayment={handlePayment} envio={envio} opcionEnvio={opcionEnvio} setOpcionEnvio={setOpcionEnvio} />}
               {preferenceId && (
                 <div className='w-full px-[4%] mt-3 flex justify-end'>
@@ -51,7 +51,7 @@ const CartDrawer = () => {
                     customization={{ texts: { valueProp: 'smart_option' },  locale: 'es_AR',}}
                   />
                 </div>
-              )}
+              )*/}
         </div>
     </>
   );
